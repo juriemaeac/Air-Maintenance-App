@@ -1,4 +1,5 @@
-import 'package:airapp/Home/home.dart';
+import 'package:airapp/home/home.dart';
+import 'package:airapp/home/navBar.dart';
 import 'package:airapp/signup/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Air Maintenance App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: const HomePage(),
+      home: NavBar(),
     );
   }
 }
