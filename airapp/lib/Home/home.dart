@@ -1,5 +1,5 @@
+import 'package:airapp/Home/forms/formsWidget.dart';
 import 'package:airapp/home/calendar/calendarSection.dart';
-import 'package:airapp/home/forms/formsWidget.dart';
 import 'package:airapp/home/manual/manualWidget.dart';
 import 'package:airapp/home/profileDetails/profileDetails.dart';
 import 'package:airapp/constants.dart';
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       width: 20,
                     ),
-                    Forms(),
+                    FormWidget(),
                   ],
                 ),
               ),

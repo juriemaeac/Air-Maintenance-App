@@ -1,3 +1,4 @@
+import 'package:airapp/forms/forms.dart';
 import 'package:airapp/home/home.dart';
 import 'package:airapp/Profile/profile.dart';
 import 'package:airapp/constants.dart';
@@ -17,8 +18,9 @@ class _NavBarState extends State<NavBar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
+    //Forms(),
     Text(
-      'Records',
+      'Index 1: Business',
       style: optionStyle,
     ),
     ProfilePage(),

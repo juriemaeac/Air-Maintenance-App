@@ -1,4 +1,5 @@
 import 'package:airapp/constants.dart';
+import 'package:airapp/forms/forms.dart';
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
@@ -87,14 +88,14 @@ class FormCard extends StatelessWidget {
   }
 }
 
-class Forms extends StatefulWidget {
-  const Forms({super.key});
+class FormWidget extends StatefulWidget {
+  const FormWidget({super.key});
 
   @override
-  State<Forms> createState() => _FormsState();
+  State<FormWidget> createState() => _FormWidgetState();
 }
 
-class _FormsState extends State<Forms> {
+class _FormWidgetState extends State<FormWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -111,14 +112,24 @@ class _FormsState extends State<Forms> {
         SizedBox(
           height: 20,
         ),
-        FormCard(
-          icon: Icon(
-            Icons.content_paste_rounded,
-            color: AppColors.yellowAccent,
-            size: 20,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Forms(),
+              ),
+            );
+          },
+          child: FormCard(
+            icon: Icon(
+              Icons.content_paste_rounded,
+              color: AppColors.yellowAccent,
+              size: 20,
+            ),
+            title: 'Maintenance ',
+            subtitle: 'Inspection',
           ),
-          title: 'Maintenance ',
-          subtitle: 'Inspection',
         ),
       ],
     );

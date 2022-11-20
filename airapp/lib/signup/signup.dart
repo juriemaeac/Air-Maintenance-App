@@ -521,7 +521,17 @@ class _SignupPageState extends State<SignupPage> {
                 height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (checkedValue == false) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Please agree to the terms and conditions',
+                          ),
+                        ),
+                      );
+                    } else {}
+                  },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(
                         const EdgeInsets.symmetric(
