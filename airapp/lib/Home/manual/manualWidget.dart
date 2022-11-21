@@ -20,10 +20,10 @@ class ManualCard extends StatelessWidget {
       // /margin: const EdgeInsets.only(left: 30),
       padding: const EdgeInsets.all(20),
       width: MediaQuery.of(context).size.width / 2 - 40,
-      height: 160,
+      height: 170,
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: AppColors.grey.withOpacity(0.2),
@@ -41,7 +41,7 @@ class ManualCard extends StatelessWidget {
               icon!,
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 8),
           Text(
             title!,
             style: AppTextStyles.title1,

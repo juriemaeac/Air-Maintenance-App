@@ -38,7 +38,7 @@ class _NavBarState extends State<NavBar> {
         decoration: const BoxDecoration(
           color: AppColors.blueAccent,
           borderRadius: BorderRadius.all(
-            Radius.circular(15),
+            Radius.circular(18),
           ),
         ),
         child: SafeArea(
@@ -57,7 +57,7 @@ class _NavBarState extends State<NavBar> {
               textStyle: AppTextStyles.subtitle2.copyWith(
                 color: AppColors.blueAccent,
               ),
-              tabBorderRadius: 10,
+              tabBorderRadius: 13,
               tabs: const [
                 GButton(
                   icon: Icons.home_rounded,

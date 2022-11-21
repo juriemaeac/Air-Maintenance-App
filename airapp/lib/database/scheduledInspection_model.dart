@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 //part 'scheduledInspection_model.dart';
 
+@HiveType(typeId: 2)
 class ScheduledInspection extends HiveObject {
   @HiveField(0)
   String? id;

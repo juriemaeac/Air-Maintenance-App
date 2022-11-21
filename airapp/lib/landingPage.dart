@@ -1,6 +1,5 @@
 import 'package:airapp/constants.dart';
-import 'package:airapp/login/login.dart';
-import 'package:airapp/signup/signup.dart';
+import 'package:airapp/authentication/login.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {
@@ -8,96 +7,142 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height / 5,
-            ),
-            Center(
-              child: Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: MediaQuery.of(context).size.height * 0.08,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: AppColors.blueAccent,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          // padding: const EdgeInsets.all(30),
+          child: Stack(
+            children: [
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   child: Image(
-                      image: AssetImage('assets/images/airapp_logo.png'))),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Welcome to Air Maintenance App',
-              style: AppTextStyles.headings,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              'Log in now to access your account',
-              style: AppTextStyles.subHeadings,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width / 1.2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
-                },
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 40)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(AppColors.blueAccent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                    image: AssetImage('assets/images/bg1.jpg'),
+                    fit: BoxFit.cover,
+                  )),
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.5,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.yellowAccent,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.airplanemode_active_rounded,
+                          size: 50,
+                          color: AppColors.blueAccent,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Aircraft inspection\nand maintenance\nat glance',
+                        style: AppTextStyles.headings1.copyWith(
+                          color: AppColors.yellowAccent,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text('Philippine State College of Aeronautics',
+                          style: AppTextStyles.subtitle),
+                    ],
                   ),
-                  shadowColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
                 ),
-                child: Text('Login',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 15,
-                    )),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width / 1.2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignupPage()));
-                },
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 40)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(AppColors.blueAccent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.18,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 40)),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                AppColors.yellowAccent),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                            ),
+                            shadowColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 13,
+                              ),
+                              Text("Let's Go!",
+                                  style: AppTextStyles.title2.copyWith(
+                                    color: AppColors.blueAccent,
+                                  )),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: AppColors.blueAccent,
+                                size: 15,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 25),
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Powered by   ",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.white,
+                              ),
+                            ),
+                            Image.asset('assets/images/artemis.png',
+                                width: 60,
+                                //height: 100,
+                                fit: BoxFit.fill),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  shadowColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
                 ),
-                child: Text('Register',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 15,
-                    )),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -51,6 +51,13 @@ class AppTextStyles {
     fontFamily: 'Poppins',
   );
 
+  static const TextStyle title2 = TextStyle(
+    color: AppColors.black,
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+    fontFamily: 'Poppins',
+  );
+
   static TextStyle subtitle = GoogleFonts.quicksand(
     color: AppColors.grey,
     fontWeight: FontWeight.w600,
@@ -64,7 +71,7 @@ class AppTextStyles {
   static const TextStyle subtitle2 = TextStyle(
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontSize: 15,
+    fontSize: 13,
     fontFamily: 'Poppins',
   );
   static const TextStyle textFields = TextStyle(

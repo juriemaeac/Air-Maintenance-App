@@ -17,8 +17,8 @@ class FormCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2 - 40,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.white, width: 2),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppColors.greyAccent, width: 2),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,16 +28,21 @@ class FormCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             //width: MediaQuery.of(context).size.width / 2 - 75,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.white,
+              borderRadius: BorderRadius.circular(13),
+              color: AppColors.greyAccent,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 icon!,
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
                   subtitle!,
-                  style: AppTextStyles.subtitle2,
+                  style: AppTextStyles.subtitle2.copyWith(
+                    color: AppColors.black,
+                  ),
                 ),
               ],
             ),

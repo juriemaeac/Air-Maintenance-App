@@ -37,6 +37,7 @@ class _FormsState extends State<Forms> {
                 child: Text('Manual'))
           ],
         ),
+        elevation: 2,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

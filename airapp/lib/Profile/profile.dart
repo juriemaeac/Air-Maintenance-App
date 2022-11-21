@@ -1,6 +1,6 @@
 import 'package:airapp/constants.dart';
 import 'package:airapp/landingPage.dart';
-import 'package:airapp/login/login.dart';
+import 'package:airapp/authentication/login.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return LoginPage();
+                      return LandingPage();
                     }));
                   },
                   style: ButtonStyle(
@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     shadowColor:
                         MaterialStateProperty.all<Color>(Colors.transparent),
                   ),
-                  child: Text('Login',
+                  child: Text('Logout',
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 15,

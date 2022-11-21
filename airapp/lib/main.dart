@@ -1,6 +1,7 @@
 import 'package:airapp/home/home.dart';
 import 'package:airapp/home/navBar.dart';
-import 'package:airapp/signup/signup.dart';
+import 'package:airapp/landingPage.dart';
+import 'package:airapp/authentication/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: NavBar(),
+      home: SignupPage(),
     );
   }
 }

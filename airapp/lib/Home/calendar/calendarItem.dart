@@ -43,12 +43,12 @@ class _CalendarWeeklyState extends State<CalendarWeekly> {
           cellMargin: const EdgeInsets.all(8),
           todayDecoration: BoxDecoration(
             color: AppColors.blueAccent,
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(15.0),
             //shape: BoxShape.circle,
           ),
           defaultDecoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(15.0),
               boxShadow: const [
                 BoxShadow(
                   blurRadius: 7.5,
@@ -58,7 +58,7 @@ class _CalendarWeeklyState extends State<CalendarWeekly> {
               ]),
           weekendDecoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(15.0),
               boxShadow: const [
                 BoxShadow(
                   blurRadius: 7.5,

@@ -1,7 +1,7 @@
-import 'package:airapp/Home/forms/formsWidget.dart';
+import 'package:airapp/Home/formsWidget.dart';
+import 'package:airapp/Home/profileDetails.dart';
 import 'package:airapp/home/calendar/calendarSection.dart';
 import 'package:airapp/home/manual/manualWidget.dart';
-import 'package:airapp/home/profileDetails/profileDetails.dart';
 import 'package:airapp/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: AppColors.blueAccent,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Icon(
-                          Icons.person,
+                          Icons.airplanemode_active_rounded,
                           color: AppColors.white,
                           size: 25,
                         ),
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                       width: MediaQuery.of(context).size.width / 2 - 40,
                       decoration: BoxDecoration(
                         color: AppColors.blueAccent,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                               color: Color.fromARGB(70, 136, 136, 136),
                               borderRadius: BorderRadius.all(
-                                Radius.circular(10),
+                                Radius.circular(15),
                               ),
                             ),
                             child: Row(
@@ -128,9 +128,9 @@ class _HomePageState extends State<HomePage> {
                           Text('5',
                               style: TextStyle(
                                 color: AppColors.yellowAccent,
-                                fontSize: 110,
+                                fontSize: 100,
                                 fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins',
+                                //fontFamily: 'Poppins',
                               )),
                           Column(
                             children: [
