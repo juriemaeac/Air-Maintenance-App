@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 class FormCard extends StatefulWidget {
   String? question;
   String? number;
+  final ValueChanged<String> initials;
+  final ValueChanged<int> findings;
 
   FormCard({
     required this.question,
     required this.number,
+    required this.findings,
+    required this.initials,
   });
 
   @override
@@ -16,8 +20,14 @@ class FormCard extends StatefulWidget {
 }
 
 class _FormCardState extends State<FormCard> {
+
+  
+
+  int? _selectedValueIndex;
   @override
   Widget build(BuildContext context) {
+    String? fQuestion = widget.question ?? '';
+    String? fNumber = widget.number ?? '';
     return Container(
       margin: const EdgeInsets.only(bottom: 40),
       child: Column(
@@ -70,22 +80,28 @@ class _FormCardState extends State<FormCard> {
               hintText: 'Initials (Optional)',
               hintStyle: AppTextStyles.subtitle,
             ),
+            onChanged: (value) {
+              widget.initials(value);
+            },
+           
           ),
         ],
       ),
     );
   }
 
-  int? _selectedValueIndex;
-
   List<String> buttonText = ["Satisfactory", "Not Satisfactory", "Warning"];
 
   Widget button({required String text, required int index}) {
+    String? fQuestion = widget.question ?? '';
+    String? fNumber = widget.number ?? '';
     return InkWell(
       splashColor: Colors.white,
       onTap: () {
+        widget.findings(index);
         setState(() {
           _selectedValueIndex = index;
+          print("$fNumber, $fQuestion, $_selectedValueIndex");
         });
       },
       child: Container(

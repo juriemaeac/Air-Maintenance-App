@@ -10,9 +10,9 @@ class ScheduledInspection extends HiveObject {
   @HiveField(2)
   String? inspectionDate;
   @HiveField(3)
-  int? sipA1Findings;
+  int? sipA11Findings;
   @HiveField(4)
-  String? sipA1Initials;
+  String? sipA11Initials;
   @HiveField(5)
   int? sipA2Findings;
   @HiveField(6)
@@ -43,173 +43,159 @@ class ScheduledInspection extends HiveObject {
   @HiveField(18)
   String? sipB1Initials;
   @HiveField(19)
-  int? sipB2Findings;
-  @HiveField(20)
-  String? sipB2Initials;
-  @HiveField(21)
   int? sipB21Findings;
-  @HiveField(22)
+  @HiveField(20)
   String? sipB21Initials;
-  @HiveField(23)
+  @HiveField(21)
   int? sipB22Findings;
-  @HiveField(24)
+  @HiveField(22)
   String? sipB22Initials;
-  @HiveField(25)
+  @HiveField(23)
   int? sipB23Findings;
-  @HiveField(26)
+  @HiveField(24)
   String? sipB23Initials;
-  @HiveField(27)
+  @HiveField(25)
   int? sipB24Findings;
-  @HiveField(28)
+  @HiveField(26)
   String? sipB24Initials;
-  @HiveField(29)
+  @HiveField(27)
   int? sipB25Findings;
-  @HiveField(30)
+  @HiveField(28)
   String? sipB25Initials;
-  @HiveField(31)
-  int? sipB3Findings;
-  @HiveField(32)
-  String? sipB3Initials;
-  @HiveField(33)
+  @HiveField(29)
   int? sipB31Findings;
-  @HiveField(34)
+  @HiveField(30)
   String? sipB31Initials;
-  @HiveField(35)
+  @HiveField(31)
   int? sipB32Findings;
-  @HiveField(36)
+  @HiveField(32)
   String? sipB32Initials;
-  @HiveField(37)
-  int? sipB4Findings;
-  @HiveField(38)
-  String? sipB4Initials;
-  @HiveField(39)
+  @HiveField(33)
   int? sipB41Findings;
-  @HiveField(40)
+  @HiveField(34)
   String? sipB41Initials;
-  @HiveField(41)
+  @HiveField(35)
   int? sipB42Findings;
-  @HiveField(42)
+  @HiveField(36)
   String? sipB42Initials;
-  @HiveField(43)
+  @HiveField(37)
   int? sipB43Findings;
-  @HiveField(44)
+  @HiveField(38)
   String? sipB43Initials;
-  @HiveField(45)
+  @HiveField(39)
   int? sipB44Findings;
-  @HiveField(46)
+  @HiveField(40)
   String? sipB44Initials;
-  @HiveField(47)
-  int? sipB5Findings;
-  @HiveField(48)
-  String? sipB5Initials;
-  @HiveField(49)
+  @HiveField(41)
   int? sipB51Findings;
-  @HiveField(50)
+  @HiveField(42)
   String? sipB51Initials;
-  @HiveField(51)
+  @HiveField(43)
   int? sipB52Findings;
-  @HiveField(52)
+  @HiveField(44)
   String? sipB52Initials;
-  @HiveField(53)
+  @HiveField(45)
   int? sipB53Findings;
-  @HiveField(54)
+  @HiveField(46)
   String? sipB53Initials;
-  @HiveField(55)
+  @HiveField(47)
   int? sipB54Findings;
-  @HiveField(56)
+  @HiveField(48)
   String? sipB54Initials;
-  @HiveField(57)
+  @HiveField(49)
   int? sipB55Findings;
-  @HiveField(58)
+  @HiveField(50)
   String? sipB55Initials;
-  @HiveField(59)
-  int? sipB6Findings;
-  @HiveField(60)
-  String? sipB6Initials;
-  @HiveField(61)
+  @HiveField(51)
   int? sipB61Findings;
-  @HiveField(62)
+  @HiveField(52)
   String? sipB61Initials;
-  @HiveField(63)
+  @HiveField(53)
   int? sipB62Findings;
-  @HiveField(64)
+  @HiveField(54)
   String? sipB62Initials;
-  @HiveField(65)
+  @HiveField(55)
   int? sipB63Findings;
-  @HiveField(66)
+  @HiveField(56)
   String? sipB63Initials;
-  @HiveField(67)
+  @HiveField(57)
   int? sipB64Findings;
-  @HiveField(68)
+  @HiveField(58)
   String? sip64Initials;
-  @HiveField(69)
-  int? sipB7Findings;
-  @HiveField(70)
-  String? sipB7Initials;
-  @HiveField(71)
+  @HiveField(59)
   int? sipB71Findings;
-  @HiveField(72)
+  @HiveField(60)
   String? sipB71Initials;
-  @HiveField(73)
+  @HiveField(61)
   int? sipB72Findings;
-  @HiveField(74)
+  @HiveField(62)
   String? sipB72Initials;
-  @HiveField(75)
+  @HiveField(63)
   int? sipB73Findings;
-  @HiveField(76)
+  @HiveField(64)
   String? sipB73Initials;
-  @HiveField(77)
+  @HiveField(65)
   int? sipB74Findings;
-  @HiveField(78)
+  @HiveField(66)
   String? sipB74Initials;
-  @HiveField(79)
+  @HiveField(67)
   int? sipB75Findings;
-  @HiveField(80)
+  @HiveField(68)
   String? sipB75Initials;
-  @HiveField(81)
-  int? sipB8Findings;
-  @HiveField(82)
-  String? sipB8Initials;
-  @HiveField(83)
+  @HiveField(69)
   int? sipB81Findings;
-  @HiveField(84)
+  @HiveField(70)
   String? sipB81Initials;
-  @HiveField(85)
+  @HiveField(71)
   int? sipB82Findings;
-  @HiveField(86)
+  @HiveField(72)
   String? sipB82Initials;
-  @HiveField(87)
+  @HiveField(73)
   int? sipB83Findings;
-  @HiveField(88)
+  @HiveField(74)
   String? sipB83Initials;
-  @HiveField(89)
+  @HiveField(75)
   int? sipB84Findings;
-  @HiveField(90)
+  @HiveField(76)
   String? sipB84Initials;
-  @HiveField(91)
+  @HiveField(77)
   int? sipB85Findings;
-  @HiveField(92)
+  @HiveField(78)
   String? sipB85Initials;
-  @HiveField(93)
+  @HiveField(79)
   int? sipB86Findings;
-  @HiveField(94)
+  @HiveField(80)
   String? sipB86Initials;
-  @HiveField(95)
-  int? sipB9Findings;
-  @HiveField(96)
-  String? sipB9Initials;
-  @HiveField(97)
+  @HiveField(81)
   int? sipB91Findings;
-  @HiveField(98)
+  @HiveField(82)
   String? sipB91Initials;
-  @HiveField(99)
+  @HiveField(83)
   int? sipB92Findings;
-  @HiveField(100)
+  @HiveField(84)
   String? sipB92Initials;
+  @HiveField(85)
+  int? sipA12Findings;
+  @HiveField(86)
+  String? sipA12Initials;
+  @HiveField(87)
+  int? sipA13Findings;
+  @HiveField(88)
+  String? sipA13Initials;
+  @HiveField(89)
+  int? sipA14Findings;
+  @HiveField(90)
+  String? sipA14Initials;
 
   ScheduledInspection({
-    required this.sipA1Findings,
-    required this.sipA1Initials,
+    required this.sipA11Findings,
+    required this.sipA11Initials,
+    required this.sipA12Findings,
+    required this.sipA12Initials,
+    required this.sipA13Findings,
+    required this.sipA13Initials,
+    required this.sipA14Findings,
+    required this.sipA14Initials,
     required this.sipA2Findings,
     required this.sipA2Initials,
     required this.sipA3Findings,
@@ -224,8 +210,6 @@ class ScheduledInspection extends HiveObject {
     required this.sipA7Initials,
     required this.sipB1Findings,
     required this.sipB1Initials,
-    required this.sipB2Findings,
-    required this.sipB2Initials,
     required this.sipB21Findings,
     required this.sipB21Initials,
     required this.sipB22Findings,
@@ -236,14 +220,10 @@ class ScheduledInspection extends HiveObject {
     required this.sipB24Initials,
     required this.sipB25Findings,
     required this.sipB25Initials,
-    required this.sipB3Findings,
-    required this.sipB3Initials,
     required this.sipB31Findings,
     required this.sipB31Initials,
     required this.sipB32Findings,
     required this.sipB32Initials,
-    required this.sipB4Findings,
-    required this.sipB4Initials,
     required this.sipB41Findings,
     required this.sipB41Initials,
     required this.sipB42Findings,
@@ -252,8 +232,6 @@ class ScheduledInspection extends HiveObject {
     required this.sipB43Initials,
     required this.sipB44Findings,
     required this.sipB44Initials,
-    required this.sipB5Findings,
-    required this.sipB5Initials,
     required this.sipB51Findings,
     required this.sipB51Initials,
     required this.sipB52Findings,
@@ -264,8 +242,6 @@ class ScheduledInspection extends HiveObject {
     required this.sipB54Initials,
     required this.sipB55Findings,
     required this.sipB55Initials,
-    required this.sipB6Findings,
-    required this.sipB6Initials,
     required this.sipB61Findings,
     required this.sipB61Initials,
     required this.sipB62Findings,
@@ -274,8 +250,6 @@ class ScheduledInspection extends HiveObject {
     required this.sipB63Initials,
     required this.sipB64Findings,
     required this.sip64Initials,
-    required this.sipB7Findings,
-    required this.sipB7Initials,
     required this.sipB71Findings,
     required this.sipB71Initials,
     required this.sipB72Findings,
@@ -286,8 +260,6 @@ class ScheduledInspection extends HiveObject {
     required this.sipB74Initials,
     required this.sipB75Findings,
     required this.sipB75Initials,
-    required this.sipB8Findings,
-    required this.sipB8Initials,
     required this.sipB81Findings,
     required this.sipB81Initials,
     required this.sipB82Findings,
@@ -300,8 +272,6 @@ class ScheduledInspection extends HiveObject {
     required this.sipB85Initials,
     required this.sipB86Findings,
     required this.sipB86Initials,
-    required this.sipB9Findings,
-    required this.sipB9Initials,
     required this.sipB91Findings,
     required this.sipB91Initials,
     required this.sipB92Findings,

@@ -64,7 +64,7 @@ class FormCard extends StatelessWidget {
                     ),
                     Text(
                       title!,
-                      style: AppTextStyles.title1,
+                      style: AppTextStyles.title0,
                     ),
                   ],
                 ),
