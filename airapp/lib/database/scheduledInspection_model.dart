@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-//part 'scheduledInspection_model.dart';
+part 'scheduledInspection_model.g.dart';
 
 @HiveType(typeId: 2)
 class ScheduledInspection extends HiveObject {
@@ -188,6 +188,8 @@ class ScheduledInspection extends HiveObject {
   String? sipA14Initials;
 
   ScheduledInspection({
+    required this.accountID,
+    required this.inspectionDate,
     required this.sipA11Findings,
     required this.sipA11Initials,
     required this.sipA12Findings,

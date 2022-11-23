@@ -1,7 +1,13 @@
 import 'package:airapp/Home/navBar.dart';
+import 'package:airapp/boxes/boxInstructor.dart';
+import 'package:airapp/boxes/boxStudent.dart';
 import 'package:airapp/constants.dart';
 import 'package:airapp/authentication/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
+import '../database/instructor_model.dart';
+import '../database/student_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,8 +23,85 @@ class _LoginPageState extends State<LoginPage> {
   String? username;
   String? password;
 
+  @override
+  void initState() {
+    super.initState();
+    Hive.openBox<Student>(HiveBoxesStudent.student);
+    Hive.openBox<Instructor>(HiveBoxesInstructor.instructor);
+  }
+
   TextEditingController usernameText = TextEditingController();
   TextEditingController passwordText = TextEditingController();
+
+  void clearInputFields() {
+    usernameText.clear();
+    passwordText.clear();
+  }
+
+  authenticateUser() {
+    Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
+    Box<Instructor> instructorBox = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    var userAuthenticated = false;
+
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      for (var students in studentBox.values) {
+        if (students.userName == usernameText.text &&
+           students.password == passwordText.text) {
+          var uuName = students.userName.toString();
+          var uname =
+              "${students.name.toString()} ${students.lastName.toString()}";
+          var udept = students.department.toString();
+          var uaccountID = students.accountID.toString();
+          var usy = students.schoolYear.toString();
+          var uss = students.schoolSection.toString();
+          userCredential.setUsername(uuName);
+          userCredential.setName(uname);
+          userCredential.setDepartment(udept);
+          userCredential.setAccountID(uaccountID);
+          userCredential.setSchoolYear(usy);
+          userCredential.setSchoolSection(uss);
+          userAuthenticated = true;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NavBar(),
+            ),
+          );
+        }
+      }
+      for (var instructors in instructorBox.values) {
+        if (instructors.userName == usernameText.text &&
+            instructors.password == passwordText.text) {
+          var uuName = instructors.userName.toString();
+          var uname =
+              "${instructors.name.toString()} ${instructors.lastName.toString()}";
+          var udept = instructors.department.toString();
+          var uaccountID = instructors.accountID.toString();
+
+          userCredential.setUsername(uuName);
+          userCredential.setName(uname);
+          userCredential.setDepartment(udept);
+          userCredential.setAccountID(uaccountID);
+          userAuthenticated = true;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NavBar(),
+            ),
+          );
+        }
+      }
+      if (!userAuthenticated) {
+        clearInputFields();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Invalid username or password'),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +167,6 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: TextFormField(
-                              autofocus: true,
                               controller: usernameText,
                               style: AppTextStyles.textFields,
                               decoration: const InputDecoration(
@@ -121,7 +203,6 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: TextFormField(
-                              autofocus: true,
                               controller: passwordText,
                               obscureText: !_isObscure,
                               style: AppTextStyles.textFields,
@@ -173,10 +254,11 @@ class _LoginPageState extends State<LoginPage> {
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => NavBar()));
+                                authenticateUser();
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => NavBar()));
                               },
                               style: ButtonStyle(
                                 padding: MaterialStateProperty.all(
@@ -231,5 +313,68 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ))));
+  }
+}
+
+class userCredential {
+  static String username = 'n/a';
+  static String name = 'n/a';
+  static String department = 'n/a';
+  static String schoolYear = 'n/a';
+  static String schoolSection = 'n/a';
+  static String accountID = 'n/a';
+
+  static String getUsername() {
+    return username;
+  }
+
+  static String getName() {
+    return name;
+  }
+
+  static String getDepartment() {
+    return department;
+  }
+
+  static String getSchoolYear() {
+    return schoolYear;
+  }
+
+  static String getSchoolSection() {
+    return schoolSection;
+  }
+
+  static String getAccountID() {
+    return accountID;
+  }
+
+  static void setUsername(String value) {
+    username = value;
+    print("Username: " + username);
+  }
+
+  static void setName(String value) {
+    name = value;
+    print("Name: " + name);
+  }
+
+  static void setDepartment(String value) {
+    department = value;
+    print("Department: " + department);
+  }
+
+  static void setSchoolYear(String value) {
+    schoolYear = value;
+    print("School Year: " + schoolYear);
+  }
+
+  static void setSchoolSection(String value) {
+    schoolSection = value;
+    print("School Section: " + schoolSection);
+  }
+
+  static void setAccountID(String value) {
+    accountID = value;
+    print("Account ID: " + accountID);
   }
 }

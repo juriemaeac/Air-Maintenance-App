@@ -1,5 +1,6 @@
 import 'package:airapp/Home/formsWidget.dart';
 import 'package:airapp/Home/profileDetails.dart';
+import 'package:airapp/authentication/login.dart';
 import 'package:airapp/home/calendar/calendarSection.dart';
 import 'package:airapp/home/manual/manualWidget.dart';
 import 'package:airapp/constants.dart';
@@ -13,6 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? name;
+
+  @override
+  void initState() {
+    super.initState();
+    name = userCredential.name;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +46,8 @@ class _HomePageState extends State<HomePage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Good Morning, ', style: AppTextStyles.subtitle),
-                        Text('Juan Dela Cruz',
+                        Text('Hello! ', style: AppTextStyles.subtitle),
+                        Text('$name',
                             style: AppTextStyles.headings2.copyWith(
                               color: AppColors.yellowAccent,
                             )),
@@ -154,7 +163,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-
               Container(
                 //color: Colors.amber,
                 width: MediaQuery.of(context).size.width,

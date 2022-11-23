@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-//part 'instructor_model.g.dart';
+part 'instructor_model.g.dart';
 
 @HiveType(typeId: 0)
 class Instructor extends HiveObject {
@@ -20,7 +20,6 @@ class Instructor extends HiveObject {
   @HiveField(7)
   late String? password;
   Instructor({
-    required this.id,
     required this.name,
     required this.lastName,
     required this.middleName,

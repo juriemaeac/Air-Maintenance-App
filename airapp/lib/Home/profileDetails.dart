@@ -1,6 +1,6 @@
 import 'package:airapp/constants.dart';
 import 'package:flutter/material.dart';
-
+import 'package:airapp/authentication/login.dart';
 class DetailsCard extends StatefulWidget {
   String? title;
   IconData? icon;
@@ -73,6 +73,8 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+
+
   //dito
   String? username = "user1234567890";
   String? accountID = "12345";
@@ -85,7 +87,16 @@ class _DetailsState extends State<Details> {
   bool isExpanded2 = false;
   bool isExpanded3 = false;
   bool isExpanded4 = false;
-
+  
+  @override
+  void initState() {
+    super.initState();
+    username = userCredential.username;
+    department = userCredential.department;
+    accountID = userCredential.accountID;
+    schoolYear = userCredential.schoolYear;
+    schoolSection = userCredential.schoolSection;
+  }
   @override
   Widget build(BuildContext context) {
     double? width = MediaQuery.of(context).size.width / 7;

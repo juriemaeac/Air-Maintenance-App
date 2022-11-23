@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-//part 'maintenanceTask_model.dart';
+part 'maintenanceTask_model.g.dart';
 
 @HiveType(typeId: 3)
 class MaintenanceTask extends HiveObject {
@@ -76,79 +76,79 @@ class MaintenanceTask extends HiveObject {
   String? departmentB;
   @HiveField(35)
   String? acRegB;
-  @HiveField(35)
-  String? userB;
   @HiveField(36)
+  String? userB;
+  @HiveField(37)
   String? dateB;
   //Walkaround fuselage wings and tails
-  @HiveField(37)
-  String? findingsA1;
   @HiveField(38)
-  String? findingsB1;
+  String? findingsA1;
   @HiveField(39)
-  String? findingsLogbook1;
+  String? findingsB1;
   @HiveField(40)
-  String? findingsSolution1;
+  String? findingsLogbook1;
   @HiveField(41)
+  String? findingsSolution1;
+  @HiveField(42)
   String? findingsResult1;
   //Walkaround exterior
-  @HiveField(42)
-  String? findingsA2;
   @HiveField(43)
-  String? findingsB2;
+  String? findingsA2;
   @HiveField(44)
-  String? findingsLogbook2;
+  String? findingsB2;
   @HiveField(45)
-  String? findingsSolution2;
+  String? findingsLogbook2;
   @HiveField(46)
+  String? findingsSolution2;
+  @HiveField(47)
   String? findingsResult2;
   //Check Engine
-  @HiveField(47)
-  String? findingsA3;
   @HiveField(48)
-  String? findingsB3;
+  String? findingsA3;
   @HiveField(49)
-  String? findingsLogbook3;
+  String? findingsB3;
   @HiveField(50)
-  String? findingsSolution3;
+  String? findingsLogbook3;
   @HiveField(51)
+  String? findingsSolution3;
+  @HiveField(52)
   String? findingsResult3;
   //Check Visual inspection battery alternator
-  @HiveField(52)
-  String? findingsA4;
   @HiveField(53)
-  String? findingsB4;
+  String? findingsA4;
   @HiveField(54)
-  String? findingsLogbook4;
+  String? findingsB4;
   @HiveField(55)
-  String? findingsSolution4;
+  String? findingsLogbook4;
   @HiveField(56)
+  String? findingsSolution4;
+  @HiveField(57)
   String? findingsResult4;
   //Check Lighting System
-  @HiveField(57)
-  String? findingsA5;
   @HiveField(58)
-  String? findingsB5;
+  String? findingsA5;
   @HiveField(59)
-  String? findingsLogbook5;
+  String? findingsB5;
   @HiveField(60)
-  String? findingsSolution5;
+  String? findingsLogbook5;
   @HiveField(61)
+  String? findingsSolution5;
+  @HiveField(62)
   String? findingsResult5;
   //Check Flashing Beacon
-  @HiveField(62)
+  @HiveField(63)
   String? findingsA6;
-  @HiveField(63)
-  String? findingsB6;
-  @HiveField(63)
-  String? findingsLogbook6;
   @HiveField(64)
-  String? findingsSolution6;
+  String? findingsB6;
   @HiveField(65)
+  String? findingsLogbook6;
+  @HiveField(66)
+  String? findingsSolution6;
+  @HiveField(67)
   String? findingsResult6;
 
   MaintenanceTask(
-      {required this.id,
+      {
       required this.accountID,
       required this.taskCardNumber,
       required this.taskCardSpecification,

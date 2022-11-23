@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-//part 'student_model.dart';
+part 'student_model.g.dart';
 
 @HiveType(typeId: 1)
 class Student extends HiveObject {
@@ -21,12 +21,12 @@ class Student extends HiveObject {
   late String? password;
   @HiveField(8)
   late String? birthdate;
-  @HiveField(8)
+  @HiveField(9)
   late String? schoolYear;
-  @HiveField(8)
+  @HiveField(10)
   late String? schoolSection;
   Student(
-      {required this.id,
+      {
       required this.name,
       required this.lastName,
       required this.middleName,
