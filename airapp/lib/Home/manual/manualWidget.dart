@@ -20,7 +20,7 @@ class ManualCard extends StatelessWidget {
       // /margin: const EdgeInsets.only(left: 30),
       padding: const EdgeInsets.all(20),
       width: MediaQuery.of(context).size.width / 2 - 40,
-      height: 170,
+      height: MediaQuery.of(context).size.height * 0.3 - 40,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
@@ -66,7 +66,9 @@ class _ManualsState extends State<Manuals> {
       );
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
+      runSpacing: 30,
+      spacing: 20,
       children: [
         GestureDetector(
           onTap: () async {
@@ -82,9 +84,9 @@ class _ManualsState extends State<Manuals> {
             author: '30 pages',
           ),
         ),
-        const SizedBox(
-          width: 15,
-        ),
+        // const SizedBox(
+        //   width: 15,
+        // ),
         GestureDetector(
           onTap: () async {
             const path = 'assets/files/Cessna_152_1978-1985_MM_D2064-1-13.pdf';
@@ -99,9 +101,9 @@ class _ManualsState extends State<Manuals> {
             author: '30 pages',
           ),
         ),
-        const SizedBox(
-          width: 15,
-        ),
+        // const SizedBox(
+        //   width: 15,
+        // ),
         GestureDetector(
           onTap: () async {
             const path = 'assets/files/Cessna-150-Owners-Manual.pdf';
@@ -116,9 +118,9 @@ class _ManualsState extends State<Manuals> {
             author: '30 pages',
           ),
         ),
-        const SizedBox(
-          width: 15,
-        ),
+        // const SizedBox(
+        //   width: 15,
+        // ),
         GestureDetector(
           onTap: () async {
             const path = 'assets/files/05.-ATA-24-ELECTRICAL-POWER.pdf';
@@ -133,9 +135,9 @@ class _ManualsState extends State<Manuals> {
             author: '30 pages',
           ),
         ),
-        const SizedBox(
-          width: 15,
-        ),
+        // const SizedBox(
+        //   width: 15,
+        // ),
         GestureDetector(
           onTap: () async {
             const path = 'assets/files/150_sm_69.pdf';
@@ -150,9 +152,9 @@ class _ManualsState extends State<Manuals> {
             author: '30 pages',
           ),
         ),
-        const SizedBox(
-          width: 15,
-        ),
+        // const SizedBox(
+        //   width: 15,
+        // ),
         GestureDetector(
           onTap: () async {
             const path = 'assets/files/A319-320-321-Electrical.pdf';

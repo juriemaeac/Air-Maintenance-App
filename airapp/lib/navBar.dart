@@ -1,4 +1,4 @@
-import 'package:airapp/forms/forms.dart';
+import 'package:airapp/Records/records.dart';
 import 'package:airapp/home/home.dart';
 import 'package:airapp/Profile/profile.dart';
 import 'package:airapp/constants.dart';
@@ -19,17 +19,18 @@ class _NavBarState extends State<NavBar> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     //Forms(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    RecordPage(),
+    // Text(
+    //   'Index 1: Business',
+    //   style: optionStyle,
+    // ),
     ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      //backgroundColor: AppColors.white,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

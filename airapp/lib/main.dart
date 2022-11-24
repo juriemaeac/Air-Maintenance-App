@@ -3,7 +3,6 @@ import 'package:airapp/boxes/boxMaintenance.dart';
 import 'package:airapp/boxes/boxStudent.dart';
 import 'package:airapp/database/instructor_model.dart';
 import 'package:airapp/home/home.dart';
-import 'package:airapp/home/navBar.dart';
 import 'package:airapp/landingPage.dart';
 import 'package:airapp/authentication/signup.dart';
 import 'package:flutter/material.dart';

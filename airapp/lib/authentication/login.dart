@@ -1,4 +1,4 @@
-import 'package:airapp/Home/navBar.dart';
+import 'package:airapp/navBar.dart';
 import 'package:airapp/boxes/boxInstructor.dart';
 import 'package:airapp/boxes/boxStudent.dart';
 import 'package:airapp/constants.dart';
@@ -40,13 +40,14 @@ class _LoginPageState extends State<LoginPage> {
 
   authenticateUser() {
     Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
-    Box<Instructor> instructorBox = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    Box<Instructor> instructorBox =
+        Hive.box<Instructor>(HiveBoxesInstructor.instructor);
     var userAuthenticated = false;
 
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       for (var students in studentBox.values) {
         if (students.userName == usernameText.text &&
-           students.password == passwordText.text) {
+            students.password == passwordText.text) {
           var uuName = students.userName.toString();
           var uname =
               "${students.name.toString()} ${students.lastName.toString()}";

@@ -1,6 +1,7 @@
 import 'package:airapp/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:airapp/authentication/login.dart';
+
 class DetailsCard extends StatefulWidget {
   String? title;
   IconData? icon;
@@ -26,7 +27,7 @@ class _DetailsCardState extends State<DetailsCard> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       duration: Duration(milliseconds: 300),
       width: widget.width,
       height: 40,
@@ -73,8 +74,6 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-
-
   //dito
   String? username = "user1234567890";
   String? accountID = "12345";
@@ -87,7 +86,7 @@ class _DetailsState extends State<Details> {
   bool isExpanded2 = false;
   bool isExpanded3 = false;
   bool isExpanded4 = false;
-  
+
   @override
   void initState() {
     super.initState();
@@ -97,10 +96,11 @@ class _DetailsState extends State<Details> {
     schoolYear = userCredential.schoolYear;
     schoolSection = userCredential.schoolSection;
   }
+
   @override
   Widget build(BuildContext context) {
     double? width = MediaQuery.of(context).size.width / 7;
-    double? widthExpanded = MediaQuery.of(context).size.width / 3;
+    double? widthExpanded = MediaQuery.of(context).size.width / 2.5;
     return Row(
       children: [
         GestureDetector(

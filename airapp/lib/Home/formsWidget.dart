@@ -1,5 +1,6 @@
 import 'package:airapp/constants.dart';
-import 'package:airapp/forms/forms.dart';
+import 'package:airapp/formMaintenancetask/TaskCard.dart';
+import 'package:airapp/formsInspection/forms.dart';
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
@@ -105,14 +106,24 @@ class _FormWidgetState extends State<FormWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FormCard(
-          icon: Icon(
-            Icons.build_rounded,
-            color: AppColors.yellowAccent,
-            size: 20,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TaskCard(),
+              ),
+            );
+          },
+          child: FormCard(
+            icon: Icon(
+              Icons.build_rounded,
+              color: AppColors.yellowAccent,
+              size: 20,
+            ),
+            title: 'Maintenance ',
+            subtitle: 'Task Card',
           ),
-          title: 'Maintenance ',
-          subtitle: 'Task Card',
         ),
         SizedBox(
           height: 20,

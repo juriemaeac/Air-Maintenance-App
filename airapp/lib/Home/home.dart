@@ -185,11 +185,11 @@ class _HomePageState extends State<HomePage> {
               Container(
                 //color: Colors.amber,
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.22,
+                height: MediaQuery.of(context).size.height * 0.3,
                 child: const SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                     child: Manuals(),
                   ),
                 ),

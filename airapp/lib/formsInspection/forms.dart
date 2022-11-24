@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:airapp/constants.dart';
-import 'package:airapp/forms/formCard.dart';
+import 'package:airapp/formsInspection/formCard.dart';
 import 'package:airapp/home/manual/pdf/pdfAPI.dart';
 import 'package:airapp/home/manual/pdf/pdfViewer.dart';
+import 'package:airapp/manualList.dart';
 import 'package:flutter/material.dart';
 
 class Forms extends StatefulWidget {
@@ -508,11 +509,17 @@ class _FormsState extends State<Forms> with ChangeNotifier {
             Text('Forms'),
             GestureDetector(
                 onTap: () async {
-                  const path = 'assets/files/150_sm_69.pdf';
-                  final file = await PDFApi.loadAsset(path);
-                  openPDF(context, file);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ManualList()));
                 },
                 child: Text('Manual'))
+            // GestureDetector(
+            //     onTap: () async {
+            //       const path = 'assets/files/150_sm_69.pdf';
+            //       final file = await PDFApi.loadAsset(path);
+            //       openPDF(context, file);
+            //     },
+            //     child: Text('Manual'))
           ],
         ),
         elevation: 2,
@@ -535,29 +542,12 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Row(
-                        children: [
-                          // Container(
-                          //   width: 30,
-                          //   padding: const EdgeInsets.all(6),
-                          //   decoration: BoxDecoration(
-                          //     color: AppColors.blueAccent,
-                          //     shape: BoxShape.circle,
-                          //   ),
-                          //   child: Center(
-                          //     child: Text('1',
-                          //         style: AppTextStyles.subtitle2
-                          //             .copyWith(color: AppColors.white)),
-                          //   ),
-                          // ),
-                          // SizedBox(width: 5),
-                          Text('Check status of:', style: AppTextStyles.title),
-                        ],
-                      ),
-                    ),
                     //1
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Text("1. Check status of:",
+                          style: AppTextStyles.title),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 25),
                       child: Column(
