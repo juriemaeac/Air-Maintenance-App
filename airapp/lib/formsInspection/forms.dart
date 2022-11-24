@@ -1,11 +1,18 @@
 import 'dart:io';
 
+import 'package:airapp/Records/records.dart';
 import 'package:airapp/constants.dart';
 import 'package:airapp/formsInspection/formCard.dart';
 import 'package:airapp/home/manual/pdf/pdfAPI.dart';
 import 'package:airapp/home/manual/pdf/pdfViewer.dart';
 import 'package:airapp/manualList.dart';
+import 'package:airapp/navBar.dart';
 import 'package:flutter/material.dart';
+import 'package:airapp/authentication/login.dart';
+import 'package:hive/hive.dart';
+
+import '../boxes/boxInspection.dart';
+import '../database/scheduledInspection_model.dart';
 
 class Forms extends StatefulWidget {
   const Forms({super.key});
@@ -17,12 +24,26 @@ class Forms extends StatefulWidget {
 class _FormsState extends State<Forms> with ChangeNotifier {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? id = "empty";
-  String? accountID = "empty";
-  String? inspectionDate = "empty";
+  String? accountID = "n/a";
+  String? inspectionDate = "n/a";
+
+  @override
+  void initState() {
+    super.initState();
+    Hive.openBox<ScheduledInspection>(HiveBoxesInspection.inspection);
+    accountID = userCredential.accountID;
+    getDate();
+  }
+
+  void getDate() {
+    DateTime date = DateTime.now();
+    var dateTime = DateTime.parse(date.toString());
+    var format1 = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+    inspectionDate = format1;
+  }
 
   int? sipA11Findings = 0;
-  String? sipA11Initials = "empty";
+  String? sipA11Initials = "No Comment";
   _updateFindings11a(int findings) {
     setState(() => sipA11Findings = findings);
   }
@@ -32,7 +53,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA12Findings = 0;
-  String? sipA12Initials = "empty";
+  String? sipA12Initials = "No Comment";
   _updateFindings12a(int findings) {
     setState(() => sipA12Findings = findings);
   }
@@ -42,7 +63,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA13Findings = 0;
-  String? sipA13Initials = "empty";
+  String? sipA13Initials = "No Comment";
   _updateFindings13a(int findings) {
     setState(() => sipA13Findings = findings);
   }
@@ -52,7 +73,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA14Findings = 0;
-  String? sipA14Initials = "empty";
+  String? sipA14Initials = "No Comment";
   _updateFindings14a(int findings) {
     setState(() => sipA14Findings = findings);
   }
@@ -62,7 +83,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA2Findings = 0;
-  String? sipA2Initials = "empty";
+  String? sipA2Initials = "No Comment";
   _updateFindings2(int findings) {
     setState(() => sipA2Findings = findings);
   }
@@ -72,7 +93,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA3Findings = 0;
-  String? sipA3Initials = "empty";
+  String? sipA3Initials = "No Comment";
   _updateFindings3(int findings) {
     setState(() => sipA3Findings = findings);
   }
@@ -82,7 +103,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA4Findings = 0;
-  String? sipA4Initials = "empty";
+  String? sipA4Initials = "No Comment";
   _updateFindings4(int findings) {
     setState(() => sipA4Findings = findings);
   }
@@ -92,7 +113,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA5Findings = 0;
-  String? sipA5Initials = "empty";
+  String? sipA5Initials = "No Comment";
   _updateFindings5(int findings) {
     setState(() => sipA5Findings = findings);
   }
@@ -102,7 +123,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA6Findings = 0;
-  String? sipA6Initials = "empty";
+  String? sipA6Initials = "No Comment";
   _updateFindings6(int findings) {
     setState(() => sipA6Findings = findings);
   }
@@ -112,7 +133,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   }
 
   int? sipA7Findings = 0;
-  String? sipA7Initials = "empty";
+  String? sipA7Initials = "No Comment";
   _updateFindings7(int findings) {
     setState(() => sipA7Findings = findings);
   }
@@ -123,7 +144,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//  //--------------------------------------------------------//
   int? sipB1Findings = 0;
-  String? sipB1Initials = "empty";
+  String? sipB1Initials = "No Comment";
   _updateFindings8(int findings) {
     setState(() => sipB1Findings = findings);
   }
@@ -134,7 +155,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB21Findings = 0;
-  String? sipB21Initials = "empty";
+  String? sipB21Initials = "No Comment";
   _updateFindings10(int findings) {
     setState(() => sipB21Findings = findings);
   }
@@ -145,7 +166,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB22Findings = 0;
-  String? sipB22Initials = "empty";
+  String? sipB22Initials = "No Comment";
   _updateFindings11(int findings) {
     setState(() => sipB22Findings = findings);
   }
@@ -156,7 +177,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB23Findings = 0;
-  String? sipB23Initials = "empty";
+  String? sipB23Initials = "No Comment";
   _updateFindings12(int findings) {
     setState(() => sipB23Findings = findings);
   }
@@ -167,7 +188,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB24Findings = 0;
-  String? sipB24Initials = "empty";
+  String? sipB24Initials = "No Comment";
   _updateFindings13(int findings) {
     setState(() => sipB24Findings = findings);
   }
@@ -178,7 +199,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB25Findings = 0;
-  String? sipB25Initials = "empty";
+  String? sipB25Initials = "No Comment";
   _updateFindings14(int findings) {
     setState(() => sipB25Findings = findings);
   }
@@ -189,7 +210,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB31Findings = 0;
-  String? sipB31Initials = "empty";
+  String? sipB31Initials = "No Comment";
   _updateFindings16(int findings) {
     setState(() => sipB31Findings = findings);
   }
@@ -200,7 +221,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB32Findings = 0;
-  String? sipB32Initials = "empty";
+  String? sipB32Initials = "No Comment";
   _updateFindings17(int findings) {
     setState(() => sipB32Findings = findings);
   }
@@ -211,7 +232,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB41Findings = 0;
-  String? sipB41Initials = "empty";
+  String? sipB41Initials = "No Comment";
   _updateFindings19(int findings) {
     setState(() => sipB41Findings = findings);
   }
@@ -222,7 +243,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB42Findings = 0;
-  String? sipB42Initials = "empty";
+  String? sipB42Initials = "No Comment";
   _updateFindings20(int findings) {
     setState(() => sipB42Findings = findings);
   }
@@ -233,7 +254,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB43Findings = 0;
-  String? sipB43Initials = "empty";
+  String? sipB43Initials = "No Comment";
   _updateFindings21(int findings) {
     setState(() => sipB43Findings = findings);
   }
@@ -244,7 +265,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB44Findings = 0;
-  String? sipB44Initials = "empty";
+  String? sipB44Initials = "No Comment";
   _updateFindings22(int findings) {
     setState(() => sipB44Findings = findings);
   }
@@ -255,7 +276,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB51Findings = 0;
-  String? sipB51Initials = "empty";
+  String? sipB51Initials = "No Comment";
   _updateFindings24(int findings) {
     setState(() => sipB51Findings = findings);
   }
@@ -266,7 +287,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB52Findings = 0;
-  String? sipB52Initials = "empty";
+  String? sipB52Initials = "No Comment";
   _updateFindings25(int findings) {
     setState(() => sipB52Findings = findings);
   }
@@ -277,7 +298,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB53Findings = 0;
-  String? sipB53Initials = "empty";
+  String? sipB53Initials = "No Comment";
   _updateFindings26(int findings) {
     setState(() => sipB53Findings = findings);
   }
@@ -288,7 +309,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB54Findings = 0;
-  String? sipB54Initials = "empty";
+  String? sipB54Initials = "No Comment";
   _updateFindings27(int findings) {
     setState(() => sipB54Findings = findings);
   }
@@ -299,7 +320,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB55Findings = 0;
-  String? sipB55Initials = "empty";
+  String? sipB55Initials = "No Comment";
   _updateFindings28(int findings) {
     setState(() => sipB55Findings = findings);
   }
@@ -310,7 +331,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB61Findings = 0;
-  String? sipB61Initials = "empty";
+  String? sipB61Initials = "No Comment";
   _updateFindings30(int findings) {
     setState(() => sipB61Findings = findings);
   }
@@ -321,7 +342,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB62Findings = 0;
-  String? sipB62Initials = "empty";
+  String? sipB62Initials = "No Comment";
   _updateFindings31(int findings) {
     setState(() => sipB62Findings = findings);
   }
@@ -332,7 +353,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB63Findings = 0;
-  String? sipB63Initials = "empty";
+  String? sipB63Initials = "No Comment";
   _updateFindings32(int findings) {
     setState(() => sipB63Findings = findings);
   }
@@ -343,7 +364,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB64Findings = 0;
-  String? sipB64Initials = "empty";
+  String? sipB64Initials = "No Comment";
   _updateFindings33(int findings) {
     setState(() => sipB64Findings = findings);
   }
@@ -354,7 +375,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB71Findings = 0;
-  String? sipB71Initials = "empty";
+  String? sipB71Initials = "No Comment";
   _updateFindings35(int findings) {
     setState(() => sipB71Findings = findings);
   }
@@ -365,7 +386,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB72Findings = 0;
-  String? sipB72Initials = "empty";
+  String? sipB72Initials = "No Comment";
   _updateFindings36(int findings) {
     setState(() => sipB72Findings = findings);
   }
@@ -376,7 +397,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB73Findings = 0;
-  String? sipB73Initials = "empty";
+  String? sipB73Initials = "No Comment";
   _updateFindings37(int findings) {
     setState(() => sipB73Findings = findings);
   }
@@ -387,7 +408,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB74Findings = 0;
-  String? sipB74Initials = "empty";
+  String? sipB74Initials = "No Comment";
   _updateFindings38(int findings) {
     setState(() => sipB74Findings = findings);
   }
@@ -398,7 +419,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB75Findings = 0;
-  String? sipB75Initials = "empty";
+  String? sipB75Initials = "No Comment";
   _updateFindings39(int findings) {
     setState(() => sipB75Findings = findings);
   }
@@ -409,7 +430,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB81Findings = 0;
-  String? sipB81Initials = "empty";
+  String? sipB81Initials = "No Comment";
   _updateFindings41(int findings) {
     setState(() => sipB81Findings = findings);
   }
@@ -420,7 +441,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB82Findings = 0;
-  String? sipB82Initials = "empty";
+  String? sipB82Initials = "No Comment";
   _updateFindings42(int findings) {
     setState(() => sipB82Findings = findings);
   }
@@ -431,7 +452,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB83Findings = 0;
-  String? sipB83Initials = "empty";
+  String? sipB83Initials = "No Comment";
   _updateFindings43(int findings) {
     setState(() => sipB83Findings = findings);
   }
@@ -442,7 +463,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB84Findings = 0;
-  String? sipB84Initials = "empty";
+  String? sipB84Initials = "No Comment";
   _updateFindings44(int findings) {
     setState(() => sipB84Findings = findings);
   }
@@ -453,7 +474,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB85Findings = 0;
-  String? sipB85Initials = "empty";
+  String? sipB85Initials = "No Comment";
   _updateFindings45(int findings) {
     setState(() => sipB85Findings = findings);
   }
@@ -464,7 +485,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB86Findings = 0;
-  String? sipB86Initials = "empty";
+  String? sipB86Initials = "No Comment";
   _updateFindings46(int findings) {
     setState(() => sipB86Findings = findings);
   }
@@ -475,7 +496,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB91Findings = 0;
-  String? sipB91Initials = "empty";
+  String? sipB91Initials = "No Comment";
   _updateFindings48(int findings) {
     setState(() => sipB91Findings = findings);
   }
@@ -486,7 +507,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   //--------------------------------------------------------//
   int? sipB92Findings = 0;
-  String? sipB92Initials = "empty";
+  String? sipB92Initials = "No Comment";
   _updateFindings49(int findings) {
     setState(() => sipB92Findings = findings);
   }
@@ -957,6 +978,30 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
+                          saveForm();
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Form Submitted"),
+                                  content: Text(
+                                      "Thank you for submitting the form. You will be redirected to the home page."),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NavBar()));
+                                      },
+                                      child: Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              });
+                          print('Account ID: $accountID');
+                          print('Inspection Date: $inspectionDate');
                           print('sipA11Findings: $sipA11Findings');
                           print('sipA11Initials: $sipA11Initials');
                           print('sipA12Findings: $sipA12Findings');
@@ -1070,5 +1115,102 @@ class _FormsState extends State<Forms> with ChangeNotifier {
         ),
       ),
     );
+  }
+
+  saveForm() {
+    Box<ScheduledInspection> inspectionBox =
+        Hive.box<ScheduledInspection>(HiveBoxesInspection.inspection);
+    inspectionBox.add(ScheduledInspection(
+      accountID: accountID,
+      inspectionDate: inspectionDate,
+      sipA11Findings: sipA11Findings,
+      sipA11Initials: sipA11Initials,
+      sipA12Findings: sipA12Findings,
+      sipA12Initials: sipA12Initials,
+      sipA13Findings: sipA13Findings,
+      sipA13Initials: sipA13Initials,
+      sipA14Findings: sipA14Findings,
+      sipA14Initials: sipA14Initials,
+      sipA2Findings: sipA2Findings,
+      sipA2Initials: sipA2Initials,
+      sipA3Findings: sipA3Findings,
+      sipA3Initials: sipA3Initials,
+      sipA4Findings: sipA4Findings,
+      sipA4Initials: sipA4Initials,
+      sipA5Findings: sipA5Findings,
+      sipA5Initials: sipA5Initials,
+      sipA6Findings: sipA6Findings,
+      sipA6Initials: sipA6Initials,
+      sipA7Findings: sipA7Findings,
+      sipA7Initials: sipA7Initials,
+      sipB1Findings: sipB1Findings,
+      sipB1Initials: sipB1Initials,
+      sipB21Findings: sipB21Findings,
+      sipB21Initials: sipB21Initials,
+      sipB22Findings: sipB22Findings,
+      sipB22Initials: sipB22Initials,
+      sipB23Findings: sipB23Findings,
+      sipB23Initials: sipB23Initials,
+      sipB24Findings: sipB24Findings,
+      sipB24Initials: sipB24Initials,
+      sipB25Findings: sipB25Findings,
+      sipB25Initials: sipB25Initials,
+      sipB31Findings: sipB31Findings,
+      sipB31Initials: sipB31Initials,
+      sipB32Findings: sipB32Findings,
+      sipB32Initials: sipB32Initials,
+      sipB41Findings: sipB41Findings,
+      sipB41Initials: sipB41Initials,
+      sipB42Findings: sipB42Findings,
+      sipB42Initials: sipB42Initials,
+      sipB43Findings: sipB43Findings,
+      sipB43Initials: sipB43Initials,
+      sipB44Findings: sipB44Findings,
+      sipB44Initials: sipB44Initials,
+      sipB51Findings: sipB51Findings,
+      sipB51Initials: sipB51Initials,
+      sipB52Findings: sipB52Findings,
+      sipB52Initials: sipB52Initials,
+      sipB53Findings: sipB53Findings,
+      sipB53Initials: sipB53Initials,
+      sipB54Findings: sipB54Findings,
+      sipB54Initials: sipB54Initials,
+      sipB55Findings: sipB55Findings,
+      sipB55Initials: sipB55Initials,
+      sipB61Findings: sipB61Findings,
+      sipB61Initials: sipB61Initials,
+      sipB62Findings: sipB62Findings,
+      sipB62Initials: sipB62Initials,
+      sipB63Findings: sipB63Findings,
+      sipB63Initials: sipB63Initials,
+      sipB64Findings: sipB64Findings,
+      sip64Initials: sipB64Initials,
+      sipB71Findings: sipB71Findings,
+      sipB71Initials: sipB71Initials,
+      sipB72Findings: sipB72Findings,
+      sipB72Initials: sipB72Initials,
+      sipB73Findings: sipB73Findings,
+      sipB73Initials: sipB73Initials,
+      sipB74Findings: sipB74Findings,
+      sipB74Initials: sipB74Initials,
+      sipB75Findings: sipB75Findings,
+      sipB75Initials: sipB75Initials,
+      sipB81Findings: sipB81Findings,
+      sipB81Initials: sipB81Initials,
+      sipB82Findings: sipB82Findings,
+      sipB82Initials: sipB82Initials,
+      sipB83Findings: sipB83Findings,
+      sipB83Initials: sipB83Initials,
+      sipB84Findings: sipB84Findings,
+      sipB84Initials: sipB84Initials,
+      sipB85Findings: sipB85Findings,
+      sipB85Initials: sipB85Initials,
+      sipB86Findings: sipB86Findings,
+      sipB86Initials: sipB86Initials,
+      sipB91Findings: sipB91Findings,
+      sipB91Initials: sipB91Initials,
+      sipB92Findings: sipB92Findings,
+      sipB92Initials: sipB92Initials,
+    ));
   }
 }

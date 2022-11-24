@@ -1,5 +1,6 @@
 import 'package:airapp/constants.dart';
-import 'package:airapp/formMaintenancetask/TaskCard.dart';
+import 'package:airapp/formMaintenancetask/task.dart';
+import 'package:airapp/formMaintenancetask/taskCard.dart';
 import 'package:airapp/formsInspection/forms.dart';
 import 'package:flutter/material.dart';
 
@@ -111,7 +112,7 @@ class _FormWidgetState extends State<FormWidget> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => TaskCard(),
+                builder: (context) => Task(),
               ),
             );
           },

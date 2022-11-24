@@ -1,5 +1,4 @@
 import 'package:airapp/constants.dart';
-import 'package:airapp/formsInspection/options/options.dart';
 import 'package:flutter/material.dart';
 
 class FormCard extends StatefulWidget {
@@ -66,10 +65,10 @@ class _FormCardState extends State<FormCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ...List.generate(
-                  buttonText.length,
+                  buttonText.length - 1,
                   (index) => button(
-                    index: index,
-                    text: buttonText[index],
+                    index: index + 1,
+                    text: buttonText[index + 1],
                   ),
                 )
               ],
@@ -89,7 +88,7 @@ class _FormCardState extends State<FormCard> {
     );
   }
 
-  List<String> buttonText = ["Satisfactory", "Not Satisfactory", "Warning"];
+  List<String> buttonText = ["", "Satisfactory", "Not Satisfactory", "Warning"];
 
   Widget button({required String text, required int index}) {
     String? fQuestion = widget.question ?? '';
@@ -106,18 +105,13 @@ class _FormCardState extends State<FormCard> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
-          color: _selectedValueIndex == 0 && index == 0
+          color: _selectedValueIndex == 1 && index == 1
               ? Colors.green
-              : _selectedValueIndex == 1 && index == 1
+              : _selectedValueIndex == 2 && index == 2
                   ? Colors.orangeAccent
-                  : _selectedValueIndex == 2 && index == 2
+                  : _selectedValueIndex == 3 && index == 3
                       ? Colors.redAccent
-                      : null, //AppColors.white,
-          // border: Border.all(
-          //     color: _selectedValueIndex == index
-          //         ? AppColors.blueAccent
-          //         : AppColors.greyAccentLine,
-          //     width: _selectedValueIndex == index ? 2 : 1),
+                      : null,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
