@@ -51,7 +51,7 @@ class LandingPage extends StatelessWidget {
                       ),
                       Text(
                         'Aircraft inspection\nand maintenance\nat glance',
-                        style: AppTextStyles.headings1.copyWith(
+                        style: AppTextStyles.headings2.copyWith(
                           color: AppColors.yellowAccent,
                         ),
                       ),
@@ -67,7 +67,7 @@ class LandingPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.18,
                   child: Column(

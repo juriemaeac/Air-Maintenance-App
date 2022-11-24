@@ -53,7 +53,7 @@ class _NavBarState extends State<NavBar> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: AppColors.yellowAccent,
-              color: AppColors.white,
+              color: AppColors.yellowAccent,
               textStyle: AppTextStyles.subtitle2.copyWith(
                 color: AppColors.blueAccent,
               ),

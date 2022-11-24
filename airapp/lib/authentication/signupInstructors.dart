@@ -1,7 +1,8 @@
 import 'dart:ffi';
 
 import 'package:airapp/Home/navBar.dart';
-import 'package:airapp/authentication/signupInstructors.dart';
+import 'package:airapp/authentication/signup.dart';
+import 'package:airapp/boxes/boxInstructor.dart';
 import 'package:airapp/constants.dart';
 import 'package:airapp/authentication/login.dart';
 import 'package:airapp/database/t.dart';
@@ -12,18 +13,16 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import '../database/instructor_model.dart';
 
-import '../boxes/boxStudent.dart';
-import '../database/student_model.dart';
-
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class SignupInstructor extends StatefulWidget {
+  const SignupInstructor({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<SignupInstructor> createState() => _SignupInstructorState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupInstructorState extends State<SignupInstructor> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool _isObscure = false;
@@ -36,9 +35,6 @@ class _SignupPageState extends State<SignupPage> {
   String? middleName;
   String? lastName;
   String? accountID;
-  String? schoolSection;
-  String? schoolYear;
-  String? textBirthdate;
   String? department;
   String? password;
   String? confirmPassword;
@@ -55,16 +51,6 @@ class _SignupPageState extends State<SignupPage> {
       return;
     }
   }
-
-  // TextEditingController usernameText = TextEditingController();
-  // TextEditingController firstNameText = TextEditingController();
-  // TextEditingController middleNameText = TextEditingController();
-  // TextEditingController lastNameText = TextEditingController();
-  // TextEditingController studentNoText = TextEditingController();
-  // TextEditingController departmentText = TextEditingController();
-  // TextEditingController passwordText = TextEditingController();
-  // TextEditingController confirmPasswordText = TextEditingController();
-  TextEditingController textBirthdateController = TextEditingController();
 
   List<String> departmentOptions = [
     "AET",
@@ -94,13 +80,13 @@ class _SignupPageState extends State<SignupPage> {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: AppColors.blueAccent,
+                      color: AppColors.yellowAccent,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.airplanemode_active_rounded,
                       size: 50,
-                      color: AppColors.yellowAccent,
+                      color: AppColors.blueAccent,
                     ),
                   ),
                   // Container(
@@ -125,7 +111,7 @@ class _SignupPageState extends State<SignupPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Register as instructor? ',
+                      'Register as student? ',
                       style: AppTextStyles.subHeadings.copyWith(
                         fontWeight: FontWeight.normal,
                       ),
@@ -134,8 +120,7 @@ class _SignupPageState extends State<SignupPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupInstructor()),
+                          MaterialPageRoute(builder: (context) => SignupPage()),
                         );
                       },
                       child: Text(
@@ -283,7 +268,6 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          //controller: studentNoText,
                           style: AppTextStyles.textFields,
                           decoration: const InputDecoration(
                             contentPadding:
@@ -323,12 +307,11 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          //controller: studentNoText,
                           style: AppTextStyles.textFields,
                           decoration: const InputDecoration(
                             contentPadding:
                                 const EdgeInsets.only(left: 25, right: 13),
-                            labelText: 'Enter Student No.',
+                            labelText: 'Enter Account No.',
                             labelStyle: AppTextStyles.subHeadings,
                             border: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
@@ -341,142 +324,6 @@ class _SignupPageState extends State<SignupPage> {
                           onChanged: (value) {
                             setState(() {
                               accountID = value;
-                            });
-                          },
-                          validator: (String? value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Required!";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width - 60, // / 2 - 5,
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  decoration: BoxDecoration(
-                    color: AppColors.greyAccent,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextFormField(
-                    readOnly: true,
-                    onTap: () {
-                      DatePicker.showDatePicker(context,
-                          showTitleActions: true,
-                          minTime: DateTime(1900, 1, 1),
-                          maxTime: DateTime(3000, 1, 1), onChanged: (date) {
-                        print('change $date');
-                      }, onConfirm: (date) {
-                        print('confirm $date');
-                        setState(() {
-                          var dateTime = DateTime.parse(date.toString());
-                          var formate1 =
-                              "${dateTime.day}-${dateTime.month}-${dateTime.year}";
-                          textBirthdateController.text = formate1;
-                        });
-                      }, currentTime: DateTime.now(), locale: LocaleType.en);
-                    },
-                    controller: textBirthdateController,
-                    style: AppTextStyles.textFields,
-                    decoration: InputDecoration(
-                      contentPadding:
-                          const EdgeInsets.only(left: 25, right: 25),
-                      labelText: 'Enter Birthdate',
-                      labelStyle: AppTextStyles.subHeadings,
-                      border: InputBorder.none,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                            BorderSide(color: AppColors.blueAccent, width: 2),
-                      ),
-                      suffixIcon: const Icon(
-                        Icons.calendar_month_rounded,
-                        color: AppColors.blueAccent,
-                      ),
-                    ),
-                    validator: (var value) {
-                      if (value!.isEmpty) {
-                        return 'Enter Birthdate';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width / 2 - 35,
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: AppColors.greyAccent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextFormField(
-                          //controller: studentNoText,
-                          style: AppTextStyles.textFields,
-                          decoration: const InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.only(left: 25, right: 13),
-                            labelText: 'Enter School Year',
-                            labelStyle: AppTextStyles.subHeadings,
-                            border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: AppColors.blueAccent, width: 2),
-                            ),
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              schoolYear = value;
-                            });
-                          },
-                          validator: (String? value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Required!";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width / 2 - 35,
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: AppColors.greyAccent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextFormField(
-                          //controller: studentNoText,
-                          style: AppTextStyles.textFields,
-                          decoration: const InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.only(left: 25, right: 13),
-                            labelText: 'Enter School Section',
-                            labelStyle: AppTextStyles.subHeadings,
-                            border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: AppColors.blueAccent, width: 2),
-                            ),
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              schoolSection = value;
                             });
                           },
                           validator: (String? value) {
@@ -2311,9 +2158,6 @@ class _SignupPageState extends State<SignupPage> {
                         print(middleName);
                         print(lastName);
                         print(accountID);
-                        print(schoolSection);
-                        print(schoolYear);
-                        print(textBirthdate);
                         print(department);
                         print(password);
                         validateCredentials();
@@ -2326,7 +2170,7 @@ class _SignupPageState extends State<SignupPage> {
                           const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 40)),
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          AppColors.blueAccent),
+                          AppColors.yellowAccent),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
@@ -2334,9 +2178,9 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     child: Text(
-                      'Register as Student',
+                      'Register as Instructor',
                       style: AppTextStyles.title
-                          .copyWith(color: AppColors.yellowAccent),
+                          .copyWith(color: AppColors.blueAccent),
                     ),
                   ),
                 ),
@@ -2376,16 +2220,14 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void saveUser() {
-    Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
-    studentBox.add(Student(
+    Box<Instructor> instructorBox =
+        Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    instructorBox.add(Instructor(
       userName: username,
       name: firstName,
       middleName: middleName,
       lastName: lastName,
       accountID: accountID,
-      schoolSection: schoolSection,
-      schoolYear: schoolYear,
-      birthdate: textBirthdate,
       department: department,
       password: password,
     ));
@@ -2393,7 +2235,8 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   displayDetailsIndialog() {
-    Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
+    Box<Instructor> instructorBox =
+        Hive.box<Instructor>(HiveBoxesInstructor.instructor);
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -2431,11 +2274,8 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         Text("Username: $username"),
                         Text("Full Name: $lastName, $firstName $middleName"),
-                        Text("Birthdate: ${textBirthdateController.text}"),
                         Text("Account ID: $accountID"),
-                        Text("School Year: $schoolYear"),
                         Text("Department: $department"),
-                        Text("School Section: $schoolSection"),
                       ],
                     ),
                   ),

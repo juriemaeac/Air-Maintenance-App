@@ -20,9 +20,6 @@ class FormCard extends StatefulWidget {
 }
 
 class _FormCardState extends State<FormCard> {
-
-  
-
   int? _selectedValueIndex;
   @override
   Widget build(BuildContext context) {
@@ -34,21 +31,25 @@ class _FormCardState extends State<FormCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //   width: 30,
-              //   padding: const EdgeInsets.all(6),
-              //   decoration: BoxDecoration(
-              //     color: AppColors.blueAccent,
-              //     shape: BoxShape.circle,
-              //   ),
-              //   child: Text(widget.number!,
-              //       style: AppTextStyles.subtitle2
-              //           .copyWith(color: AppColors.white)),
-              // ),
-              // SizedBox(width: 5),
               Container(
-                  width: MediaQuery.of(context).size.width - 95,
+                width: 30,
+                padding: const EdgeInsets.all(2),
+                margin: const EdgeInsets.only(top: 3),
+                decoration: BoxDecoration(
+                  color: AppColors.blueAccent,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Text(widget.number!,
+                      style: AppTextStyles.subtitle2
+                          .copyWith(color: AppColors.white)),
+                ),
+              ),
+              SizedBox(width: 5),
+              Container(
+                  width: MediaQuery.of(context).size.width - 125,
                   child: Text(widget.question!, style: AppTextStyles.title)),
             ],
           ),
@@ -74,7 +75,6 @@ class _FormCardState extends State<FormCard> {
               ],
             ),
           ),
-          //Container(height: 100, child: Options()),
           TextFormField(
             decoration: InputDecoration(
               hintText: 'Initials (Optional)',
@@ -83,7 +83,6 @@ class _FormCardState extends State<FormCard> {
             onChanged: (value) {
               widget.initials(value);
             },
-           
           ),
         ],
       ),
@@ -107,9 +106,13 @@ class _FormCardState extends State<FormCard> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
-          color: _selectedValueIndex == index
-              ? AppColors.blueAccent
-              : null, //AppColors.white,
+          color: _selectedValueIndex == 0 && index == 0
+              ? Colors.green
+              : _selectedValueIndex == 1 && index == 1
+                  ? Colors.orangeAccent
+                  : _selectedValueIndex == 2 && index == 2
+                      ? Colors.redAccent
+                      : null, //AppColors.white,
           // border: Border.all(
           //     color: _selectedValueIndex == index
           //         ? AppColors.blueAccent
