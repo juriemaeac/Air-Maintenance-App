@@ -1,15 +1,11 @@
 import 'dart:io';
 import 'package:airapp/database/scheduledInspection_model.dart';
-import 'package:airapp/pdf/api/pdf_api.dart';
-import 'package:airapp/pdf/model/invoice.dart';
-import 'package:airapp/pdf/model/studentPDF.dart';
-import 'package:airapp/pdf/utils.dart';
-import 'package:flutter/services.dart';
+import 'package:airapp/pdfMaintenanceInspection/inspection_pdf_api.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
-class PdfMaintenanceApi {
+class PdfInspectionApi {
   static Future<File> generate(ScheduledInspection inspection) async {
     getRating(int rating) {
       String equivRating = "";
@@ -548,7 +544,8 @@ class PdfMaintenanceApi {
       ),
     );
 
-    return PdfApi.saveDocument(name: 'Maintenance Task Card.pdf', pdf: pdf);
+    return InspectionPdfApi.saveDocument(
+        name: 'Maintenance Inspection.pdf', pdf: pdf);
   }
 
   static Widget buildHeaderScheduled() => Column(

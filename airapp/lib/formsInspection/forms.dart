@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:airapp/Records/records.dart';
 import 'package:airapp/constants.dart';
 import 'package:airapp/formsInspection/formCard.dart';
-import 'package:airapp/home/manual/pdf/pdfAPI.dart';
 import 'package:airapp/home/manual/pdf/pdfViewer.dart';
 import 'package:airapp/manualList.dart';
 import 'package:airapp/navBar.dart';
