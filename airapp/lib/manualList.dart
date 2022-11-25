@@ -1,6 +1,8 @@
 import 'package:airapp/Home/manual/manualWidget.dart';
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 class ManualList extends StatefulWidget {
   const ManualList({super.key});
 
@@ -13,7 +15,18 @@ class _ManualListState extends State<ManualList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Manual'),
+        backgroundColor: AppColors.yellowAccent,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            size: 20,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Manuals',
+            style: AppTextStyles.title.copyWith(color: AppColors.blueAccent)),
         elevation: 2,
       ),
       body: SafeArea(

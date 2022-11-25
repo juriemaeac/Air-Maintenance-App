@@ -1,254 +1,131 @@
-// //   String? id = "empty";
-// //   String? accountID = "empty";
-// //   String? inspectionDate = "empty";
-// //   int? sipA1Findings = 0;  
-// //   int? sipA2Findings = 0; 
-// //   int? sipA3Findings = 0;
-// //   int? sipA4Findings = 0; 
-// //   int? sipA5Findings = 0;
-// //   int? sipA6Findings = 0;
-// //   int? sipA7Findings = 0;
-// //   //--------------------------------------------------------//
-// //   int? sipB1Findings = 0;
-// //   int? sipB2Findings = 0;
-// //   int? sipB21Findings = 0;
-// //   int? sipB22Findings = 0;
-// //   int? sipB23Findings = 0;
-// //   int? sipB24Findings = 0;
-// //   int? sipB25Findings = 0;
-// //   int? sipB3Findings = 0;
-// //   int? sipB31Findings = 0;
-// //   int? sipB32Findings = 0;
-// //   int? sipB4Findings = 0;
-// //   int? sipB41Findings = 0;
-// //   int? sipB42Findings = 0;
-// //   int? sipB43Findings = 0;
-// //   int? sipB44Findings = 0;
-// //   int? sipB5Findings = 0;
-// //   int? sipB51Findings = 0;
-// //   int? sipB52Findings = 0;
-// //   int? sipB53Findings = 0;
-// //   int? sipB54Findings = 0;
-// //   int? sipB55Findings = 0;
-// //   int? sipB6Findings = 0;
-// //   int? sipB61Findings = 0;
-// //   int? sipB62Findings = 0;
-// //   int? sipB63Findings = 0;
-// //   int? sipB64Findings = 0;
-// //   int? sipB7Findings = 0;
-// //   int? sipB71Findings = 0;
-// //   int? sipB72Findings = 0;
-// //   int? sipB73Findings = 0;
-// //   int? sipB74Findings = 0; 
-// //   int? sipB75Findings = 0;
-// //   int? sipB8Findings = 0;
-// //   int? sipB81Findings = 0;
-// //   int? sipB82Findings = 0;
-// //   int? sipB83Findings = 0;  
-// //   int? sipB84Findings = 0; 
-// //   int? sipB85Findings = 0;  
-// //   int? sipB86Findings = 0; 
-// //   int? sipB9Findings = 0; 
-// //   int? sipB91Findings = 0;  
-// //   int? sipB92Findings = 0;  
+// //  accountID;
+// //  taskCardNumber;
+// //  taskCardSpecification;
+// //  taskCardRevision;
+// //  taskCardRevisionDate;
+// //  woSpecification;
+// //  woScheduleStart;
+// //  location;
+// //  aircraftType;
+// //  acReg;
+// //  acSerial;
+// //  area;
+// //  student;
+// //  instructor;
+// //  taskCardType;
+// //  ata;
+// //  mmEffectivity;
+// //  ipcEffectivity;
+// //  manHours;
+// //  men;
+// //  user;
+// //  acRegA;
+// //  userA;
+// //  dateA;
+// // //===================================================================
+// //  itemNum;
+// //  userActionDescription;
+// //  studentB;
+// //  instructorB;
+// //  inspectorB;
+// //  submittedBy;
+// //  reviewedBy;
+// //  completedBy;
+// //  dateCompletionB;
+// //  departmentB;
+// //  acRegB;
+// //  userB;
+// //  dateB;
+// // //Walkaround fuselage wings and tails
+// //  findingsA1;
+// //  findingsB1;
+// //  findingsLogbook1;
+// //  findingsSolution1;
+// //  findingsResult1;
+// // //Walkaround exterior
+// //  findingsA2;
+// //  findingsB2;
+// //  findingsLogbook2;
+// //  findingsSolution2;
+// //  findingsResult2;
+// // //Check Engine
+// //  findingsA3;
+// //  findingsB3;
+// //  findingsLogbook3;
+// //  findingsSolution3;
+// //  findingsResult3;
+// // //Check Visual inspection battery alternator
+// //  findingsA4;
+// //  findingsB4;
+// //  findingsLogbook4;
+// //  findingsSolution4;
+// //  findingsResult4;
+// // //Check Lighting System
+// //  findingsA5;
+// //  findingsB5;
+// //  findingsLogbook5;
+// //  findingsSolution5;
+// //  findingsResult5;
+// // //Check Flashing Beacon
+// //  findingsA6;
+// //  findingsB6;
+// //  findingsLogbook6;
+// //  findingsSolution6;
+// //  findingsResult6;
 
-
-// //                           sipA13Findings: sipA13Findings??3);
-// //                           sipA14Findings: sipA14Findings??3);
-// //                           sipA2Findings: sipA2Findings??3);
-// //                           sipA3Findings: sipA3Findings??3);
-// //                           sipA4Findings: sipA4Findings??3);
-// //                           sipA5Findings: sipA5Findings??3);
-// //                           sipA6Findings: sipA6Findings??3);
-// //                           sipA7Findings: sipA7Findings??3);
-// //                           sipB1Findings: sipB1Findings??3);
-// //                           sipB21Findings: sipB21Findings??3);
-// //                           sipB22Findings: sipB22Findings??3);
-// //                           sipB23Findings: sipB23Findings??3);
-// //                           sipB24Findings: sipB24Findings??3);
-// //                           sipB25Findings: sipB25Findings??3);
-// //                           sipB31Findings: sipB31Findings??3);
-// //                           sipB32Findings: sipB32Findings??3);
-// //                           sipB41Findings: sipB41Findings??3);
-// //                           sipB42Findings: sipB42Findings??3);
-// //                           sipB43Findings: sipB43Findings??3);
-// //                           sipB44Findings: sipB44Findings??3);
-// //                           sipB51Findings: sipB51Findings??3);
-// //                           sipB52Findings: sipB52Findings??3);
-// //                           sipB53Findings: sipB53Findings??3);
-// //                           sipB54Findings: sipB54Findings??3);
-// //                           sipB55Findings: sipB55Findings??3);
-// //                           sipB61Findings: sipB61Findings??3);
-// //                           sipB62Findings: sipB62Findings??3);
-// //                           sipB63Findings: sipB63Findings??3);
-// //                           sipB64Findings: sipB64Findings??3);
-// //                           sipB71Findings: sipB71Findings??3);
-// //                           sipB72Findings: sipB72Findings??3);
-// //                           sipB73Findings: sipB73Findings??3);
-// //                           sipB74Findings: sipB74Findings??3);
-// //                           sipB75Findings: sipB75Findings??3);
-// //                           sipB81Findings: sipB81Findings??3);
-// //                           sipB82Findings: sipB82Findings??3);
-// //                           sipB83Findings: sipB83Findings??3);
-// //                           sipB84Findings: sipB84Findings??3);
-// //                           sipB85Findings: sipB85Findings??3);
-// //                           sipB86Findings: sipB86Findings??3);
-// //                           sipB91Findings: sipB91Findings??3);
-// //                           sipB92Findings: sipB92Findings??3);
-
-//   String? accountID;
-//   String? taskCardNumber;
-//   String? taskCardSpecification;
-//   String? taskCardRevision;
-//   String? taskCardRevisionDate;
-//   String? woSpecification;
-//   String? woScheduleStart;
-//   String? location;
-//   String? aircraftType;
-//   String? acReg;
-//   String? acSerial;
-//   String? area;
-//   String? student;
-//   String? instructor;
-//   String? taskCardType;
-//   String? ata;
-//   String? mmEffectivity;
-//   String? ipcEffectivity;
-//   String? manHours;
-//   String? men;
-//   String? user;
-//   String? acRegA;
-//   String? userA;
-//   String? dateA;
-//   //===================================================================
-//   String? itemNum;
-//   String? userActionDescription;
-//   String? studentB;
-//   String? instructorB;
-//   String? inspectorB;
-//   String? submittedBy;
-//   String? reviewedBy;
-//   String? completedBy;
-//   String? dateCompletionB;
-//   String? departmentB;
-//   String? acRegB;
-//   String? userB;
-//   String? dateB;
-//   //Walkaround fuselage wings and tails
-//   String? findingsA1;
-//   String? findingsB1;
-//   String? findingsLogbook1;
-//   String? findingsSolution1;
-//   String? findingsString = getRating(inspection.lt1;
-//   //Walkaround exterior
-//   String? findingsA2;
-//   String? findingsB2;
-//   String? findingsLogbook2;
-//   String? findingsSolution2;
-//   String? findingsString = getRating(inspection.lt2;
-//   //Check Engine
-//   String? findingsA3;
-//   String? findingsB3;
-//   String? findingsLogbook3;
-//   String? findingsSolution3;
-//   String? findingsString = getRating(inspection.lt3;
-//   //Check Visual inspection battery alternator
-//   String? findingsA4;
-//   String? findingsB4;
-//   String? findingsLogbook4;
-//   String? findingsSolution4;
-//   String? findingsString = getRating(inspection.lt4;
-//   //Check Lighting System
-//   String? findingsA5;
-//   String? findingsB5;
-//   String? findingsLogbook5;
-//   String? findingsSolution5;
-//   String? findingsString = getRating(inspection.lt5;
-//   //Check Flashing Beacon
-//   String? findingsA6;
-//   String? findingsB6;
-//   String? findingsLogbook6;
-//   String? findingsSolution6;
-//   String? findingsString = getRating(inspection.lt6;
-
-
-// String = getRating(inspection.sipA11Findings??3);
-// String = getRating(inspection.sipA12Findings??3);
-// String = getRating(inspection.sipA13Findings??3);
-// String = getRating(inspection.sipA14Findings??3);
-// String = getRating(inspection.sipA2Findings??3);
-// String = getRating(inspection.sipA3Findings??3);
-// String = getRating(inspection.sipA4Findings??3);
-// String = getRating(inspection.sipA5Findings??3);
-// String = getRating(inspection.sipA6Findings??3);
-// String = getRating(inspection.sipA7Findings??3);
-// String = getRating(inspection.sipB1Findings??3);
-// String = getRating(inspection.sipB21Findings??3);
-// String = getRating(inspection.sipB22Findings??3);
-// String = getRating(inspection.sipB23Findings??3);
-// String = getRating(inspection.sipB24Findings??3);
-// String = getRating(inspection.sipB25Findings??3);
-// String = getRating(inspection.sipB31Findings??3);
-// String = getRating(inspection.sipB32Findings??3);
-// String = getRating(inspection.sipB41Findings??3);
-// String = getRating(inspection.sipB42Findings??3);
-// String = getRating(inspection.sipB43Findings??3);
-// String = getRating(inspection.sipB44Findings??3);
-// String = getRating(inspection.sipB51Findings??3);
-// String = getRating(inspection.sipB52Findings??3);
-// String = getRating(inspection.sipB53Findings??3);
-// String = getRating(inspection.sipB54Findings??3);
-// String = getRating(inspection.sipB55Findings??3);
-// String = getRating(inspection.sipB61Findings??3);
-// String = getRating(inspection.sipB62Findings??3);
-// String = getRating(inspection.sipB63Findings??3);
-// String = getRating(inspection.sipB64Findings??3);
-// String = getRating(inspection.sipB71Findings??3);
-// String = getRating(inspection.sipB72Findings??3);
-// String = getRating(inspection.sipB73Findings??3);
-// String = getRating(inspection.sipB74Findings??3);
-// String = getRating(inspection.sipB75Findings??3);
-// String = getRating(inspection.sipB81Findings??3);
-// String = getRating(inspection.sipB82Findings??3);
-// String = getRating(inspection.sipB83Findings??3);
-// String = getRating(inspection.sipB84Findings??3);
-// String = getRating(inspection.sipB85Findings??3);
-// String = getRating(inspection.sipB86Findings??3);
-// String = getRating(inspection.sipB91Findings??3);
-// String = getRating(inspection.sipB92Findings??3);
-// String = getRating(inspection.sipB92Initials??3);
-
-// // sipA7Findings:String = getRating(inspection.sipA7Findings??3);
-// // sipB1Findings:String = getRating(inspection.sipB1Findings??3);
-// // sipB21Findings:String = getRating(inspection.sipB21Findings??3);
-// // sipB22Findings:String = getRating(inspection.sipB22Findings??3);
-// // sipB23Findings:String = getRating(inspection.sipB23Findings??3);
-// // sipB24Findings:String = getRating(inspection.sipB24Findings??3);
-// // sipB25Findings:String = getRating(inspection.sipB25Findings??3);
-// // sipB31Findings:String = getRating(inspection.sipB31Findings??3);
-// // sipB32Findings:String = getRating(inspection.sipB32Findings??3);
-// // sipB41Findings:String = getRating(inspection.sipB41Findings??3);
-// // sipB42Findings:String = getRating(inspection.sipB42Findings??3);
-// // sipB43Findings:String = getRating(inspection.sipB43Findings??3);
-// // sipB44Findings:String = getRating(inspection.sipB44Findings??3);
-// // sipB51Findings:String = getRating(inspection.sipB51Findings??3);
-// // sipB52Findings:String = getRating(inspection.sipB52Findings??3);
-// // sipB53Findings:String = getRating(inspection.sipB53Findings??3);
-// // sipB54Findings:String = getRating(inspection.sipB54Findings??3);
-// // sipB55Findings:String = getRating(inspection.sipB55Findings??3);
-// // sipB61Findings:String = getRating(inspection.sipB61Findings??3);
-// // sipB62Findings:String = getRating(inspection.sipB62Findings??3);
-// // sipB63Findings:String = getRating(inspection.sipB63Findings??3);
-// // sipB64Findings:String = getRating(inspection.sipB64Findings??3);
-// // sipB71Findings:String = getRating(inspection.sipB71Findings??3);
-// // sipB72Findings:String = getRating(inspection.sipB72Findings??3);
-// // sipB73Findings:String = getRating(inspection.sipB73Findings??3);
-// // sipB74Findings:String = getRating(inspection.sipB74Findings??3);
-// // sipB75Findings:String = getRating(inspection.sipB75Findings??3);
-// // sipB81Findings:String = getRating(inspection.sipB81Findings??3);
-// // sipB82Findings:String = getRating(inspection.sipB82Findings??3);
-// // sipB83Findings:String = getRating(inspection.sipB83Findings??3);
-// // sipB84Findings:String = getRating(inspection.sipB84Findings??3);
-// // sipB85Findings:String = getRating(inspection.sipB85Findings??3);
-// // sipB86Findings:String = getRating(inspection.sipB86Findings??3);
-// // String = getRating(inspection.sipB91Findings??3);
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('Findings:\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('$a1\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+// mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('Indicate logbook:\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('${maintenance.findingsLogbook1}\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('Description of the problem and Solution:\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('${maintenance.findingsSolution1}\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('Initials/Recommendations/Inspection Result:\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),
+// pw.Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//         pw.Text('${maintenance.findingsResult1}\n\n',
+//             style: TextStyle(fontWeight: FontWeight.bold)),
+//     ],
+// ),

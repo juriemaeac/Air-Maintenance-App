@@ -36,7 +36,8 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   void getDate() {
     DateTime date = DateTime.now();
     var dateTime = DateTime.parse(date.toString());
-    var format1 = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+    var format1 =
+        "${dateTime.day}-${dateTime.month}-${dateTime.year} ${dateTime.hour}:${dateTime.minute}";
     inspectionDate = format1;
   }
 
@@ -522,26 +523,33 @@ class _FormsState extends State<Forms> with ChangeNotifier {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.yellowAccent,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            size: 20,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Forms'),
+            Text('Inspection Form',
+                style:
+                    AppTextStyles.title.copyWith(color: AppColors.blueAccent)),
             GestureDetector(
                 onTap: () async {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ManualList()));
                 },
-                child: Text('Manual'))
-            // GestureDetector(
-            //     onTap: () async {
-            //       const path = 'assets/files/150_sm_69.pdf';
-            //       final file = await PDFApi.loadAsset(path);
-            //       openPDF(context, file);
-            //     },
-            //     child: Text('Manual'))
+                child: Text('Manual',
+                    style: AppTextStyles.title
+                        .copyWith(color: AppColors.blueAccent)))
           ],
         ),
-        elevation: 2,
+        elevation: 0,
       ),
       body: SafeArea(
         child: Form(
@@ -557,11 +565,25 @@ class _FormsState extends State<Forms> with ChangeNotifier {
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //1
+                    Container(
+                      width: MediaQuery.of(context).size.width - 60,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColors.blueAccent,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("Scheduled Inspection",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.headings
+                              .copyWith(color: AppColors.yellowAccent)),
+                    ),
+                    const SizedBox(height: 15),
                     const Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Text("1. Check status of:",
@@ -641,8 +663,18 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                       initials: _updateInitials7,
                     ),
                     const SizedBox(height: 15),
-                    const Text("Periodic Inspection",
-                        style: AppTextStyles.title),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 60,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColors.blueAccent,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("Periodic Inspection",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.headings
+                              .copyWith(color: AppColors.yellowAccent)),
+                    ),
                     const SizedBox(height: 15),
                     FormCard(
                       question: 'Engine Inspection',

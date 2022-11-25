@@ -44,7 +44,7 @@ class AppTextStyles {
     fontSize: 18,
     fontFamily: 'Poppins',
   );
-    static const TextStyle title0 = TextStyle(
+  static const TextStyle title0 = TextStyle(
     color: AppColors.black,
     fontWeight: FontWeight.w500,
     fontSize: 14,

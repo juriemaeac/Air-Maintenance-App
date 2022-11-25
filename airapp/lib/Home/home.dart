@@ -5,6 +5,12 @@ import 'package:airapp/home/calendar/calendarSection.dart';
 import 'package:airapp/home/manual/manualWidget.dart';
 import 'package:airapp/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
+import '../boxes/boxInspection.dart';
+import '../boxes/boxMaintenance.dart';
+import '../database/maintenanceTask_model.dart';
+import '../database/scheduledInspection_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,11 +21,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? name;
+  int? totalRecords = 0;
 
   @override
   void initState() {
     super.initState();
     name = userCredential.name;
+    var maintenanceRecords =
+        Hive.box<MaintenanceTask>(HiveBoxesMaintenance.maintenance).length;
+    var inspectionRecords =
+        Hive.box<ScheduledInspection>(HiveBoxesInspection.inspection).length;
+    totalRecords = maintenanceRecords + inspectionRecords;
   }
 
   @override
@@ -134,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          Text('5',
+                          Text('$totalRecords',
                               style: TextStyle(
                                 color: AppColors.yellowAccent,
                                 fontSize: 100,
@@ -143,11 +155,11 @@ class _HomePageState extends State<HomePage> {
                               )),
                           Column(
                             children: [
-                              Text('Total Records',
+                              Text('Total Documents',
                                   style: AppTextStyles.subtitle2.copyWith(
                                     color: AppColors.white,
                                   )),
-                              Text('subtext',
+                              Text('Local Database',
                                   style: AppTextStyles.subHeadings.copyWith(
                                     color: Color.fromARGB(106, 240, 240, 240),
                                   )),
