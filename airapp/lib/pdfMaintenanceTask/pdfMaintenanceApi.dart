@@ -217,7 +217,7 @@ class PdfMaintenanceApi {
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: PdfColors.black)),
-                pw.Text('${maintenance.acReg}  ',
+                pw.Text('${maintenance.acRegA}  ',
                     style: TextStyle(
                         decoration: TextDecoration.underline,
                         fontSize: 12,
@@ -228,7 +228,7 @@ class PdfMaintenanceApi {
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: PdfColors.black)),
-                pw.Text('${maintenance.user}  ',
+                pw.Text('${maintenance.userA}  ',
                     style: TextStyle(
                         decoration: TextDecoration.underline,
                         fontSize: 12,
@@ -239,7 +239,7 @@ class PdfMaintenanceApi {
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: PdfColors.black)),
-                pw.Text('${maintenance.dateB}  \n\n',
+                pw.Text('${maintenance.dateA}  \n\n',
                     style: TextStyle(
                         decoration: TextDecoration.underline,
                         fontSize: 12,
@@ -319,7 +319,7 @@ class PdfMaintenanceApi {
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 color: PdfColors.black)),
-                        pw.Text('${maintenance.acReg}  ',
+                        pw.Text('${maintenance.acRegB}  ',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 fontSize: 12,
@@ -330,7 +330,7 @@ class PdfMaintenanceApi {
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 color: PdfColors.black)),
-                        pw.Text('${maintenance.user}  ',
+                        pw.Text('${maintenance.userB}  ',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 fontSize: 12,

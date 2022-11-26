@@ -377,6 +377,7 @@ class _SignupPageState extends State<SignupPage> {
                           var formate1 =
                               "${dateTime.day}-${dateTime.month}-${dateTime.year}";
                           textBirthdateController.text = formate1;
+                          textBirthdate = formate1;
                         });
                       }, currentTime: DateTime.now(), locale: LocaleType.en);
                     },

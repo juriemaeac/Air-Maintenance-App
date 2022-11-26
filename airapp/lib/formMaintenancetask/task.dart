@@ -638,25 +638,468 @@ class _TaskState extends State<Task> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text("Form Submitted"),
-                                  content: Text(
-                                      "Thank you for submitting the form. You will be redirected to the home page."),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBar()));
-                                      },
-                                      child: Text("OK"),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0))),
+                                  content: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.85,
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.vertical,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Please confirm that you have completed the inspection and that the information is correct.",
+                                            style: AppTextStyles.title,
+                                          ),
+                                          SizedBox(height: 20),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text('MAINTENANCE TASK CARD',
+                                                  style: AppTextStyles.title),
+                                            ],
+                                          ),
+                                          SizedBox(height: 20),
+                                          Text('SECTION A',
+                                              style: AppTextStyles.title),
+                                          SizedBox(height: 10),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'USER PhilSCA:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: '',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'TASK CARD NUMBER:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: taskCardNumber,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'TASK CARD SPECIFICATION:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: taskCardSpecification,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'REVISION:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: taskCardRevision,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'REV. DATE:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: taskCardRevisionDate,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'W/O SPECIFICATION:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: woSpecification,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'W/O SCHEDULE START:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: woScheduleStart,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'LOCATION:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: location,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'AIRCRAFT TYPE:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: aircraftType,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'A/C REG [If applicable]:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: acReg,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'A/C Serial No. [If applicable]:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: acSerial,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'TASK REFERENCE:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: '',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'AREA:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: area,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'STUDENT:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: student,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'INSTRUCTOR:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: instructor,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'TASK CARD TYPE:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: taskCardType,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'ATA:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: ata,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'MM Effectivity:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: mmEffectivity,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'IPC Effectivity:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: ipcEffectivity,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'MAN-HOURS:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: manHours,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'MEN:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: men,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'USER:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: user,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text(
+                                            'Take Note: If not applicable put N/A.\nNotes: \nAttachments: Cessna 150/152 or Specific aircraft that will be used in the application\nService Checklist Rev.___ dtd dd/mm/year',
+                                            style: AppTextStyles.subtitle2,
+                                          ),
+                                          Divider(
+                                            color: AppColors.greyAccentLine,
+                                            thickness: 1,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'A/C REG:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: acRegA,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'USER:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: userA,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'DATE:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: dateA,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Divider(
+                                            color: AppColors.greyAccentLine,
+                                            thickness: 1,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'ITEM No.:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: itemNum,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'User/Action Description:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: userActionDescription,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'STUDENT:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: studentB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'INSTRUCTOR:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: instructorB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'INSPECTOR [AVIONIC/MECHANIC]:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: inspectorB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'SUBMITTED BY:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: submittedBy,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'REVIEWD AND CORRECT BY:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: reviewedBy,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'COMPLETED BY:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: completedBy,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'DATE OF COMPLETION:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: dateCompletionB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
+                                  ),
                                 );
                               });
-                          print('Account ID: $accountID');
-                          print('Inspection Date: $maintenanceDate');
                         }
                       },
                       child: Container(

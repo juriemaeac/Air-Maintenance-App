@@ -1008,118 +1008,1100 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          saveForm();
+                          //saveForm();
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text("Form Submitted"),
-                                  content: Text(
-                                      "Thank you for submitting the form. You will be redirected to the home page."),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBar()));
-                                      },
-                                      child: Text("OK"),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0))),
+                                  content: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.85,
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.vertical,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Please confirm that you have completed the inspection and that the information is correct.",
+                                            style: AppTextStyles.title,
+                                          ),
+                                          SizedBox(height: 20),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'Account ID:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: accountID,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'Inspection Date:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: inspectionDate,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 20),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text('SCHEDULED INSPECTION',
+                                                  style: AppTextStyles.title),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            '1. Status of:',
+                                            style: AppTextStyles.subtitle2,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '1.1 Applicable Airworthiness Directive(s)\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipA11Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipA11Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '1.2 Applicable Service Bulletins\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipA12Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipA12Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '1.3 Log Books (reported problems)\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipA13Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipA13Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '1.4 Registration Certificate\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipA14Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipA14Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  '2. Inspect life limited parts (replaced, overhauled)\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipA2Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipA2Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  '3. Drain the fuel tanks. Inspect drain valves for condition, obstruction and blockage.\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipA3Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipA3Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  '4. Clean the aircraft fully (exterior, interior).\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipA4Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipA4Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  '5. Visual inspection of interior marking and placards for condition (legibility and intactness).\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipA5Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipA5Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  '6. Visual inspection of exterior marking and placards for condition (legibility and intactness).\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipA6Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipA6Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: '7. Jack the aircraft.\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipA7Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipA7Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(height: 20),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text('PERIODIC INSPECTION',
+                                                  style: AppTextStyles.title),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  '1. Engine Inspection.\nFor engine inspection, refer to Maintenance Manual (Line Maintenance) for Rotax Engine Type 912 Series (Ref. No MML-912, Part. No. 899191), latest issue.\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t${sipB1Findings.toString()}\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        '\t\t\t\t$sipB1Initials',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text(
+                                              '2. Engine Cowlings and Firewall',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '2.1 Remove engine cowlings. Clean and perform visual inspection for cracks, damages, loose or missing fasteners. Inspect the condition of oil inspection door.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB21Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB21Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '2.2 Visual inspection of engine cowlings fireproofing for condition and attachment (only bottom cowling)\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB22Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB22Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '2.3 Visual inspection of firewall and seals for cracks, condition and attachment.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB23Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB23Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '2.4 Visual inspection of landing lights for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB24Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB24Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '2.5 Visual inspection of all parts installed at firewall for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB25Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB25Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('3. Battery',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '3.1 Remove battery cover. Visual inspection of terminals and cables corrosion, tightening and condition. Inspection of battery charge condition.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB31Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB31Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '3.2 Visual inspection of battery attachment and condition of fireproofing. Install battery cover.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB32Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB32Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('4. Engine Mount',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '4.1 Visual inspection of engine mounts for weld cracks, bending, corrosion and distortion.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB41Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB41Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '4.2 Visual inspection of rubber silent blocks for cracks, excessive deformation and condition.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB42Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB42Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '4.3 Visual inspection of engine attachment, bolts and nuts security (engine — engine mount, engine mount - firewall)\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB43Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB43Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '4.4 Remove the engine mount attaching bolts. Visual inspection of bolts for cracks, deformation and damage. Install the bolts and inspect for proper nut torque.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB44Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB44Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('5. Fuel System',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '5.1 Remove the fuel filter covers.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB51Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB51Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '5.2 Visual inspection of fuel hoses and connections for condition, leak and security. Visual inspection of fireproof insulation for conditions, integrity, chafing and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB52Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB52Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '5.3 Check and clean the strainers. Replace fuel filters.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB53Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB53Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '5.4 Check the vent hoses at the bottom of fuselage for damage, obstruction and blockage.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB54Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB54Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '5.5 Install the fuel filter covers.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB55Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB55Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('6. Oil System',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '6.1 Visual inspection of oil tank for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB61Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB61Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '6.2 Visual inspection of oil cooler and oil thermostat for condition, leak, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB62Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB62Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '6.3 Visual inspection of hoses and connections for condition, leak and security. Visual inspection of fireproof insulation for conditions, integrity, chafing and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB63Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB63Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '6.4 Check oil level. Add oil if necessary.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB64Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB64Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('7. Cooling System',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '7.1 Visual inspection of water radiator and water thermostat for condition, leak, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB71Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB71Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '7.2 Visual inspection of hoses and tubes for condition, leak, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB72Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB72Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '7.3 Visual inspection of overflow bottle for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB73Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB73Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '7.4 Check the coolant level in the expansion tank and overflow bottle. Add coolant if necessary.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB74Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB74Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '7.5 Check the coolant condition. Change as necessary.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB75Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB75Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('8. Induction System',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '8.1 Visual inspection of carburetors, drip trays and control cables for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB81Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB81Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '8.2 Visual inspection of airbox and airbox-carburetors hoses for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB82Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB82Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '8.3 Visual inspection air filter holder for condition, attachment and security. Check the operation of carburetor preheating control.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB83Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB83Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '8.4 Visual inspection of air filter for condition, contamination, attachment and security. Clean or replace impure filter.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB84Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB84Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '8.5 Visual inspection of intake manifold and air hoses for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB85Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB85Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '8.6 Visual inspection of shroud and air hose for condition, attachment and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB86Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB86Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('9. Exhaust System',
+                                              style: AppTextStyles.subtitle2),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '9.1 Visual inspection of muffler for condition, attachment, cracks, corrosion, deformations or damages and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB91Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB91Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        '9.2 Visual inspection of exhaust pipes for condition, attachment, cracks, corrosion, deformations or damages and security.\n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t${sipB92Findings.toString()}\n',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                      TextSpan(
+                                                          text:
+                                                              '\t\t\t\t$sipB92Initials',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              TextButton(
+                                                child: Text(
+                                                  'Cancel',
+                                                  style:
+                                                      AppTextStyles.subHeadings,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.pop(context, false);
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text(
+                                                  'Submit',
+                                                  style: AppTextStyles
+                                                      .subHeadings
+                                                      .copyWith(
+                                                          color: AppColors
+                                                              .blueAccent),
+                                                ),
+                                                onPressed: () {
+                                                  saveForm();
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBar()));
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
+                                  ),
                                 );
                               });
-                          print('Account ID: $accountID');
-                          print('Inspection Date: $inspectionDate');
-                          print('sipA11Findings: $sipA11Findings');
-                          print('sipA11Initials: $sipA11Initials');
-                          print('sipA12Findings: $sipA12Findings');
-                          print('sipA12Initials: $sipA12Initials');
-                          print('sipA13Findings: $sipA13Findings');
-                          print('sipA13Initials: $sipA13Initials');
-                          print('sipA14Findings: $sipA14Findings');
-                          print('sipA14Initials: $sipA14Initials');
-                          print('sipA2Findings: $sipA2Findings');
-                          print('sipA2Initials: $sipA2Initials');
-                          print('sipA3Findings: $sipA3Findings');
-                          print('sipA3Initials: $sipA3Initials');
-                          print('sipA4Findings: $sipA4Findings');
-                          print('sipA4Initials: $sipA4Initials');
-                          print('sipA5Findings: $sipA5Findings');
-                          print('sipA5Initials: $sipA5Initials');
-                          print('sipA6Findings: $sipA6Findings');
-                          print('sipA6Initials: $sipA6Initials');
-                          print('sipA7Findings: $sipA7Findings');
-                          print('sipA7Initials: $sipA7Initials');
-                          print('sipB1Findings: $sipB1Findings');
-                          print('sipB1Initials: $sipB1Initials');
-                          print('sipB21Findings: $sipB21Findings');
-                          print('sipB21Initials: $sipB21Initials');
-                          print('sipB22Findings: $sipB22Findings');
-                          print('sipB22Initials: $sipB22Initials');
-                          print('sipB23Findings: $sipB23Findings');
-                          print('sipB23Initials: $sipB23Initials');
-                          print('sipB24Findings: $sipB24Findings');
-                          print('sipB24Initials: $sipB24Initials');
-                          print('sipB25Findings: $sipB25Findings');
-                          print('sipB25Initials: $sipB25Initials');
-                          print('sipB31Findings: $sipB31Findings');
-                          print('sipB31Initials: $sipB31Initials');
-                          print('sipB32Findings: $sipB32Findings');
-                          print('sipB32Initials: $sipB32Initials');
-                          print('sipB41Findings: $sipB41Findings');
-                          print('sipB41Initials: $sipB41Initials');
-                          print('sipB42Findings: $sipB42Findings');
-                          print('sipB42Initials: $sipB42Initials');
-                          print('sipB43Findings: $sipB43Findings');
-                          print('sipB43Initials: $sipB43Initials');
-                          print('sipB44Findings: $sipB44Findings');
-                          print('sipB44Initials: $sipB44Initials');
-                          print('sipB51Findings: $sipB51Findings');
-                          print('sipB51Initials: $sipB51Initials');
-                          print('sipB52Findings: $sipB52Findings');
-                          print('sipB52Initials: $sipB52Initials');
-                          print('sipB53Findings: $sipB53Findings');
-                          print('sipB53Initials: $sipB53Initials');
-                          print('sipB54Findings: $sipB54Findings');
-                          print('sipB54Initials: $sipB54Initials');
-                          print('sipB55Findings: $sipB55Findings');
-                          print('sipB55Initials: $sipB55Initials');
-                          print('sipB61Findings: $sipB61Findings');
-                          print('sipB61Initials: $sipB61Initials');
-                          print('sipB62Findings: $sipB62Findings');
-                          print('sipB62Initials: $sipB62Initials');
-                          print('sipB63Findings: $sipB63Findings');
-                          print('sipB63Initials: $sipB63Initials');
-                          print('sipB64Findings: $sipB64Findings');
-                          print('sipB64Initials: $sipB64Initials');
-                          print('sipB71Findings: $sipB71Findings');
-                          print('sipB71Initials: $sipB71Initials');
-                          print('sipB72Findings: $sipB72Findings');
-                          print('sipB72Initials: $sipB72Initials');
-                          print('sipB73Findings: $sipB73Findings');
-                          print('sipB73Initials: $sipB73Initials');
-                          print('sipB74Findings: $sipB74Findings');
-                          print('sipB74Initials: $sipB74Initials');
-                          print('sipB75Findings: $sipB75Findings');
-                          print('sipB75Initials: $sipB75Initials');
-                          print('sipB81Findings: $sipB81Findings');
-                          print('sipB81Initials: $sipB81Initials');
-                          print('sipB82Findings: $sipB82Findings');
-                          print('sipB82Initials: $sipB82Initials');
-                          print('sipB83Findings: $sipB83Findings');
-                          print('sipB83Initials: $sipB83Initials');
-                          print('sipB84Findings: $sipB84Findings');
-                          print('sipB84Initials: $sipB84Initials');
-                          print('sipB85Findings: $sipB85Findings');
-                          print('sipB85Initials: $sipB85Initials');
-                          print('sipB86Findings: $sipB86Findings');
-                          print('sipB86Initials: $sipB86Initials');
-                          print('sipB91Findings: $sipB91Findings');
-                          print('sipB91Initials: $sipB91Initials');
-                          print('sipB92Findings: $sipB92Findings');
-                          print('sipB92Initials: $sipB92Initials');
                         }
                       },
                       child: Container(
