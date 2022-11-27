@@ -633,7 +633,7 @@ class _TaskState extends State<Task> {
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          saveForm();
+
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -1093,6 +1093,663 @@ class _TaskState extends State<Task> {
                                                         .subHeadings),
                                               ],
                                             ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'DEPARTMENT:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: dateCompletionB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            'CESSNA 150/152 SERVICE CHECK/TASK - CHECKLIST',
+                                            style: AppTextStyles.subtitle2,
+                                          ),
+                                          Divider(
+                                            color: AppColors.greyAccentLine,
+                                            thickness: 1,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'A/C REG:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: acRegB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'USER:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: userB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'DATE:  ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: dateB,
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          Divider(
+                                            color: AppColors.greyAccentLine,
+                                            thickness: 1,
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text('SECTION B',
+                                              style: AppTextStyles.title),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'WALK AROUND - FUSELAGE, WINGS, TAILS\nRefer: D2064-1-13 - MODEL 152 SERIES\nCheck the fuselage, wings, stabilizers, tail, radome, aerials, lightning diverter strips, static dischargers and control surfaces for the following:\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '● Check for the condition, damage, and leakage\n● Check that access / service panels are locked securely and that inlets/outlets are free from obstruction.\n● Pay particular attention to the navigation antennas, i.e, GPS, VOR, and DME and fuselage skin in the vicinity of these antennas.\n● Check the overboard discharge indicators for the crew oxygen bottle (fwd fuselage RH side) and APU fire extinguisher bottle (lower aft fuselage)\n● Check for fluid leakage in the drain masts/drains in the APU area.\n● Check for the condition of passenger / crew doors, emergency exit doors and cargo doors.\n● Check all pitot tubes, static ports, and angle-of-attack sensors and the surrounding fuselage skin for damage, deformation, and obstruction.',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Findings:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: findingsA1,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Indicate Logbook:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              findingsLogbook1,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Description of the problem and Solution:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsSolution1',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Initials/Recommendations/Inspection Results:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsResult1',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                              'WALK-AROUND - EXTERIOR INSPECTION',
+                                              style: AppTextStyles.subtitle2
+                                                  .copyWith(
+                                                      decoration: TextDecoration
+                                                          .underline)),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'Refer: Cessna Model 150-Manual Figure 1-1\nPerform the following tasks: General Aircraft Condition, Filler Caps  and Inspection Plates : Perform a visual check for condition and damage\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        '● Landing gears and doors: Perform a visual check for condition and damage\n● Shock absorber/strut: Perform a visual check for leaks and extension',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Findings:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: findingsA2,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Indicate Logbook:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              findingsLogbook2,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Description of the problem and Solution:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsSolution2',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Initials/Recommendations/Inspection Results:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsResult2',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'CD2064-1-13 - MODEL 152 MANUAL (16-12 to 31)\nCheck Battery System - Troubleshooting the battery:\nNote: ',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        'The battery is 24 volts and thru 15280459. A1522759 and FA1520346 a 14 ampere-hour capacity battery is installed as standard, a 17 ampere-hour capacity battery is optional Beginning with 15280460. A1522760 and FA1520347 the battery is 24 volts with a 12.75 ampere-hour capacity as standard and a 15.5 ampere-hour capacity battery as optional. The battery is mounted on the forward side of the firewall and is equipped with non-spill caps\n',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                                TextSpan(
+                                                    text:
+                                                        'Check the Alternator - ENGINE NOT RUNNING.\nRefer: CD2064-1-13 - MODEL 152 MANUAL ',
+                                                    style: AppTextStyles
+                                                        .subtitle2),
+                                                TextSpan(
+                                                    text:
+                                                        '(16-42. TROUBLESHOOTING -- ALTERNATOR SYSTEM (BEGINNING 1979 MODELS))',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Findings:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: findingsA3,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Indicate Logbook:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              findingsLogbook3,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Description of the problem and Solution:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsSolution3',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Initials/Recommendations/Inspection Results:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsResult3',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'CD2064-1-13 - MODEL 152 MANUAL (16-12;16-32)\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        'Perform a general visual inspection of battery and alternator system',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Findings:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: findingsA4,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Indicate Logbook:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              findingsLogbook4,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Description of the problem and Solution:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsSolution4',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Initials/Recommendations/Inspection Results:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsResult4',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'Check the Lighting System - 16-48. AIRCRAFT LIGHTING SYSTEM',
+                                              style: AppTextStyles.subtitle2,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Findings:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: findingsA5,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Indicate Logbook:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              findingsLogbook5,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Description of the problem and Solution:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsSolution5',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Initials/Recommendations/Inspection Results:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsResult5',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'Refer: CD2064-1-13 - MODEL 152 MANUAL (16-48)\n',
+                                              style: AppTextStyles.subtitle2,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text:
+                                                        'Flashing Beacon does not light - Refer to 16-50 Troubleshooting',
+                                                    style: AppTextStyles
+                                                        .subHeadings),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Findings:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text: findingsA6,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'Indicate Logbook:  ',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              findingsLogbook6,
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Description of the problem and Solution:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsSolution6',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text:
+                                                        'Initials/Recommendations/Inspection Results:  \n',
+                                                    style:
+                                                        AppTextStyles.subtitle2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                          text:
+                                                              '$findingsResult6',
+                                                          style: AppTextStyles
+                                                              .subHeadings),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              TextButton(
+                                                child: Text(
+                                                  'Cancel',
+                                                  style:
+                                                      AppTextStyles.subHeadings,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.pop(context, false);
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text(
+                                                  'Submit',
+                                                  style: AppTextStyles
+                                                      .subHeadings
+                                                      .copyWith(
+                                                          color: AppColors
+                                                              .blueAccent),
+                                                ),
+                                                onPressed: () {
+                                                  saveForm();
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBar()));
+                                                },
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
