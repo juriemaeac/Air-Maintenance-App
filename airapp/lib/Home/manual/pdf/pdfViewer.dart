@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:airapp/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
@@ -29,6 +30,8 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
+        backgroundColor: AppColors.yellowAccent,
+        elevation: 0,
         actions: pages >= 2
             ? [
                 Center(child: Text(text)),

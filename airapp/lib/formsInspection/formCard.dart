@@ -32,24 +32,29 @@ class _FormCardState extends State<FormCard> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 30,
-                padding: const EdgeInsets.all(2),
-                margin: const EdgeInsets.only(top: 3),
-                decoration: BoxDecoration(
-                  color: AppColors.blueAccent,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(widget.number!,
-                      style: AppTextStyles.subtitle2
-                          .copyWith(color: AppColors.white)),
-                ),
-              ),
+              Text('${widget.number!}.', style: AppTextStyles.title),
+              // Container(
+              //   width: 30,
+              //   padding: const EdgeInsets.all(2),
+              //   margin: const EdgeInsets.only(top: 3),
+              //   decoration: BoxDecoration(
+              //     color: AppColors.blueAccent,
+              //     shape: BoxShape.circle,
+              //   ),
+              //   child: Center(
+              //     child: Text(widget.number!,
+              //         style: AppTextStyles.subtitle2
+              //             .copyWith(color: AppColors.white)),
+              //   ),
+              // ),
               SizedBox(width: 5),
               Container(
                   width: MediaQuery.of(context).size.width - 125,
-                  child: Text(widget.question!, style: AppTextStyles.title)),
+                  child: Text(
+                    widget.question!,
+                    style: AppTextStyles.title,
+                    textAlign: TextAlign.justify,
+                  )),
             ],
           ),
           SizedBox(

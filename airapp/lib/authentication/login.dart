@@ -55,12 +55,14 @@ class _LoginPageState extends State<LoginPage> {
           var uaccountID = students.accountID.toString();
           var usy = students.schoolYear.toString();
           var uss = students.schoolSection.toString();
+          var ubd = students.birthdate.toString();
           userCredential.setUsername(uuName);
           userCredential.setName(uname);
           userCredential.setDepartment(udept);
           userCredential.setAccountID(uaccountID);
           userCredential.setSchoolYear(usy);
           userCredential.setSchoolSection(uss);
+          userCredential.setBirthdate(ubd);
           userAuthenticated = true;
           Navigator.push(
             context,
@@ -324,7 +326,7 @@ class userCredential {
   static String schoolYear = 'n/a';
   static String schoolSection = 'n/a';
   static String accountID = 'n/a';
-
+  static String birthdate = 'n/a';
   static String getUsername() {
     return username;
   }
@@ -347,6 +349,10 @@ class userCredential {
 
   static String getAccountID() {
     return accountID;
+  }
+
+  static String getBirthdate() {
+    return birthdate;
   }
 
   static void setUsername(String value) {
@@ -377,5 +383,10 @@ class userCredential {
   static void setAccountID(String value) {
     accountID = value;
     print("Account ID: " + accountID);
+  }
+
+  static void setBirthdate(String value) {
+    birthdate = value;
+    print("Birthdate: " + birthdate);
   }
 }

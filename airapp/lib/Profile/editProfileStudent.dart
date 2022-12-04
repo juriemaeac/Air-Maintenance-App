@@ -60,11 +60,6 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
     birthdate = widget.studentAccount?.birthdate ?? '';
     department = widget.studentAccount?.department ?? '';
     password = widget.studentAccount?.password ?? '';
-    print("======Value Checker====");
-    print(username);
-    print(name);
-    print(accountID);
-    print(birthdate);
     TextEditingController textusernameController = TextEditingController()
       ..text = username ?? "";
     TextEditingController textnameController = TextEditingController()
@@ -156,10 +151,12 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
     }
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Profile"),
-      //   backgroundColor: AppColors.yellowAccent,
-      // ),
+      appBar: AppBar(
+        title: Center(child: Text("Edit Profile")),
+        backgroundColor: AppColors.yellowAccent,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -440,7 +437,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                         DatePicker.showDatePicker(context,
                             showTitleActions: true,
                             minTime: DateTime(1900, 1, 1),
-                            maxTime: DateTime(3000, 1, 1), onChanged: (date) {
+                            maxTime: DateTime(2022, 12, 31), onChanged: (date) {
                           print('change $date');
                         }, onConfirm: (date) {
                           print('confirm $date');

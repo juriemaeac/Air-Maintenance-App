@@ -368,7 +368,7 @@ class _SignupPageState extends State<SignupPage> {
                       DatePicker.showDatePicker(context,
                           showTitleActions: true,
                           minTime: DateTime(1900, 1, 1),
-                          maxTime: DateTime(3000, 1, 1), onChanged: (date) {
+                          maxTime: DateTime(2022, 12, 31), onChanged: (date) {
                         print('change $date');
                       }, onConfirm: (date) {
                         print('confirm $date');
@@ -769,7 +769,7 @@ class _SignupPageState extends State<SignupPage> {
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           contentPadding: EdgeInsets.all(30.0),
           content: Container(
-            height: MediaQuery.of(context).size.height * 0.35,
+            height: MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width * 0.8,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -778,11 +778,23 @@ class _SignupPageState extends State<SignupPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.35 - 30,
+                    height: MediaQuery.of(context).size.height * 0.3 - 30,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("User Details", style: AppTextStyles.headings2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: AppColors.black,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("User Details",
+                                style: AppTextStyles.headings2),
+                          ],
+                        ),
                         SizedBox(
                           height: 10,
                         ),

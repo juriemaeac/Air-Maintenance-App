@@ -519,6 +519,20 @@ class _FormsState extends State<Forms> with ChangeNotifier {
         MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)),
       );
 
+  getRating(int rating) {
+    String equivRating = "";
+    if (rating == 1) {
+      equivRating = "Satisfactory";
+    } else if (rating == 2) {
+      equivRating = "Not Satisfactory";
+    } else if (rating == 3) {
+      equivRating = "Warning";
+    } else {
+      equivRating = "N/A";
+    }
+    return equivRating;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -584,7 +598,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                               .copyWith(color: AppColors.yellowAccent)),
                     ),
                     const SizedBox(height: 15),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Text("1. Check status of:",
                           style: AppTextStyles.title),
@@ -1086,7 +1100,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipA11Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipA11Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1106,7 +1120,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipA12Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipA12Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1126,7 +1140,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipA13Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipA13Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1146,7 +1160,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipA14Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipA14Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1168,7 +1182,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipA2Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipA2Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1187,7 +1201,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipA3Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipA3Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1206,7 +1220,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipA4Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipA4Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1225,7 +1239,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipA5Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipA5Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1244,7 +1258,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipA6Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipA6Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1262,7 +1276,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipA7Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipA7Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1291,7 +1305,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                     text:
-                                                        '\t\t\t\t${sipB1Findings.toString()}\n',
+                                                        '\t\t\t\t${getRating(sipB1Findings!)}\n',
                                                     style: AppTextStyles
                                                         .subHeadings),
                                                 TextSpan(
@@ -1321,7 +1335,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB21Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB21Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1341,7 +1355,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB22Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB22Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1361,7 +1375,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB23Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB23Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1381,7 +1395,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB24Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB24Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1401,7 +1415,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB25Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB25Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1433,7 +1447,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB31Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB31Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1453,7 +1467,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB32Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB32Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1485,7 +1499,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB41Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB41Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1505,7 +1519,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB42Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB42Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1525,7 +1539,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB43Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB43Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1545,7 +1559,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB44Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB44Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1577,7 +1591,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB51Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB51Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1597,7 +1611,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB52Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB52Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1617,7 +1631,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB53Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB53Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1637,7 +1651,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB54Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB54Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1657,7 +1671,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB55Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB55Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1689,7 +1703,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB61Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB61Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1709,7 +1723,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB62Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB62Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1729,7 +1743,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB63Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB63Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1749,7 +1763,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB64Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB64Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1781,7 +1795,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB71Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB71Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1801,7 +1815,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB72Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB72Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1821,7 +1835,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB73Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB73Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1841,7 +1855,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB74Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB74Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1861,7 +1875,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB75Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB75Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1893,7 +1907,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB81Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB81Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1913,7 +1927,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB82Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB82Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1933,7 +1947,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB83Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB83Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1953,7 +1967,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB84Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB84Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -1993,7 +2007,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB86Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB86Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -2025,7 +2039,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB91Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB91Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(
@@ -2045,7 +2059,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                           text:
-                                                              '\t\t\t\t${sipB92Findings.toString()}\n',
+                                                              '\t\t\t\t${getRating(sipB92Findings!)}\n',
                                                           style: AppTextStyles
                                                               .subHeadings),
                                                       TextSpan(

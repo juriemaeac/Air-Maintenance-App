@@ -1169,10 +1169,11 @@ class _TaskState extends State<Task> {
                                               style: AppTextStyles.subtitle2,
                                               children: <TextSpan>[
                                                 TextSpan(
-                                                    text:
-                                                        '● Check for the condition, damage, and leakage\n● Check that access / service panels are locked securely and that inlets/outlets are free from obstruction.\n● Pay particular attention to the navigation antennas, i.e, GPS, VOR, and DME and fuselage skin in the vicinity of these antennas.\n● Check the overboard discharge indicators for the crew oxygen bottle (fwd fuselage RH side) and APU fire extinguisher bottle (lower aft fuselage)\n● Check for fluid leakage in the drain masts/drains in the APU area.\n● Check for the condition of passenger / crew doors, emergency exit doors and cargo doors.\n● Check all pitot tubes, static ports, and angle-of-attack sensors and the surrounding fuselage skin for damage, deformation, and obstruction.',
-                                                    style: AppTextStyles
-                                                        .subHeadings),
+                                                  text:
+                                                      '● Check for the condition, damage, and leakage\n● Check that access / service panels are locked securely and that inlets/outlets are free from obstruction.\n● Pay particular attention to the navigation antennas, i.e, GPS, VOR, and DME and fuselage skin in the vicinity of these antennas.\n● Check the overboard discharge indicators for the crew oxygen bottle (fwd fuselage RH side) and APU fire extinguisher bottle (lower aft fuselage)\n● Check for fluid leakage in the drain masts/drains in the APU area.\n● Check for the condition of passenger / crew doors, emergency exit doors and cargo doors.\n● Check all pitot tubes, static ports, and angle-of-attack sensors and the surrounding fuselage skin for damage, deformation, and obstruction.',
+                                                  style:
+                                                      AppTextStyles.subHeadings,
+                                                ),
                                               ],
                                             ),
                                           ),

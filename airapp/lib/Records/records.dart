@@ -24,8 +24,8 @@ class RecordPage extends StatefulWidget {
 }
 
 class _RecordPageState extends State<RecordPage> {
-  bool isTask = false;
-  bool isInspection = true;
+  bool isTask = true;
+  bool isInspection = false;
 
   bool isSearching = false;
   int? searchID;
@@ -79,7 +79,7 @@ class _RecordPageState extends State<RecordPage> {
             children: [
               Container(
                 padding: const EdgeInsets.all(8),
-                width: MediaQuery.of(context).size.width / 2.5,
+                // /width: MediaQuery.of(context).size.width / 2.5,
                 decoration: BoxDecoration(
                   color: AppColors.greyAccent,
                   borderRadius: BorderRadius.circular(10),
@@ -102,7 +102,7 @@ class _RecordPageState extends State<RecordPage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         padding: const EdgeInsets.all(8),
-                        child: Text('Task',
+                        child: Text('Task Card',
                             style: AppTextStyles.subHeadings.copyWith(
                                 color: isTask
                                     ? AppColors.yellowAccent
@@ -110,6 +110,7 @@ class _RecordPageState extends State<RecordPage> {
                                 fontWeight: isTask ? FontWeight.bold : null)),
                       ),
                     ),
+                    SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
                         setState(() {

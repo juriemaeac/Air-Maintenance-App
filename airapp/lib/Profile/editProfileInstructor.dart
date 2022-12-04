@@ -17,6 +17,7 @@ class EditProfileInstructor extends StatefulWidget {
 class _EditProfileInstructorState extends State<EditProfileInstructor> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: SafeArea(child: Container(child: Text('Edit Profile'))));
   }
 }

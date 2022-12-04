@@ -611,7 +611,7 @@ class _SignupInstructorState extends State<SignupInstructor> {
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           contentPadding: EdgeInsets.all(30.0),
           content: Container(
-            height: MediaQuery.of(context).size.height * 0.35,
+            height: MediaQuery.of(context).size.height * 0.25,
             width: MediaQuery.of(context).size.width * 0.8,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -620,11 +620,23 @@ class _SignupInstructorState extends State<SignupInstructor> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.35 - 30,
+                    height: MediaQuery.of(context).size.height * 0.25 - 30,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("User Details", style: AppTextStyles.headings2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: AppColors.black,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("User Details",
+                                style: AppTextStyles.headings2),
+                          ],
+                        ),
                         SizedBox(
                           height: 10,
                         ),

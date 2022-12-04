@@ -6,9 +6,13 @@ import 'package:airapp/authentication/login.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../boxes/boxInspection.dart';
 import '../boxes/boxInstructor.dart';
+import '../boxes/boxMaintenance.dart';
 import '../boxes/boxStudent.dart';
 import '../database/instructor_model.dart';
+import '../database/maintenanceTask_model.dart';
+import '../database/scheduledInspection_model.dart';
 import '../database/student_model.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -27,6 +31,10 @@ class _ProfilePageState extends State<ProfilePage> {
   String? schoolYear = "No School Year";
   String? schoolSection = "No School Section";
   String? userType = "Null";
+  String? userBirthdate = "N/A";
+  bool? isVisible = true;
+  int? taskRec = 0;
+  int? inspRec = 0;
   @override
   void initState() {
     super.initState();
@@ -36,25 +44,56 @@ class _ProfilePageState extends State<ProfilePage> {
     userAccountID = userCredential.accountID;
     schoolYear = userCredential.schoolYear;
     schoolSection = userCredential.schoolSection;
+    userBirthdate = userCredential.birthdate;
     authenticateUser();
   }
 
   void authenticateUser() {
+    int countTask = 0;
+    int countInsp = 0;
     Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
     Box<Instructor> instructorBox =
         Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    Box<ScheduledInspection> inspectionBox =
+        Hive.box<ScheduledInspection>(HiveBoxesInspection.inspection);
+    Box<MaintenanceTask> maintenanceBox =
+        Hive.box<MaintenanceTask>(HiveBoxesMaintenance.maintenance);
     for (var students in studentBox.values) {
       if (students.accountID == userAccountID) {
         userType = "Student";
         print("User is a Student!");
+        isVisible = true;
+        for (var recs in inspectionBox.values) {
+          if (recs.accountID == userAccountID) {
+            countInsp += 1;
+          }
+        }
+        for (var recs in maintenanceBox.values) {
+          if (recs.accountID == userAccountID) {
+            countTask += 1;
+          }
+        }
       }
     }
     for (var instructors in instructorBox.values) {
       if (instructors.accountID == userAccountID) {
         userType = "Instructor";
         print("User is an Instructor!");
+        isVisible = false;
+        for (var recs in inspectionBox.values) {
+          if (recs.accountID == userAccountID) {
+            countInsp += 1;
+          }
+        }
+        for (var recs in maintenanceBox.values) {
+          if (recs.accountID == userAccountID) {
+            countTask += 1;
+          }
+        }
       }
     }
+    taskRec = countTask;
+    inspRec = countInsp;
   }
 
   getUserAccount(String accountID, String userType) {
@@ -124,7 +163,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Container(
             padding: EdgeInsets.only(top: 30, left: 30, right: 30),
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
@@ -175,7 +213,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.symmetric(
-                              vertical: 15.0, horizontal: 60)),
+                              vertical: 10.0, horizontal: 20)),
                       backgroundColor: MaterialStateProperty.all<Color>(
                           AppColors.blueAccent),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -186,33 +224,35 @@ class _ProfilePageState extends State<ProfilePage> {
                       shadowColor:
                           MaterialStateProperty.all<Color>(Colors.transparent),
                     ),
-                    child: Text('Edit Profile',
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 15,
-                        )),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Edit Profile',
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15,
+                              )),
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   Container(
-                      // padding: EdgeInsets.all(10),
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     color: AppColors.greyAccentLine,
-                      //     width: 1,
-                      //   ),
-                      //   borderRadius: BorderRadius.circular(20),
-                      // ),
                       child: Column(
                     children: [
                       Container(
-                        // padding: EdgeInsets.all(5),
-                        // width: MediaQuery.of(context).size.width - 60,
-                        // decoration: BoxDecoration(
-                        //   color: AppColors.greyAccent,
-                        //   borderRadius: BorderRadius.circular(10),
-                        // ),
                         child: Center(
                             child:
                                 Text('Records', style: AppTextStyles.headings)),
@@ -226,11 +266,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Column(
                             children: [
-                              Text('5',
+                              Text(inspRec!.toString(),
                                   style: AppTextStyles.headings1.copyWith(
                                     fontSize: 60,
                                   )),
-                              Text('Task Card',
+                              Text('Inspections',
                                   style: AppTextStyles.subHeadings),
                             ],
                           ),
@@ -241,11 +281,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Column(
                             children: [
-                              Text('5',
+                              Text(taskRec!.toString(),
                                   style: AppTextStyles.headings1.copyWith(
                                     fontSize: 60,
                                   )),
-                              Text('Task Card',
+                              Text('Task Cards',
                                   style: AppTextStyles.subHeadings),
                             ],
                           ),
@@ -257,75 +297,104 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 30,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 10),
+                          padding: EdgeInsets.only(left: 20),
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: Text('Account ID: ',
+                              style: AppTextStyles.subtitle)),
+                      SizedBox(
                         width: MediaQuery.of(context).size.width / 2 - 30,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Account ID: ', style: AppTextStyles.subtitle),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(userAccountID!,
-                                style: AppTextStyles.textFields),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 10),
-                        width: MediaQuery.of(context).size.width / 2 - 30,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Department: ', style: AppTextStyles.subtitle),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(department!, style: AppTextStyles.textFields),
-                          ],
-                        ),
+                        child: Text(userAccountID!,
+                            style: AppTextStyles.textFields),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 15,
+                  ),
+                  Visibility(
+                    visible: isVisible!,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.only(left: 20),
+                            width: MediaQuery.of(context).size.width / 2 - 30,
+                            child: Text('Birthdate: ',
+                                style: AppTextStyles.subtitle)),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: Text(userBirthdate!,
+                              style: AppTextStyles.textFields),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                          padding: EdgeInsets.only(left: 20),
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: Text('Department: ',
+                              style: AppTextStyles.subtitle)),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 2 - 30,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('School Year: ',
-                                style: AppTextStyles.subtitle),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(schoolYear!, style: AppTextStyles.textFields),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2 - 30,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('School Section: ',
-                                style: AppTextStyles.subtitle),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(schoolSection!,
-                                style: AppTextStyles.textFields),
-                          ],
-                        ),
+                        child:
+                            Text(department!, style: AppTextStyles.textFields),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Visibility(
+                    visible: isVisible!,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: Text('School Year: ',
+                              style: AppTextStyles.subtitle),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: Text(schoolYear!,
+                              style: AppTextStyles.textFields),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Visibility(
+                    visible: isVisible!,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.only(left: 20),
+                            width: MediaQuery.of(context).size.width / 2 - 30,
+                            child: Text('School Section: ',
+                                style: AppTextStyles.subtitle)),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 2 - 30,
+                          child: Text(schoolSection!,
+                              style: AppTextStyles.textFields),
+                        ),
+                        // SizedBox(
+                        //   height: 5,
+                        // ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -338,6 +407,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       userCredential.setAccountID("");
                       userCredential.setSchoolYear("");
                       userCredential.setSchoolSection("");
+                      userCredential.setBirthdate("");
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return LandingPage();

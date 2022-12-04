@@ -4,6 +4,7 @@ import 'package:airapp/authentication/login.dart';
 import 'package:airapp/home/calendar/calendarSection.dart';
 import 'package:airapp/home/manual/manualWidget.dart';
 import 'package:airapp/constants.dart';
+import 'package:airapp/manualList.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -86,7 +87,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 20,
               ),
-
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: CalendarSection(),
@@ -96,9 +96,21 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                  'Maintenance',
-                  style: AppTextStyles.title,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Maintenance',
+                      style: AppTextStyles.title,
+                    ),
+                    GestureDetector(
+                      onTap: displayHowdialog,
+                      child: Text(
+                        'How to Use',
+                        style: AppTextStyles.subHeadings,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -189,9 +201,27 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                  'Manuals',
-                  style: AppTextStyles.title,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Manuals',
+                      style: AppTextStyles.title,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ManualList()));
+                      },
+                      child: Text(
+                        'View All',
+                        style: AppTextStyles.subHeadings,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -206,36 +236,149 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 30),
-              //   child: Text(
-              //     'Forms',
-              //     style: AppTextStyles.title,
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // Container(
-              //   //color: Colors.amber,
-              //   width: MediaQuery.of(context).size.width,
-              //   height: MediaQuery.of(context).size.height * 0.28,
-              //   child: SingleChildScrollView(
-              //     scrollDirection: Axis.vertical,
-              //     child: Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //           horizontal: 30, vertical: 10),
-              //       child: Forms(),
-              //     ),
-              //   ),
-              // )
             ],
           ),
         ),
       )),
+    );
+  }
+
+  displayHowdialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.info_outline_rounded,
+                color: AppColors.black,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                'Guide and Instructions',
+                style: AppTextStyles.title,
+              ),
+            ],
+          ),
+          backgroundColor: AppColors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          contentPadding: EdgeInsets.only(left: 30, right: 30, top: 15),
+          content: Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'The human interface maintenance checklist/task card is an instructional application for the avionics students to use and be familiarized with the Aircraft Maintenance Manual and Air Transportation Association (ATA) Chapters that are being used in the aviation field. For them to be able to diminish some of the dirty dozen and enhance their human factors. \n\nUse the application instructions found on this page along with the guidance in the activity form and manuals and to be submitted to the assigned avionics instructor. ',
+                    style: AppTextStyles.subtitle,
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    'Registration Process:',
+                    style: AppTextStyles.title,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      '1.	Go to the register if you don’t have an account.\n2.	Click Create Account\n3.	The sign up form will appear and it needs to be filled with the user’s personal information.\n4.	Review Human Interface MTC Application’s Terms of Service and Privacy Policy, then click I agree.\n5.	Your account will be created.',
+                      style: AppTextStyles.subtitle,
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    'To Signing in in to your Account:',
+                    style: AppTextStyles.title,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      '1.	Open the application.\n2.	Type your user name and password, then click Enter.\n3.	To sign out - To sign out, click the corresponding settings and select Sign out.',
+                      style: AppTextStyles.subtitle,
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    color: AppColors.greyAccentLine,
+                    thickness: 2,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Home page consist the Application Guide and Instructions and the Manuals',
+                    style: AppTextStyles.subtitle,
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Divider(
+                    color: AppColors.greyAccentLine,
+                    thickness: 2,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Selection of the Manuals:',
+                    style: AppTextStyles.title,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      '1.	Sign in to your account and click enter.\n2.	Once Signed in you will proceed automatically to the Home Page\n3.	Select the manual that you want to open and browse it.\n4.	After browsing it you can click back to go to the home page or proceed to the activity.',
+                      style: AppTextStyles.subtitle,
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    'Activity Procedure:',
+                    style: AppTextStyles.title,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      '1.	Sign in to your account and click enter.\n2.	Once Signed in you will proceed automatically to the Home Page.\n3.	You can click the activity to proceed and read the instructions.\n4.	Fill out the activity form\n5.	Once done filling the activity form, you will be proceeded to the double check page to double check your form.\n6.	After filling out the form you can save the form. \n7.	Download the form and submit the form to your respective avionics instructor. ',
+                      style: AppTextStyles.subtitle,
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close", style: AppTextStyles.subHeadings),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ManualCard extends StatelessWidget {
   //const ManualCard({super.key});
-  Icon? icon;
+  IconData? icon;
   String? title;
   String? subtitle;
   String? author;
@@ -38,7 +38,7 @@ class ManualCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              icon!,
+              Icon(icon!, size: 20, color: AppColors.yellowAccent),
             ],
           ),
           SizedBox(height: 8),
@@ -77,8 +77,7 @@ class _ManualsState extends State<Manuals> {
             openPDF(context, file);
           },
           child: ManualCard(
-            icon: const Icon(Icons.lightbulb_outline_rounded,
-                size: 20, color: AppColors.yellowAccent),
+            icon: Icons.lightbulb_outline_rounded,
             title: 'A320 LIGHTS',
             subtitle: 'Flight Crew Operating Manual',
             author: '30 pages',
@@ -94,8 +93,7 @@ class _ManualsState extends State<Manuals> {
             openPDF(context, file);
           },
           child: ManualCard(
-            icon: const Icon(Icons.home_repair_service_outlined,
-                size: 20, color: AppColors.yellowAccent),
+            icon: Icons.home_repair_service_outlined,
             title: 'Cessna 152 1978-1985 MM D2064-1-13',
             subtitle: 'Cessna Service Manual',
             author: '30 pages',
@@ -111,8 +109,7 @@ class _ManualsState extends State<Manuals> {
             openPDF(context, file);
           },
           child: ManualCard(
-            icon: const Icon(Icons.lightbulb_outline_rounded,
-                size: 20, color: AppColors.yellowAccent),
+            icon: Icons.handyman_rounded,
             title: "CESSNA 150 OWNER'S MANUAL",
             subtitle: "Cessna Owner's Manual",
             author: '30 pages',
@@ -128,8 +125,7 @@ class _ManualsState extends State<Manuals> {
             openPDF(context, file);
           },
           child: ManualCard(
-            icon: const Icon(Icons.lightbulb_outline_rounded,
-                size: 20, color: AppColors.yellowAccent),
+            icon: Icons.flash_on_rounded,
             title: 'ATA 24 ELECTRICAL POWER',
             subtitle: 'Aircraft Maintenance Manual',
             author: '30 pages',
@@ -145,8 +141,7 @@ class _ManualsState extends State<Manuals> {
             openPDF(context, file);
           },
           child: ManualCard(
-            icon: const Icon(Icons.lightbulb_outline_rounded,
-                size: 20, color: AppColors.yellowAccent),
+            icon: Icons.import_contacts_rounded,
             title: '150 SM 69',
             subtitle: 'Cessna Service Manual',
             author: '30 pages',
@@ -162,8 +157,7 @@ class _ManualsState extends State<Manuals> {
             openPDF(context, file);
           },
           child: ManualCard(
-            icon: const Icon(Icons.lightbulb_outline_rounded,
-                size: 20, color: AppColors.yellowAccent),
+            icon: Icons.monitor_heart_outlined,
             title: 'A319 320 321 Electrical',
             subtitle: 'Electrical Manual',
             author: '30 pages',
