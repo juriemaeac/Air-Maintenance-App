@@ -23,16 +23,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? name;
   int? totalRecords = 0;
-
+  String? initials = "A";
+  double sizeFont = 100;
   @override
   void initState() {
     super.initState();
     name = userCredential.name;
+    initials = userCredential.nameInitial;
     var maintenanceRecords =
         Hive.box<MaintenanceTask>(HiveBoxesMaintenance.maintenance).length;
     var inspectionRecords =
         Hive.box<ScheduledInspection>(HiveBoxesInspection.inspection).length;
     totalRecords = maintenanceRecords + inspectionRecords;
+    if (totalRecords! > 99) {
+      sizeFont = 70;
+    }
   }
 
   @override
@@ -66,18 +71,23 @@ class _HomePageState extends State<HomePage> {
                             )),
                       ],
                     ),
-                    Container(
-                      height: 35,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: AppColors.blueAccent,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.airplanemode_active_rounded,
-                          color: AppColors.white,
-                          size: 25,
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        //padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: AppColors.blueAccent,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: Center(
+                            child: Text(initials!,
+                                style: AppTextStyles.headings2.copyWith(
+                                    color: AppColors.yellowAccent,
+                                    fontSize: 18)),
+                          ),
                         ),
                       ),
                     )
@@ -161,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                           Text('$totalRecords',
                               style: TextStyle(
                                 color: AppColors.yellowAccent,
-                                fontSize: 100,
+                                fontSize: sizeFont,
                                 fontWeight: FontWeight.w500,
                                 //fontFamily: 'Poppins',
                               )),

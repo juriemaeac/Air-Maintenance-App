@@ -4,6 +4,7 @@ import 'package:airapp/boxes/boxStudent.dart';
 import 'package:airapp/constants.dart';
 import 'package:airapp/authentication/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
 import '../database/instructor_model.dart';
@@ -38,6 +39,16 @@ class _LoginPageState extends State<LoginPage> {
     passwordText.clear();
   }
 
+  String getInitials(String string, int limitTo) {
+    var buffer = StringBuffer();
+    var split = string.split(' ');
+    for (var i = 0; i < (limitTo); i++) {
+      buffer.write(split[i][0]);
+    }
+
+    return buffer.toString();
+  }
+
   authenticateUser() {
     Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
     Box<Instructor> instructorBox =
@@ -56,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
           var usy = students.schoolYear.toString();
           var uss = students.schoolSection.toString();
           var ubd = students.birthdate.toString();
+          String? firstLetter = getInitials(uname, 1);
           userCredential.setUsername(uuName);
           userCredential.setName(uname);
           userCredential.setDepartment(udept);
@@ -63,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
           userCredential.setSchoolYear(usy);
           userCredential.setSchoolSection(uss);
           userCredential.setBirthdate(ubd);
+          userCredential.setNameInitial(firstLetter);
           userAuthenticated = true;
           Navigator.push(
             context,
@@ -80,11 +93,12 @@ class _LoginPageState extends State<LoginPage> {
               "${instructors.name.toString()} ${instructors.lastName.toString()}";
           var udept = instructors.department.toString();
           var uaccountID = instructors.accountID.toString();
-
+          String? firstLetter = getInitials(uname, 1);
           userCredential.setUsername(uuName);
           userCredential.setName(uname);
           userCredential.setDepartment(udept);
           userCredential.setAccountID(uaccountID);
+          userCredential.setNameInitial(firstLetter);
           userAuthenticated = true;
           Navigator.push(
             context,
@@ -113,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 child: Center(
                   child: Container(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
@@ -125,37 +139,28 @@ class _LoginPageState extends State<LoginPage> {
                           // ),
                           Center(
                             child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
+                              height: 70,
+                              decoration: const BoxDecoration(
                                 color: AppColors.blueAccent,
                                 shape: BoxShape.circle,
                               ),
-                              child: Icon(
-                                Icons.airplanemode_active_rounded,
-                                size: 50,
+                              child: SvgPicture.asset(
+                                'assets/images/aeSVG.svg',
                                 color: AppColors.yellowAccent,
                               ),
                             ),
-                            // Container(
-                            //   width: MediaQuery.of(context).size.width / 2,
-                            //   height: MediaQuery.of(context).size.height * 0.08,
-                            //   child: Image(
-                            //     image:
-                            //         AssetImage('assets/images/airapp_logo.png'),
-                            //   ),
-                            // ),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             'Login to your account',
                             style: AppTextStyles.headings1,
                           ),
                           const SizedBox(
                             height: 5,
                           ),
-                          Text(
+                          const Text(
                             'Log in to start aircraft inspection and maintenance',
                             style: AppTextStyles.subHeadings,
                           ),
@@ -174,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: AppTextStyles.textFields,
                               decoration: const InputDecoration(
                                 contentPadding:
-                                    const EdgeInsets.only(left: 25, right: 13),
+                                    EdgeInsets.only(left: 25, right: 13),
                                 labelText: 'Enter Username',
                                 labelStyle: AppTextStyles.subHeadings,
                                 border: InputBorder.none,
@@ -327,6 +332,12 @@ class userCredential {
   static String schoolSection = 'n/a';
   static String accountID = 'n/a';
   static String birthdate = 'n/a';
+  static String nameInitial = 'n/a';
+
+  static String getNameInitial() {
+    return nameInitial;
+  }
+
   static String getUsername() {
     return username;
   }
@@ -353,6 +364,11 @@ class userCredential {
 
   static String getBirthdate() {
     return birthdate;
+  }
+
+  static void setNameInitial(String value) {
+    nameInitial = value;
+    print("Initials: " + nameInitial);
   }
 
   static void setUsername(String value) {

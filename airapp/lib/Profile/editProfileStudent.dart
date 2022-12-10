@@ -91,82 +91,6 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
 
   @override
   Widget build(BuildContext context) {
-    // TextEditingController _textusernameController = TextEditingController()
-    //   ..text = username!;
-    // TextEditingController _textnameController = TextEditingController()
-    //   ..text = name!;
-    // TextEditingController _textmiddleNameController = TextEditingController()
-    //   ..text = middleName!;
-    // TextEditingController _textlastNameController = TextEditingController()
-    //   ..text = lastName!;
-    // TextEditingController _textaccountIDController = TextEditingController()
-    //   ..text = accountID!;
-    // TextEditingController _textschoolSectionController = TextEditingController()
-    //   ..text = schoolSection!;
-    // TextEditingController _textschoolYearController = TextEditingController()
-    //   ..text = schoolYear!;
-    // TextEditingController _textdepartmentController = TextEditingController()
-    //   ..text = department!;
-    // TextEditingController _textpasswordController = TextEditingController()
-    //   ..text = password!;
-    // TextEditingController _textBirthdateController = TextEditingController()
-    //   ..text = birthdate!;
-
-    // @override
-    // void initState() {
-    //   super.initState();
-    //   _textusernameController.addListener(() {
-    //     setState(() {
-    //       username = _textusernameController.text;
-    //     });
-    //   });
-    //   _textnameController.addListener(() {
-    //     setState(() {
-    //       name = _textnameController.text;
-    //     });
-    //   });
-    //   _textmiddleNameController.addListener(() {
-    //     setState(() {
-    //       middleName = _textmiddleNameController.text;
-    //     });
-    //   });
-    //   _textlastNameController.addListener(() {
-    //     setState(() {
-    //       lastName = _textlastNameController.text;
-    //     });
-    //   });
-    //   _textaccountIDController.addListener(() {
-    //     setState(() {
-    //       accountID = _textaccountIDController.text;
-    //     });
-    //   });
-    //   _textschoolSectionController.addListener(() {
-    //     setState(() {
-    //       schoolSection = _textschoolSectionController.text;
-    //     });
-    //   });
-    //   _textschoolYearController.addListener(() {
-    //     setState(() {
-    //       schoolYear = _textschoolYearController.text;
-    //     });
-    //   });
-    //   _textdepartmentController.addListener(() {
-    //     setState(() {
-    //       department = _textdepartmentController.text;
-    //     });
-    //   });
-    //   _textpasswordController.addListener(() {
-    //     setState(() {
-    //       password = _textpasswordController.text;
-    //     });
-    //   });
-    //   _textBirthdateController.addListener(() {
-    //     setState(() {
-    //       birthdate = _textBirthdateController.text;
-    //     });
-    //   });
-    // }
-
     // @override
     // void dispose() {
     //   _textusernameController.dispose();
@@ -233,7 +157,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       ),
                       onChanged: (value) {
                         //setState(() {
-                          usernameLocal = _textusernameController.value.text;
+                        usernameLocal = _textusernameController.value.text;
                         //});
                       },
                       validator: (String? value) {
@@ -294,7 +218,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onChanged: (value) {
                               //setState(() {
-                                nameLocal = _textnameController.value.text;
+                              nameLocal = _textnameController.value.text;
                               //});
                             },
                             validator: (String? value) {
@@ -334,8 +258,8 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onChanged: (value) {
                               //setState(() {
-                                middleNameLocal =
-                                    _textmiddleNameController.value.text;
+                              middleNameLocal =
+                                  _textmiddleNameController.value.text;
                               //});
                             },
                             validator: (String? value) {
@@ -399,7 +323,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onChanged: (value) {
                               //setState(() {
-                                lastNameLocal = _textnameController.value.text;
+                              lastNameLocal = _textnameController.value.text;
                               //});
                             },
                             validator: (String? value) {
@@ -439,8 +363,8 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onChanged: (value) {
                               //setState(() {
-                                accountIDLocal =
-                                    _textaccountIDController.value.text;
+                              accountIDLocal =
+                                  _textaccountIDController.value.text;
                               //});
                             },
                             validator: (String? value) {
@@ -568,8 +492,8 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onChanged: (value) {
                               //setState(() {
-                                schoolYearLocal =
-                                    _textschoolYearController.value.text;
+                              schoolYearLocal =
+                                  _textschoolYearController.value.text;
                               //});
                             },
                             validator: (String? value) {
@@ -610,8 +534,8 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onChanged: (value) {
                               //setState(() {
-                                schoolSectionLocal =
-                                    _textschoolSectionController.value.text;
+                              schoolSectionLocal =
+                                  _textschoolSectionController.value.text;
                               //});
                             },
                             validator: (String? value) {
@@ -722,7 +646,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             ),
                             onPressed: () {
                               //setState(() {
-                                _isObscure = !_isObscure;
+                              _isObscure = !_isObscure;
                               //});
                             }),
                       ),
@@ -739,7 +663,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       },
                     ),
                   ),
-                  
+
                   SizedBox(
                     height: 10,
                   ),
@@ -754,6 +678,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                                   builder: (context) => NavBar()));
                         },
                         style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 15.0, horizontal: 55)),
@@ -794,6 +719,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                           }));
                         },
                         style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 15.0, horizontal: 55)),

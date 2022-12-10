@@ -10,6 +10,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
@@ -92,14 +93,13 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 Center(
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    height: 70,
                     decoration: BoxDecoration(
                       color: AppColors.blueAccent,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      Icons.airplanemode_active_rounded,
-                      size: 50,
+                    child: SvgPicture.asset(
+                      'assets/images/aeSVG.svg',
                       color: AppColors.yellowAccent,
                     ),
                   ),

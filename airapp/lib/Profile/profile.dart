@@ -32,9 +32,11 @@ class _ProfilePageState extends State<ProfilePage> {
   String? schoolSection = "No School Section";
   String? userType = "Null";
   String? userBirthdate = "N/A";
+  String? initials = "A";
   bool? isVisible = true;
   int? taskRec = 0;
   int? inspRec = 0;
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
     schoolYear = userCredential.schoolYear;
     schoolSection = userCredential.schoolSection;
     userBirthdate = userCredential.birthdate;
+    initials = userCredential.nameInitial;
     authenticateUser();
   }
 
@@ -121,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
               MaterialPageRoute(
                   builder: (context) => EditProfilePageStudent(
                         studentAccount: studentAccount,
-                        studentIndex: indexS-1,
+                        studentIndex: indexS - 1,
                       )));
         }
         indexS += 1;
@@ -148,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
               MaterialPageRoute(
                   builder: (context) => EditProfileInstructor(
                         instructorAccount: instructorAccount,
-                        instructorIndex: indexI-1,
+                        instructorIndex: indexI - 1,
                       )));
         }
         indexI += 1;
@@ -171,22 +174,28 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        //height: 70,
+                        padding: const EdgeInsets.all(30),
                         decoration: BoxDecoration(
                           color: AppColors.blueAccent,
                           shape: BoxShape.circle,
                           //borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Icon(
-                          Icons.airplanemode_active_rounded,
-                          size: 50,
-                          color: AppColors.yellowAccent,
+                        child: Center(
+                          child: Text(initials!,
+                              style: AppTextStyles.headings2.copyWith(
+                                  color: AppColors.yellowAccent, fontSize: 45)),
                         ),
+                        // Icon(
+                        //   Icons.airplanemode_active_rounded,
+                        //   size: 50,
+                        //   color: AppColors.yellowAccent,
+                        // ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Text(
                     name!,
@@ -206,7 +215,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 20,
                   ),
-                  
                   Container(
                       child: Column(
                     children: [
@@ -254,187 +262,297 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 30,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.only(left: 20),
-                          width: MediaQuery.of(context).size.width / 2 - 30,
-                          child: Text('Account ID: ',
-                              style: AppTextStyles.subtitle)),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2 - 30,
-                        child: Text(userAccountID!,
-                            style: AppTextStyles.textFields),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Visibility(
-                    visible: isVisible!,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: AppColors.greyAccent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
                       children: [
-                        Container(
-                            padding: EdgeInsets.only(left: 20),
-                            width: MediaQuery.of(context).size.width / 2 - 30,
-                            child: Text('Birthdate: ',
-                                style: AppTextStyles.subtitle)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 2 - 30,
-                          child: Text(userBirthdate!,
-                              style: AppTextStyles.textFields),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.only(left: 20),
-                          width: MediaQuery.of(context).size.width / 2 - 30,
-                          child: Text('Department: ',
-                              style: AppTextStyles.subtitle)),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2 - 30,
-                        child:
-                            Text(department!, style: AppTextStyles.textFields),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Visibility(
-                    visible: isVisible!,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: 20),
-                          width: MediaQuery.of(context).size.width / 2 - 30,
-                          child: Text('School Year: ',
-                              style: AppTextStyles.subtitle),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 2 - 30,
-                          child: Text(schoolYear!,
-                              style: AppTextStyles.textFields),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Visibility(
-                    visible: isVisible!,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            padding: EdgeInsets.only(left: 20),
-                            width: MediaQuery.of(context).size.width / 2 - 30,
-                            child: Text('School Section: ',
-                                style: AppTextStyles.subtitle)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 2 - 30,
-                          child: Text(schoolSection!,
-                              style: AppTextStyles.textFields),
-                        ),
-                        // SizedBox(
-                        //   height: 5,
-                        // ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [ElevatedButton(
-                    onPressed: () {
-                      getUserAccount(userAccountID!, userType!);
-                    },
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
-                          const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20)),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          AppColors.blueAccent),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      shadowColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent),
-                    ),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.edit,
-                            color: AppColors.white,
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text('Edit Profile',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 15,
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 30),
-                      ElevatedButton(
-                        onPressed: () {
-                          userCredential.setUsername("");
-                          userCredential.setName("");
-                          userCredential.setDepartment("");
-                          userCredential.setAccountID("");
-                          userCredential.setSchoolYear("");
-                          userCredential.setSchoolSection("");
-                          userCredential.setBirthdate("");
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return LandingPage();
-                          }));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.symmetric(
-                                  vertical: 15.0, horizontal: 60)),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.redAccent),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(left: 10),
+                                width:
+                                    MediaQuery.of(context).size.width / 2 - 40,
+                                child: Text('Account ID: ',
+                                    style: AppTextStyles.subtitle)),
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              width: MediaQuery.of(context).size.width / 2 - 40,
+                              child: Text(userAccountID!,
+                                  style: AppTextStyles.textFields),
                             ),
-                          ),
-                          shadowColor:
-                              MaterialStateProperty.all<Color>(Colors.transparent),
+                          ],
                         ),
-                        child: Text('Logout',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 15,
-                            )),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Visibility(
+                          visible: isVisible!,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.only(left: 10),
+                                  width: MediaQuery.of(context).size.width / 2 -
+                                      40,
+                                  child: Text('Birthdate: ',
+                                      style: AppTextStyles.subtitle)),
+                              Container(
+                                padding: EdgeInsets.only(left: 10),
+                                width:
+                                    MediaQuery.of(context).size.width / 2 - 40,
+                                child: Text(userBirthdate!,
+                                    style: AppTextStyles.textFields),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(left: 10),
+                                width:
+                                    MediaQuery.of(context).size.width / 2 - 40,
+                                child: Text('Department: ',
+                                    style: AppTextStyles.subtitle)),
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              width: MediaQuery.of(context).size.width / 2 - 40,
+                              child: Text(department!,
+                                  style: AppTextStyles.textFields),
+                            ),
+                          ],
+                        ),
+                        Visibility(
+                          visible: isVisible!,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 -
+                                            40,
+                                    child: Text('School Year: ',
+                                        style: AppTextStyles.subtitle),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 -
+                                            40,
+                                    child: Text(schoolYear!,
+                                        style: AppTextStyles.textFields),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Visibility(
+                          visible: isVisible!,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      width: MediaQuery.of(context).size.width /
+                                              2 -
+                                          40,
+                                      child: Text('School Section: ',
+                                          style: AppTextStyles.subtitle)),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 -
+                                            40,
+                                    child: Text(schoolSection!,
+                                        style: AppTextStyles.textFields),
+                                  ),
+                                  // SizedBox(
+                                  //   height: 5,
+                                  // ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                getUserAccount(userAccountID!, userType!);
+                              },
+                              style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(0),
+                                padding: MaterialStateProperty.all(
+                                    const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 20)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        AppColors.blueAccent),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                              ),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.edit,
+                                      color: AppColors.white,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text('Edit Profile',
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontSize: 15,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                userCredential.setUsername("");
+                                userCredential.setName("");
+                                userCredential.setDepartment("");
+                                userCredential.setAccountID("");
+                                userCredential.setSchoolYear("");
+                                userCredential.setSchoolSection("");
+                                userCredential.setBirthdate("");
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return LandingPage();
+                                }));
+                              },
+                              style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(0),
+                                padding: MaterialStateProperty.all(
+                                    const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 20)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.redAccent),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                              ),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.logout,
+                                      color: AppColors.white,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text('Logout',
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontSize: 15,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     userCredential.setUsername("");
+                  //     userCredential.setName("");
+                  //     userCredential.setDepartment("");
+                  //     userCredential.setAccountID("");
+                  //     userCredential.setSchoolYear("");
+                  //     userCredential.setSchoolSection("");
+                  //     userCredential.setBirthdate("");
+                  //     Navigator.push(context,
+                  //         MaterialPageRoute(builder: (context) {
+                  //       return LandingPage();
+                  //     }));
+                  //   },
+                  //   style: ButtonStyle(
+                  //     padding: MaterialStateProperty.all(
+                  //         const EdgeInsets.symmetric(
+                  //             vertical: 10.0, horizontal: 20)),
+                  //     backgroundColor:
+                  //         MaterialStateProperty.all<Color>(Colors.redAccent),
+                  //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  //       RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(10.0),
+                  //       ),
+                  //     ),
+                  //     shadowColor:
+                  //         MaterialStateProperty.all<Color>(Colors.transparent),
+                  //   ),
+                  //   child: Container(
+                  //     width: MediaQuery.of(context).size.width / 3.5,
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         Icon(
+                  //           Icons.logout,
+                  //           color: AppColors.white,
+                  //           size: 20,
+                  //         ),
+                  //         SizedBox(
+                  //           width: 10,
+                  //         ),
+                  //         Text('Logout',
+                  //             style: TextStyle(
+                  //               color: AppColors.white,
+                  //               fontSize: 15,
+                  //             )),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             )),
