@@ -99,11 +99,11 @@ class _ProfilePageState extends State<ProfilePage> {
   getUserAccount(String accountID, String userType) {
     if (userType == "Student") {
       Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
-      int index = 0;
+      int indexS = 0;
       for (final student in studentBox.values) {
-        print("FInding user at index: $index");
+        print("FInding user at index: $indexS");
         if (student.accountID == accountID) {
-          print("User found at index: $index");
+          print("User found at index: $indexS");
           Student studentAccount = Student(
             name: student.name,
             userName: student.userName,
@@ -121,19 +121,19 @@ class _ProfilePageState extends State<ProfilePage> {
               MaterialPageRoute(
                   builder: (context) => EditProfilePageStudent(
                         studentAccount: studentAccount,
-                        studentIndex: index,
+                        studentIndex: indexS-1,
                       )));
         }
-        index += 1;
+        indexS += 1;
       }
     } else if (userType == "Instructor") {
       Box<Instructor> instructorBox =
           Hive.box<Instructor>(HiveBoxesInstructor.instructor);
-      int index = 0;
+      int indexI = 0;
       for (final instructor in instructorBox.values) {
-        print("FInding user at index: $index");
+        print("FInding user at index: $indexI");
         if (instructor.accountID == accountID) {
-          print("User found at index: $index");
+          print("User found at index: $indexI");
           Instructor instructorAccount = Instructor(
             name: instructor.name,
             userName: instructor.userName,
@@ -148,10 +148,10 @@ class _ProfilePageState extends State<ProfilePage> {
               MaterialPageRoute(
                   builder: (context) => EditProfileInstructor(
                         instructorAccount: instructorAccount,
-                        instructorIndex: index,
+                        instructorIndex: indexI-1,
                       )));
         }
-        index += 1;
+        indexI += 1;
       }
     }
   }
@@ -206,49 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      getUserAccount(userAccountID!, userType!);
-                    },
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
-                          const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20)),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          AppColors.blueAccent),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      shadowColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent),
-                    ),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.edit,
-                            color: AppColors.white,
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text('Edit Profile',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 15,
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  
                   Container(
                       child: Column(
                     children: [
@@ -399,26 +357,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
+                  Row(
+                    children: [ElevatedButton(
                     onPressed: () {
-                      userCredential.setUsername("");
-                      userCredential.setName("");
-                      userCredential.setDepartment("");
-                      userCredential.setAccountID("");
-                      userCredential.setSchoolYear("");
-                      userCredential.setSchoolSection("");
-                      userCredential.setBirthdate("");
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return LandingPage();
-                      }));
+                      getUserAccount(userAccountID!, userType!);
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
                           const EdgeInsets.symmetric(
-                              vertical: 15.0, horizontal: 60)),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.redAccent),
+                              vertical: 10.0, horizontal: 20)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          AppColors.blueAccent),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -427,11 +376,64 @@ class _ProfilePageState extends State<ProfilePage> {
                       shadowColor:
                           MaterialStateProperty.all<Color>(Colors.transparent),
                     ),
-                    child: Text('Logout',
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 15,
-                        )),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Edit Profile',
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15,
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 30),
+                      ElevatedButton(
+                        onPressed: () {
+                          userCredential.setUsername("");
+                          userCredential.setName("");
+                          userCredential.setDepartment("");
+                          userCredential.setAccountID("");
+                          userCredential.setSchoolYear("");
+                          userCredential.setSchoolSection("");
+                          userCredential.setBirthdate("");
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return LandingPage();
+                          }));
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 60)),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.redAccent),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          shadowColor:
+                              MaterialStateProperty.all<Color>(Colors.transparent),
+                        ),
+                        child: Text('Logout',
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 15,
+                            )),
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -56,10 +56,13 @@ class LandingPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Text('Philippine State College of Aeronautics',
                           style: AppTextStyles.subtitle),
+                      SizedBox(
+                        height: 15,
+                      ),
                     ],
                   ),
                 ),
@@ -67,6 +70,7 @@ class LandingPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
+                  margin: const EdgeInsets.only(top: 10),
                   padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.18,

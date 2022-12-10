@@ -23,18 +23,18 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
 
   bool _isObscure = false;
 
-  String? username;
-  String? name;
-  String? middleName;
-  String? lastName;
-  String? accountID;
-  String? schoolSection;
-  String? schoolYear;
-  String? birthdate;
-  String? department;
-  String? password;
-  String? confirmPassword;
-  int? studentIndex;
+  String? usernameLocal;
+  String? nameLocal;
+  String? middleNameLocal;
+  String? lastNameLocal;
+  String? accountIDLocal;
+  String? schoolSectionLocal;
+  String? schoolYearLocal;
+  String? birthdateLocal;
+  String? departmentLocal;
+  String? passwordLocal;
+  String? confirmPasswordLocal;
+  int? studentIndexLocal;
   List<String> departmentOptions = [
     "AET",
     "AMT",
@@ -42,113 +42,145 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
     "AIR TRANSPORTATION",
   ];
 
+  TextEditingController _textusernameController = TextEditingController()
+    ..text = "";
+  TextEditingController _textnameController = TextEditingController()
+    ..text = "";
+  TextEditingController _textmiddleNameController = TextEditingController()
+    ..text = "";
+  TextEditingController _textlastNameController = TextEditingController()
+    ..text = "";
+  TextEditingController _textaccountIDController = TextEditingController()
+    ..text = "";
+  TextEditingController _textschoolSectionController = TextEditingController()
+    ..text = "";
+  TextEditingController _textschoolYearController = TextEditingController()
+    ..text = "";
+  TextEditingController _textdepartmentController = TextEditingController()
+    ..text = "";
+  TextEditingController _textpasswordController = TextEditingController()
+    ..text = "";
+  TextEditingController _textBirthdateController = TextEditingController()
+    ..text = "";
   @override
   void initState() {
+    super.initState();
     Hive.openBox<Student>(HiveBoxesStudent.student);
+    usernameLocal = widget.studentAccount?.userName;
+    nameLocal = widget.studentAccount?.name;
+    middleNameLocal = widget.studentAccount?.middleName;
+    lastNameLocal = widget.studentAccount?.lastName;
+    accountIDLocal = widget.studentAccount?.accountID;
+    schoolSectionLocal = widget.studentAccount?.schoolSection;
+    schoolYearLocal = widget.studentAccount?.schoolYear;
+    birthdateLocal = widget.studentAccount?.birthdate;
+    departmentLocal = widget.studentAccount?.department;
+    passwordLocal = widget.studentAccount?.password;
+    studentIndexLocal = widget.studentIndex;
+    _textusernameController.text = usernameLocal ?? "";
+    _textnameController.text = nameLocal ?? "";
+    _textmiddleNameController.text = middleNameLocal ?? "";
+    _textlastNameController.text = lastNameLocal ?? "";
+    _textaccountIDController.text = accountIDLocal ?? "";
+    _textschoolSectionController.text = schoolSectionLocal ?? "";
+    _textschoolYearController.text = schoolYearLocal ?? "";
+    _textdepartmentController.text = departmentLocal ?? "";
+    _textpasswordController.text = passwordLocal ?? "";
+    _textBirthdateController.text = birthdateLocal ?? "";
   }
 
   @override
   Widget build(BuildContext context) {
-    studentIndex = widget.studentIndex;
-    username = widget.studentAccount?.userName ?? '';
-    name = widget.studentAccount?.name ?? '';
-    middleName = widget.studentAccount?.middleName ?? '';
-    lastName = widget.studentAccount?.lastName ?? '';
-    accountID = widget.studentAccount?.accountID ?? '';
-    schoolSection = widget.studentAccount?.schoolSection ?? '';
-    schoolYear = widget.studentAccount?.schoolYear ?? '';
-    birthdate = widget.studentAccount?.birthdate ?? '';
-    department = widget.studentAccount?.department ?? '';
-    password = widget.studentAccount?.password ?? '';
-    TextEditingController textusernameController = TextEditingController()
-      ..text = username ?? "";
-    TextEditingController textnameController = TextEditingController()
-      ..text = name ?? "";
-    TextEditingController textmiddleNameController = TextEditingController()
-      ..text = middleName ?? "";
-    TextEditingController textlastNameController = TextEditingController()
-      ..text = lastName ?? "";
-    TextEditingController textaccountIDController = TextEditingController()
-      ..text = accountID ?? "";
-    TextEditingController textschoolSectionController = TextEditingController()
-      ..text = schoolSection ?? "";
-    TextEditingController textschoolYearController = TextEditingController()
-      ..text = schoolYear ?? "";
-    TextEditingController textdepartmentController = TextEditingController()
-      ..text = department ?? "";
-    TextEditingController textpasswordController = TextEditingController()
-      ..text = password ?? "";
-    TextEditingController textBirthdateController = TextEditingController()
-      ..text = birthdate ?? "";
-    @override
-    void initState() {
-      super.initState();
-      textusernameController.addListener(() {
-        setState(() {
-          username = textusernameController.text;
-        });
-      });
-      textnameController.addListener(() {
-        setState(() {
-          name = textnameController.text;
-        });
-      });
-      textmiddleNameController.addListener(() {
-        setState(() {
-          middleName = textmiddleNameController.text;
-        });
-      });
-      textlastNameController.addListener(() {
-        setState(() {
-          lastName = textlastNameController.text;
-        });
-      });
-      textaccountIDController.addListener(() {
-        setState(() {
-          accountID = textaccountIDController.text;
-        });
-      });
-      textschoolSectionController.addListener(() {
-        setState(() {
-          schoolSection = textschoolSectionController.text;
-        });
-      });
-      textschoolYearController.addListener(() {
-        setState(() {
-          schoolYear = textschoolYearController.text;
-        });
-      });
-      textdepartmentController.addListener(() {
-        setState(() {
-          department = textdepartmentController.text;
-        });
-      });
-      textpasswordController.addListener(() {
-        setState(() {
-          password = textpasswordController.text;
-        });
-      });
-      textBirthdateController.addListener(() {
-        setState(() {
-          birthdate = textBirthdateController.text;
-        });
-      });
-    }
+    // TextEditingController _textusernameController = TextEditingController()
+    //   ..text = username!;
+    // TextEditingController _textnameController = TextEditingController()
+    //   ..text = name!;
+    // TextEditingController _textmiddleNameController = TextEditingController()
+    //   ..text = middleName!;
+    // TextEditingController _textlastNameController = TextEditingController()
+    //   ..text = lastName!;
+    // TextEditingController _textaccountIDController = TextEditingController()
+    //   ..text = accountID!;
+    // TextEditingController _textschoolSectionController = TextEditingController()
+    //   ..text = schoolSection!;
+    // TextEditingController _textschoolYearController = TextEditingController()
+    //   ..text = schoolYear!;
+    // TextEditingController _textdepartmentController = TextEditingController()
+    //   ..text = department!;
+    // TextEditingController _textpasswordController = TextEditingController()
+    //   ..text = password!;
+    // TextEditingController _textBirthdateController = TextEditingController()
+    //   ..text = birthdate!;
 
-    @override
-    void dispose() {
-      textusernameController.dispose();
-      textnameController.dispose();
-      textmiddleNameController.dispose();
-      textlastNameController.dispose();
-      textaccountIDController.dispose();
-      textschoolSectionController.dispose();
-      textschoolYearController.dispose();
-      textdepartmentController.dispose();
-      textpasswordController.dispose();
-      textBirthdateController.dispose();
-      super.dispose();
-    }
+    // @override
+    // void initState() {
+    //   super.initState();
+    //   _textusernameController.addListener(() {
+    //     setState(() {
+    //       username = _textusernameController.text;
+    //     });
+    //   });
+    //   _textnameController.addListener(() {
+    //     setState(() {
+    //       name = _textnameController.text;
+    //     });
+    //   });
+    //   _textmiddleNameController.addListener(() {
+    //     setState(() {
+    //       middleName = _textmiddleNameController.text;
+    //     });
+    //   });
+    //   _textlastNameController.addListener(() {
+    //     setState(() {
+    //       lastName = _textlastNameController.text;
+    //     });
+    //   });
+    //   _textaccountIDController.addListener(() {
+    //     setState(() {
+    //       accountID = _textaccountIDController.text;
+    //     });
+    //   });
+    //   _textschoolSectionController.addListener(() {
+    //     setState(() {
+    //       schoolSection = _textschoolSectionController.text;
+    //     });
+    //   });
+    //   _textschoolYearController.addListener(() {
+    //     setState(() {
+    //       schoolYear = _textschoolYearController.text;
+    //     });
+    //   });
+    //   _textdepartmentController.addListener(() {
+    //     setState(() {
+    //       department = _textdepartmentController.text;
+    //     });
+    //   });
+    //   _textpasswordController.addListener(() {
+    //     setState(() {
+    //       password = _textpasswordController.text;
+    //     });
+    //   });
+    //   _textBirthdateController.addListener(() {
+    //     setState(() {
+    //       birthdate = _textBirthdateController.text;
+    //     });
+    //   });
+    // }
+
+    // @override
+    // void dispose() {
+    //   _textusernameController.dispose();
+    //   _textnameController.dispose();
+    //   _textmiddleNameController.dispose();
+    //   _textlastNameController.dispose();
+    //   _textaccountIDController.dispose();
+    //   _textschoolSectionController.dispose();
+    //   _textschoolYearController.dispose();
+    //   _textdepartmentController.dispose();
+    //   _textpasswordController.dispose();
+    //   _textBirthdateController.dispose();
+    //   super.dispose();
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -185,7 +217,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      controller: textusernameController,
+                      autofocus: true,
+                      //initialValue: usernameLocal,
+                      controller: _textusernameController,
                       style: AppTextStyles.textFields,
                       decoration: const InputDecoration(
                         contentPadding:
@@ -198,9 +232,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                         ),
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          username = textusernameController.text;
-                        });
+                        //setState(() {
+                          usernameLocal = _textusernameController.value.text;
+                        //});
                       },
                       validator: (String? value) {
                         if (value == null || value.trim().isEmpty) {
@@ -243,7 +277,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextFormField(
-                            controller: textnameController,
+                            autofocus: true,
+                            //initialValue: nameLocal,
+                            controller: _textnameController,
                             style: AppTextStyles.textFields,
                             decoration: const InputDecoration(
                               contentPadding:
@@ -257,9 +293,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                                name = value;
-                              });
+                              //setState(() {
+                                nameLocal = _textnameController.value.text;
+                              //});
                             },
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
@@ -281,7 +317,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextFormField(
-                            controller: textmiddleNameController,
+                            autofocus: true,
+                            //initialValue: middleNameLocal,
+                            controller: _textmiddleNameController,
                             style: AppTextStyles.textFields,
                             decoration: const InputDecoration(
                               contentPadding:
@@ -295,9 +333,10 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                                middleName = value;
-                              });
+                              //setState(() {
+                                middleNameLocal =
+                                    _textmiddleNameController.value.text;
+                              //});
                             },
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
@@ -343,7 +382,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextFormField(
-                            controller: textlastNameController,
+                            autofocus: true,
+                            //initialValue: lastNameLocal,
+                            controller: _textlastNameController,
                             style: AppTextStyles.textFields,
                             decoration: const InputDecoration(
                               contentPadding:
@@ -357,9 +398,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                                lastName = value;
-                              });
+                              //setState(() {
+                                lastNameLocal = _textnameController.value.text;
+                              //});
                             },
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
@@ -381,7 +422,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextFormField(
-                            controller: textaccountIDController,
+                            autofocus: true,
+                            //initialValue: accountIDLocal,
+                            controller: _textaccountIDController,
                             style: AppTextStyles.textFields,
                             decoration: const InputDecoration(
                               contentPadding:
@@ -395,9 +438,10 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                                accountID = value;
-                              });
+                              //setState(() {
+                                accountIDLocal =
+                                    _textaccountIDController.value.text;
+                              //});
                             },
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
@@ -432,7 +476,6 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      readOnly: true,
                       onTap: () {
                         DatePicker.showDatePicker(context,
                             showTitleActions: true,
@@ -445,11 +488,12 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             var dateTime = DateTime.parse(date.toString());
                             var formate1 =
                                 "${dateTime.day}-${dateTime.month}-${dateTime.year}";
-                            textBirthdateController.text = formate1;
+                            _textBirthdateController.text = formate1;
                           });
                         }, currentTime: DateTime.now(), locale: LocaleType.en);
                       },
-                      controller: textBirthdateController,
+                      controller: _textBirthdateController,
+                      //initialValue: birthdateLocal,
                       style: AppTextStyles.textFields,
                       decoration: InputDecoration(
                         contentPadding:
@@ -506,7 +550,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextFormField(
-                            controller: textschoolYearController,
+                            autofocus: true,
+                            //initialValue: schoolYearLocal,
+                            controller: _textschoolYearController,
                             style: AppTextStyles.textFields,
                             decoration: const InputDecoration(
                               contentPadding:
@@ -521,9 +567,10 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                                schoolYear = value;
-                              });
+                              //setState(() {
+                                schoolYearLocal =
+                                    _textschoolYearController.value.text;
+                              //});
                             },
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
@@ -545,7 +592,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextFormField(
-                            controller: textschoolSectionController,
+                            autofocus: true,
+                            //initialValue: schoolSectionLocal,
+                            controller: _textschoolSectionController,
                             style: AppTextStyles.textFields,
                             decoration: const InputDecoration(
                               contentPadding:
@@ -560,9 +609,10 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                                schoolSection = value;
-                              });
+                              //setState(() {
+                                schoolSectionLocal =
+                                    _textschoolSectionController.value.text;
+                              //});
                             },
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
@@ -646,7 +696,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      controller: textpasswordController,
+                      autofocus: true,
+                      //initialValue: passwordLocal,
+                      controller: _textpasswordController,
                       obscureText: !_isObscure,
                       style: AppTextStyles.textFields,
                       decoration: InputDecoration(
@@ -669,14 +721,14 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                               size: 20,
                             ),
                             onPressed: () {
-                              setState(() {
+                              //setState(() {
                                 _isObscure = !_isObscure;
-                              });
+                              //});
                             }),
                       ),
                       onChanged: (value) {
                         setState(() {
-                          password = value;
+                          passwordLocal = _textpasswordController.value.text;
                         });
                       },
                       validator: (String? value) {
@@ -687,6 +739,7 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       },
                     ),
                   ),
+                  
                   SizedBox(
                     height: 10,
                   ),
@@ -726,7 +779,9 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          saveStudent();
+                          birthdateLocal = _textBirthdateController.value.text;
+                          print("Birthday: $birthdateLocal");
+                          saveStudent(studentIndexLocal!);
                           userCredential.setUsername("");
                           userCredential.setName("");
                           userCredential.setDepartment("");
@@ -770,23 +825,24 @@ class _EditProfilePageStudentState extends State<EditProfilePageStudent> {
     );
   }
 
-  void saveStudent() {
+  void saveStudent(int studInd) {
+    print("Student Index: " + studInd.toString());
+    int index = studInd;
     Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
     studentBox.putAt(
-        studentIndex!,
+        index,
         Student(
-          userName: username,
-          name: name,
-          middleName: middleName,
-          lastName: lastName,
-          accountID: accountID,
-          schoolSection: schoolSection,
-          schoolYear: schoolYear,
-          birthdate: birthdate,
-          department: department,
-          password: password,
+          userName: usernameLocal ?? "",
+          name: nameLocal ?? "",
+          middleName: middleNameLocal ?? "",
+          lastName: lastNameLocal ?? "",
+          accountID: accountIDLocal ?? "",
+          schoolSection: schoolSectionLocal ?? "",
+          schoolYear: schoolYearLocal ?? "",
+          birthdate: birthdateLocal ?? "",
+          department: departmentLocal ?? "",
+          password: passwordLocal ?? "",
         ));
     print("User Profile has been saved!");
-    Navigator.push(context, MaterialPageRoute(builder: (context) => NavBar()));
   }
 }
