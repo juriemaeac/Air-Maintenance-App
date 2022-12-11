@@ -15,6 +15,7 @@ import 'package:airapp/pdfMaintenanceTask/maintenance_pdf_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:airapp/authentication/login.dart';
 
 class RecordPage extends StatefulWidget {
   const RecordPage({super.key});
@@ -28,10 +29,52 @@ class _RecordPageState extends State<RecordPage> {
   bool isInspection = false;
 
   bool isSearching = false;
-  int? searchID;
+  String? searchID;
   bool? isEnabled = true;
   int? searchCount = 1;
   int? counter = 0;
+  String? userType = "Student";
+  int? taskRec = 0;
+  int? inspRec = 0;
+
+  void authenticateUser(String uID) {
+    int countTask = 0;
+    int countInsp = 0;
+    String? userID = uID;
+    Box<Student> studentBox = Hive.box<Student>(HiveBoxesStudent.student);
+    Box<Instructor> instructorBox =
+        Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    Box<ScheduledInspection> inspectionBox =
+        Hive.box<ScheduledInspection>(HiveBoxesInspection.inspection);
+    Box<MaintenanceTask> maintenanceBox =
+        Hive.box<MaintenanceTask>(HiveBoxesMaintenance.maintenance);
+    for (var students in studentBox.values) {
+      if (students.accountID == userID) {
+        userType = "Student";
+        print("User is a Student!");
+        isSearching = true;
+      }
+    }
+    for (var recs in inspectionBox.values) {
+      if (recs.accountID == userID) {
+        countInsp += 1;
+      }
+    }
+    for (var recs in maintenanceBox.values) {
+      if (recs.accountID == userID) {
+        countTask += 1;
+      }
+    }
+    taskRec = countTask;
+    inspRec = countInsp;
+    // for (var instructors in instructorBox.values) {
+    //   if (instructors.accountID == userID) {
+    //     userType = "Instructor";
+    //     print("User is an Instructor!");
+    //     isSearching = false;
+    //   }
+    // }
+  }
 
   @override
   void initState() {
@@ -40,6 +83,8 @@ class _RecordPageState extends State<RecordPage> {
     Hive.openBox<ScheduledInspection>(HiveBoxesInspection.inspection);
     Hive.openBox<Student>(HiveBoxesStudent.student);
     Hive.openBox<Instructor>(HiveBoxesInstructor.instructor);
+    searchID = userCredential.accountID;
+    authenticateUser(searchID!);
     //var user = studentCredential.getString();
     // isEnabled = true;
     // if (user == '') {
@@ -151,6 +196,7 @@ class _RecordPageState extends State<RecordPage> {
   }
 
   Widget _buildInspectionRecords() {
+    authenticateUser(searchID!);
     return Container(
       //color: Colors.red,
       //height: MediaQuery.of(context).size.height - 300,
@@ -170,7 +216,7 @@ class _RecordPageState extends State<RecordPage> {
                   Hive.box<ScheduledInspection>(HiveBoxesInspection.inspection)
                       .listenable(),
               builder: (context, Box<ScheduledInspection> box, _) {
-                if (box.values.isEmpty) {
+                if (box.values.isEmpty || inspRec! <= 0) {
                   return Container(
                       height: MediaQuery.of(context).size.height - 300,
                       child: Center(
@@ -182,7 +228,7 @@ class _RecordPageState extends State<RecordPage> {
                 return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 229,
+                    height: MediaQuery.of(context).size.height - 240,
                     //color: Colors.blue,
                     child: ListView.builder(
                       shrinkWrap: true,
@@ -365,6 +411,7 @@ class _RecordPageState extends State<RecordPage> {
   }
 
   Widget _buildMaintenanceRecords() {
+    authenticateUser(searchID!);
     return Container(
       //color: Colors.red,
       //height: MediaQuery.of(context).size.height - 300,
@@ -384,7 +431,7 @@ class _RecordPageState extends State<RecordPage> {
                   Hive.box<MaintenanceTask>(HiveBoxesMaintenance.maintenance)
                       .listenable(),
               builder: (context, Box<MaintenanceTask> box, _) {
-                if (box.values.isEmpty) {
+                if (box.values.isEmpty || taskRec! <= 0) {
                   return Container(
                       height: MediaQuery.of(context).size.height - 300,
                       child: Center(
@@ -396,7 +443,7 @@ class _RecordPageState extends State<RecordPage> {
                 return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 229,
+                    height: MediaQuery.of(context).size.height - 240,
                     //color: Colors.blue,
                     child: ListView.builder(
                       shrinkWrap: true,

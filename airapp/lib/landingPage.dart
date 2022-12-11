@@ -48,10 +48,8 @@ class LandingPage extends StatelessWidget {
                               color: AppColors.yellowAccent,
                               shape: BoxShape.circle,
                             ),
-                            child: SvgPicture.asset(
-                              'assets/images/aeSVG.svg',
-                              color: AppColors.blueAccent,
-                            ),
+                            child:
+                                Image(image: AssetImage('assets/images/1.png')),
                           ),
                         ],
                       ),

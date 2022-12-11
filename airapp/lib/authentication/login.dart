@@ -139,15 +139,14 @@ class _LoginPageState extends State<LoginPage> {
                           // ),
                           Center(
                             child: Container(
-                              height: 70,
+                              height: 120,
                               decoration: const BoxDecoration(
-                                color: AppColors.blueAccent,
+                                color:
+                                    Colors.transparent, //AppColors.blueAccent,
                                 shape: BoxShape.circle,
                               ),
-                              child: SvgPicture.asset(
-                                'assets/images/aeSVG.svg',
-                                color: AppColors.yellowAccent,
-                              ),
+                              child: Image(
+                                  image: AssetImage('assets/images/3.png')),
                             ),
                           ),
                           const SizedBox(

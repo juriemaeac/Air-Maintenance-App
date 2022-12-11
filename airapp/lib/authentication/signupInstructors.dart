@@ -79,15 +79,12 @@ class _SignupInstructorState extends State<SignupInstructor> {
               children: [
                 Center(
                   child: Container(
-                    height: 70,
+                    height: 90,
                     decoration: BoxDecoration(
-                      color: AppColors.yellowAccent,
+                      color: Colors.transparent, //AppColors.yellowAccent,
                       shape: BoxShape.circle,
                     ),
-                    child: SvgPicture.asset(
-                      'assets/images/aeSVG.svg',
-                      color: AppColors.blueAccent,
-                    ),
+                    child: Image(image: AssetImage('assets/images/3.png')),
                   ),
                   // Container(
                   //   width: MediaQuery.of(context).size.width / 2,
@@ -96,9 +93,6 @@ class _SignupInstructorState extends State<SignupInstructor> {
                   //     image: AssetImage('assets/images/airapp_logo.png'),
                   //   ),
                   // ),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 Text(
                   'Create new account',

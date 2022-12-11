@@ -93,15 +93,12 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 Center(
                   child: Container(
-                    height: 70,
+                    height: 90,
                     decoration: BoxDecoration(
-                      color: AppColors.blueAccent,
+                      color: Colors.transparent, //AppColors.blueAccent,
                       shape: BoxShape.circle,
                     ),
-                    child: SvgPicture.asset(
-                      'assets/images/aeSVG.svg',
-                      color: AppColors.yellowAccent,
-                    ),
+                    child: Image(image: AssetImage('assets/images/3.png')),
                   ),
                   // Container(
                   //   width: MediaQuery.of(context).size.width / 2,
@@ -110,9 +107,6 @@ class _SignupPageState extends State<SignupPage> {
                   //     image: AssetImage('assets/images/airapp_logo.png'),
                   //   ),
                   // ),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 Text(
                   'Create new account',

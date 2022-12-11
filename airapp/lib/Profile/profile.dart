@@ -66,16 +66,6 @@ class _ProfilePageState extends State<ProfilePage> {
         userType = "Student";
         print("User is a Student!");
         isVisible = true;
-        for (var recs in inspectionBox.values) {
-          if (recs.accountID == userAccountID) {
-            countInsp += 1;
-          }
-        }
-        for (var recs in maintenanceBox.values) {
-          if (recs.accountID == userAccountID) {
-            countTask += 1;
-          }
-        }
       }
     }
     for (var instructors in instructorBox.values) {
@@ -83,16 +73,16 @@ class _ProfilePageState extends State<ProfilePage> {
         userType = "Instructor";
         print("User is an Instructor!");
         isVisible = false;
-        for (var recs in inspectionBox.values) {
-          if (recs.accountID == userAccountID) {
-            countInsp += 1;
-          }
-        }
-        for (var recs in maintenanceBox.values) {
-          if (recs.accountID == userAccountID) {
-            countTask += 1;
-          }
-        }
+      }
+    }
+    for (var recs in inspectionBox.values) {
+      if (recs.accountID == userAccountID) {
+        countInsp += 1;
+      }
+    }
+    for (var recs in maintenanceBox.values) {
+      if (recs.accountID == userAccountID) {
+        countTask += 1;
       }
     }
     taskRec = countTask;
@@ -423,7 +413,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Colors.transparent),
                               ),
                               child: Container(
-                                width: MediaQuery.of(context).size.width / 3.5,
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -438,7 +428,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Text('Edit Profile',
                                         style: TextStyle(
                                           color: AppColors.white,
-                                          fontSize: 15,
+                                          fontSize: 13,
                                         )),
                                   ],
                                 ),
@@ -477,7 +467,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Colors.transparent),
                               ),
                               child: Container(
-                                width: MediaQuery.of(context).size.width / 3.5,
+                                width: MediaQuery.of(context).size.width / 4,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -492,7 +482,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Text('Logout',
                                         style: TextStyle(
                                           color: AppColors.white,
-                                          fontSize: 15,
+                                          fontSize: 13,
                                         )),
                                   ],
                                 ),

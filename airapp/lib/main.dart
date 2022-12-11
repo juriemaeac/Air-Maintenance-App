@@ -13,6 +13,7 @@ import 'boxes/boxInspection.dart';
 import 'database/maintenanceTask_model.dart';
 import 'database/scheduledInspection_model.dart';
 import 'database/student_model.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +41,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: LandingPage(),
+      home: AnimatedSplashScreen(
+        splash: Image.asset(
+          'assets/images/3.png',
+        ),
+        nextScreen: LandingPage(),
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: Colors.white,
+        duration: 2000,
+      ), //LandingPage(),
     );
   }
 }
