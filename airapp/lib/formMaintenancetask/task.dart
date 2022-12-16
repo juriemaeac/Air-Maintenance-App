@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:airapp/boxes/boxMaintenance.dart';
 import 'package:airapp/database/maintenanceTask_model.dart';
 import 'package:airapp/formMaintenancetask/taskCardA.dart';
@@ -6,6 +8,7 @@ import 'package:airapp/manualList.dart';
 import 'package:flutter/material.dart';
 import 'package:airapp/authentication/login.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:signature/signature.dart';
 
 import '../constants.dart';
 import '../navBar.dart';
@@ -19,6 +22,21 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Uint8List? exportedImageStudent;
+  Uint8List? exportedImageInstructor;
+
+  SignatureController studentSignature = SignatureController(
+    penStrokeWidth: 3,
+    penColor: Colors.red,
+    exportBackgroundColor: Colors.yellowAccent,
+  );
+
+  SignatureController instructorSignature = SignatureController(
+    penStrokeWidth: 3,
+    penColor: Colors.red,
+    exportBackgroundColor: Colors.yellowAccent,
+  );
   String? accountID = "n/a";
   String? maintenanceDate = "n/a";
   String? taskCardNumber = "n/a";
@@ -629,10 +647,83 @@ class _TaskState extends State<Task> {
                       solution: _updateSection66,
                       result: _updateSection67,
                     ),
+                    Text('Student Signature:', style: AppTextStyles.title),
+                    Signature(
+                      controller: studentSignature,
+                      width: 350,
+                      height: 200,
+                      backgroundColor: Colors.lightBlue[100]!,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  studentSignature.clear();
+                                },
+                                child: const Text(
+                                  "Clear",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: BorderSide(
+                                                color: Colors.red)))))),
+                      ],
+                    ),
+                    Text(
+                      "Instructor Signature:",
+                      style: AppTextStyles.title,
+                    ),
+                    Signature(
+                      controller: instructorSignature,
+                      width: 350,
+                      height: 200,
+                      backgroundColor: Colors.lightBlue[100]!,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  instructorSignature.clear();
+                                },
+                                child: const Text(
+                                  "Clear",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: BorderSide(
+                                                color: Colors.red)))))),
+                      ],
+                    ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
+                          exportedImageStudent =
+                              await studentSignature.toPngBytes();
+                          exportedImageInstructor =
+                              await instructorSignature.toPngBytes();
 
                           showDialog(
                               context: context,
@@ -1718,6 +1809,32 @@ class _TaskState extends State<Task> {
                                           SizedBox(
                                             height: 15,
                                           ),
+                                          Text(
+                                            "Student Signature:",
+                                            style: AppTextStyles.subtitle2,
+                                          ),
+                                          if (exportedImageStudent != null)
+                                            Image.memory(
+                                              exportedImageStudent!,
+                                              // width: 300,
+                                              // height: 250,
+                                            ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Text(
+                                            "Instructor Signature:",
+                                            style: AppTextStyles.subtitle2,
+                                          ),
+                                          if (exportedImageInstructor != null)
+                                            Image.memory(
+                                              exportedImageInstructor!,
+                                              // width: 300,
+                                              // height: 250,
+                                            ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
@@ -1742,6 +1859,7 @@ class _TaskState extends State<Task> {
                                                               .blueAccent),
                                                 ),
                                                 onPressed: () {
+                                                  //insert signature upload to storage
                                                   saveForm();
                                                   Navigator.push(
                                                       context,

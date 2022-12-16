@@ -37,7 +37,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_datetime_picker: ^1.5.1
-  
   flutter_pdfview: ^1.2.5
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
@@ -52,11 +51,12 @@ dependencies:
   path: ^1.8.2
   path_provider: ^2.0.11
   pdf: ^3.8.4
+  signature: ^5.3.0
   table_calendar: ^3.0.8
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.11.0
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
