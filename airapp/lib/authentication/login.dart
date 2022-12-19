@@ -76,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
           userCredential.setSchoolSection(uss);
           userCredential.setBirthdate(ubd);
           userCredential.setNameInitial(firstLetter);
+          userCredential.setIsUserStudent(true);
           userAuthenticated = true;
           Navigator.push(
             context,
@@ -99,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
           userCredential.setDepartment(udept);
           userCredential.setAccountID(uaccountID);
           userCredential.setNameInitial(firstLetter);
+          userCredential.setIsUserStudent(false);
           userAuthenticated = true;
           Navigator.push(
             context,
@@ -333,6 +335,22 @@ class userCredential {
   static String birthdate = 'n/a';
   static String nameInitial = 'n/a';
 
+  static String instructorID = 'n/a';
+  static String instructorName = 'Instructor';
+  static bool isUserStudent = true;
+
+  static bool getIsUserStudent() {
+    return isUserStudent;
+  }
+
+  static String getInstructorName() {
+    return instructorName;
+  }
+
+  static String getInstructorID() {
+    return instructorID;
+  }
+
   static String getNameInitial() {
     return nameInitial;
   }
@@ -403,5 +421,20 @@ class userCredential {
   static void setBirthdate(String value) {
     birthdate = value;
     print("Birthdate: " + birthdate);
+  }
+
+  static void setInstructorID(String value) {
+    instructorID = value;
+    print("Instructor ID: " + instructorID);
+  }
+
+  static void setInstructorName(String value) {
+    instructorName = value;
+    print("Instructor Name: " + instructorName);
+  }
+
+  static void setIsUserStudent(bool value) {
+    isUserStudent = value;
+    print("Is User Student:" + isUserStudent.toString());
   }
 }

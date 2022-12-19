@@ -31,7 +31,8 @@ class _RecordPageState extends State<RecordPage> {
   bool isSearching = false;
   String? searchID;
   bool? isEnabled = true;
-  int? searchCount = 1;
+  int? searchCountTask = 1;
+  int? searchCountInspection = 1;
   int? counter = 0;
   String? userType = "Student";
   int? taskRec = 0;
@@ -52,7 +53,7 @@ class _RecordPageState extends State<RecordPage> {
       if (students.accountID == userID) {
         userType = "Student";
         print("User is a Student!");
-        isSearching = true;
+        isSearching = true; //uncomment dis after
       }
     }
     for (var recs in inspectionBox.values) {
@@ -67,6 +68,8 @@ class _RecordPageState extends State<RecordPage> {
     }
     taskRec = countTask;
     inspRec = countInsp;
+    searchCountTask = countTask;
+    searchCountInspection = countInsp;
     // for (var instructors in instructorBox.values) {
     //   if (instructors.accountID == userID) {
     //     userType = "Instructor";
@@ -233,7 +236,9 @@ class _RecordPageState extends State<RecordPage> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: isSearching ? searchCount : box.values.length,
+                      itemCount: isSearching
+                          ? searchCountInspection
+                          : box.values.length,
                       itemBuilder: (context, index) {
                         int reverseIndex = box.length - 1 - index;
                         final ScheduledInspection? res = isSearching
@@ -450,7 +455,8 @@ class _RecordPageState extends State<RecordPage> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: isSearching ? searchCount : box.values.length,
+                      itemCount:
+                          isSearching ? searchCountTask : box.values.length,
                       itemBuilder: (context, index) {
                         int reverseIndex = box.length - 1 - index;
                         final MaintenanceTask? res = isSearching

@@ -2,10 +2,17 @@ import 'dart:io';
 import 'package:airapp/database/maintenanceTask_model.dart';
 import 'package:airapp/pdfMaintenanceTask/maintenance_pdf_api.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
+import 'package:airapp/authentication/login.dart';
+
+import '../boxes/boxInstructor.dart';
+import '../database/instructor_model.dart';
 
 class PdfMaintenanceApi {
   //
@@ -15,6 +22,16 @@ class PdfMaintenanceApi {
         await rootBundle.loadString('assets/images/avionicsLogo.svg');
     final imageSchool =
         await rootBundle.loadString('assets/images/philscaLogo.svg');
+
+    Uint8List? studentSig = maintenance.studentSignature;
+    Uint8List? instructorSig = maintenance.instructorSignature;
+
+    final imageStudent = pw.MemoryImage(studentSig!);
+    final imageInstructor = pw.MemoryImage(instructorSig!);
+    final instructorID = userCredential.instructorID;
+    final isUserStudent = userCredential.isUserStudent;
+    final String instructorName = userCredential.instructorName.toString();
+    final String studentName = userCredential.name.toString();
 
     getRating(String rating) {
       String equivRating = "";
@@ -35,6 +52,12 @@ class PdfMaintenanceApi {
     String a5 = getRating(maintenance.findingsA5 ?? "");
     String a6 = getRating(maintenance.findingsA6 ?? "");
 
+    //SvgPicture imageStudent =
+    //    SvgPicture.memory(studentSig!, width: 60, height: 60);
+    //SvgPicture? imageInstructor =
+    //    SvgPicture.memory(instructorSig!, width: 60, height: 60);
+    // print('AVIONICS' + imageAvionics + '\n\n');
+    // print('INSTRUCTOR' + instructorSig.toString() + '\n\n');
     pdf.addPage(
       MultiPage(
         header: (context) {
@@ -46,6 +69,7 @@ class PdfMaintenanceApi {
                 children: [
                   SvgImage(svg: imageSchool, width: 50, height: 50),
                   pw.SizedBox(width: 30),
+                  //imageStudent,
                   pw.Column(children: [
                     pw.Text(
                       'Republic of the Philippines\nPhilippine State College of Aeronautics',
@@ -881,6 +905,66 @@ class PdfMaintenanceApi {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline)),
+                ],
+              ),
+              pw.SizedBox(height: 30),
+              pw.Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  isUserStudent
+                      ? pw.Container(
+                          height: 120,
+                          width: 180,
+                          child: pw.Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                pw.Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      pw.Text('Prepared by:'),
+                                    ]),
+                                pw.Column(children: [
+                                  pw.Image(imageStudent, width: 50, height: 50),
+                                  Divider(
+                                    thickness: 1,
+                                  ),
+                                  pw.Text(studentName,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  pw.Text(
+                                    'Student',
+                                  ),
+                                ]),
+                              ]),
+                        )
+                      : pw.Container(),
+                  pw.Container(
+                    height: 120,
+                    width: 180,
+                    child: pw.Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          pw.Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                pw.Text('Verified by:'),
+                              ]),
+                          pw.Column(children: [
+                            pw.Image(imageInstructor, width: 50, height: 50),
+                            Divider(
+                              thickness: 1,
+                            ),
+                            pw.Text(instructorName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            pw.Text(
+                              'Instructor',
+                            ),
+                          ]),
+                        ]),
+                  ),
                 ],
               ),
             ],

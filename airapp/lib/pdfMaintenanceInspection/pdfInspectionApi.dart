@@ -1,12 +1,27 @@
 import 'dart:io';
 import 'package:airapp/database/scheduledInspection_model.dart';
 import 'package:airapp/pdfMaintenanceInspection/inspection_pdf_api.dart';
+import 'package:hive/hive.dart';
 import 'package:pdf/pdf.dart';
+import 'dart:typed_data';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
+import 'package:airapp/authentication/login.dart';
+
+import '../boxes/boxInstructor.dart';
+import '../database/instructor_model.dart';
 
 class PdfInspectionApi {
   static Future<File> generate(ScheduledInspection inspection) async {
+    Uint8List? studentSig = inspection.studentSignature;
+    Uint8List? instructorSig = inspection.instructorSignature;
+
+    final imageStudent = pw.MemoryImage(studentSig!);
+    final imageInstructor = pw.MemoryImage(instructorSig!);
+    final instructorID = userCredential.instructorID;
+    final isUserStudent = userCredential.isUserStudent;
+    final String instructorName = userCredential.instructorName.toString();
+    final String studentName = userCredential.name.toString();
     getRating(int rating) {
       String equivRating = "";
       if (rating == 1) {
@@ -537,6 +552,66 @@ class PdfInspectionApi {
                   3: FlexColumnWidth(2),
                 },
                 cellHeight: 35,
+              ),
+              pw.SizedBox(height: 30),
+              pw.Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Container(
+                    height: 120,
+                    width: 180,
+                    child: isUserStudent
+                        ? pw.Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                                pw.Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      pw.Text('Prepared by:'),
+                                    ]),
+                                pw.Column(children: [
+                                  pw.Image(imageStudent, width: 50, height: 50),
+                                  Divider(
+                                    thickness: 1,
+                                  ),
+                                  pw.Text(studentName,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  pw.Text(
+                                    'Student',
+                                  ),
+                                ]),
+                              ])
+                        : pw.Container(),
+                  ),
+                  pw.Container(
+                    height: 120,
+                    width: 180,
+                    child: pw.Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          pw.Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                pw.Text('Verified by:'),
+                              ]),
+                          pw.Column(children: [
+                            pw.Image(imageInstructor, width: 50, height: 50),
+                            Divider(
+                              thickness: 1,
+                            ),
+                            pw.Text(instructorName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            pw.Text(
+                              'Instructor',
+                            ),
+                          ]),
+                        ]),
+                  ),
+                ],
               ),
             ],
           ),

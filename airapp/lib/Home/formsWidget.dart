@@ -1,8 +1,13 @@
+import 'package:airapp/Home/home.dart';
 import 'package:airapp/constants.dart';
 import 'package:airapp/formMaintenancetask/task.dart';
 import 'package:airapp/formMaintenancetask/taskCardA.dart';
 import 'package:airapp/formsInspection/forms.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
+import '../boxes/boxInstructor.dart';
+import '../database/instructor_model.dart';
 
 class FormCard extends StatelessWidget {
   String? title;
@@ -37,7 +42,7 @@ class FormCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 icon!,
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
@@ -49,7 +54,7 @@ class FormCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -60,7 +65,7 @@ class FormCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Aircraft',
                       style: AppTextStyles.subHeadings,
                     ),
@@ -76,7 +81,7 @@ class FormCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_ios_rounded,
                       color: AppColors.greyAccentLine,
                       size: 15,
@@ -86,7 +91,7 @@ class FormCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         ],
@@ -103,21 +108,102 @@ class FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<FormWidget> {
+  bool isInstructorAvailable = false;
+  void getInstructor() {
+    final box = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    int instructorCount = box.length;
+    if (instructorCount > 0) {
+      setState(() {
+        print("Instructor Available");
+        isInstructorAvailable = true;
+      });
+    } else {
+      print("No Instructor Available");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Task(),
-              ),
-            );
+            getInstructor();
+            if (isInstructorAvailable == true) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Task(),
+                ),
+              );
+            } else {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: Colors.red,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                      content: Container(
+                        color: Colors.red,
+                        height: MediaQuery.of(context).size.height / 5.5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                    'No instructor account available on this device. Please register Instructor first before proceeding.',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                    ),
+                                    textAlign: TextAlign.justify),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'OK',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  });
+            }
           },
           child: FormCard(
-            icon: Icon(
+            icon: const Icon(
               Icons.build_rounded,
               color: AppColors.yellowAccent,
               size: 20,
@@ -126,20 +212,87 @@ class _FormWidgetState extends State<FormWidget> {
             subtitle: 'Task Card',
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Forms(),
-              ),
-            );
+            getInstructor();
+            if (isInstructorAvailable == true) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Forms(),
+                ),
+              );
+            } else {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: Colors.red,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0))),
+                      content: Container(
+                        color: Colors.red,
+                        height: MediaQuery.of(context).size.height / 5.5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                    'No instructor account available on this device. Please register Instructor first before proceeding.',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                    ),
+                                    textAlign: TextAlign.justify),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'OK',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  });
+            }
           },
           child: FormCard(
-            icon: Icon(
+            icon: const Icon(
               Icons.content_paste_rounded,
               color: AppColors.yellowAccent,
               size: 20,

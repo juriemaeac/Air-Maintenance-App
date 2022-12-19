@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:airapp/boxes/boxMaintenance.dart';
 import 'package:airapp/database/maintenanceTask_model.dart';
+import 'package:airapp/database/student_model.dart';
 import 'package:airapp/formMaintenancetask/taskCardA.dart';
 import 'package:airapp/formMaintenancetask/taskCardB.dart';
 import 'package:airapp/manualList.dart';
@@ -11,6 +12,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:signature/signature.dart';
 
 import '../boxes/boxInstructor.dart';
+import '../boxes/boxStudent.dart';
 import '../constants.dart';
 import '../database/instructor_model.dart';
 import '../navBar.dart';
@@ -27,6 +29,7 @@ class _TaskState extends State<Task> {
 
   Uint8List? exportedImageStudent;
   Uint8List? exportedImageInstructor;
+  bool isUserStudent = false;
   bool isInstructorAvailable = false;
   bool isInstructorValidated = false;
   bool isSaveEnabled = false;
@@ -375,6 +378,7 @@ class _TaskState extends State<Task> {
     userB = userCredential.name;
     dateA = getDate();
     dateB = getDate();
+    isUserStudent = userCredential.isUserStudent;
     getInstructor();
   }
 
@@ -398,7 +402,11 @@ class _TaskState extends State<Task> {
     for (var instructor in instructorBox.values) {
       if (instructor.accountID == inputID && instructor.password == inputPass) {
         setState(() {
-          print("Instructor Validated");
+          String iName =
+              "${instructor.name.toString()} ${instructor.lastName.toString()}";
+          print("Instructor Validated: " + iName);
+          userCredential.setInstructorID(inputID);
+          userCredential.setInstructorName(iName);
           isInstructorValidated = true;
           isSaveEnabled = true;
         });
@@ -469,7 +477,7 @@ class _TaskState extends State<Task> {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: AppColors.blueAccent,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: Text("Maintenance Task Section A",
                           style: AppTextStyles.headings
@@ -610,7 +618,7 @@ class _TaskState extends State<Task> {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: AppColors.blueAccent,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: Text("Maintenance Task Section B",
                           style: AppTextStyles.headings
@@ -687,38 +695,252 @@ class _TaskState extends State<Task> {
                       solution: _updateSection66,
                       result: _updateSection67,
                     ),
-                    Text('Student Signature:', style: AppTextStyles.title),
-                    Signature(
-                      controller: studentSignature,
-                      width: 350,
-                      height: 200,
-                      backgroundColor: Colors.lightBlue[100]!,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  studentSignature.clear();
-                                },
-                                child: const Text(
-                                  "Clear",
-                                  style: TextStyle(fontSize: 20),
+                    Visibility(
+                      visible: isUserStudent,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Student Signature:',
+                              style: AppTextStyles.title),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 360,
+                            height: 265,
+                            decoration: BoxDecoration(
+                              color: AppColors.greyAccent,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(5),
+                                  child: Signature(
+                                    controller: studentSignature,
+                                    width: 350,
+                                    height: 200,
+                                    backgroundColor: AppColors.greyAccent,
+                                  ),
                                 ),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.blue),
-                                    shape: MaterialStateProperty.all<
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          studentSignature.clear();
+                                        },
+                                        child: const Text(
+                                          "Clear",
+                                          style: AppTextStyles.subHeadings,
+                                        ),
+                                        style: ButtonStyle(
+                                          elevation:
+                                              MaterialStateProperty.all(0),
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.white),
+                                          shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              side: BorderSide(
+                                                  color: Colors.transparent),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Instructor Signature:",
+                          style: AppTextStyles.title,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: 360,
+                          height: 265,
+                          decoration: BoxDecoration(
+                            color: AppColors.greyAccent,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(5),
+                                child: Signature(
+                                  controller: instructorSignature,
+                                  width: 350,
+                                  height: 200,
+                                  backgroundColor: AppColors.greyAccent,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        instructorSignature.clear();
+                                      },
+                                      child: const Text(
+                                        "Clear",
+                                        style: AppTextStyles.subHeadings,
+                                      ),
+                                      style: ButtonStyle(
+                                        elevation: MaterialStateProperty.all(0),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white),
+                                        shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
+                                          RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(18.0),
+                                                BorderRadius.circular(10.0),
                                             side: BorderSide(
-                                                color: Colors.red)))))),
+                                                color: Colors.transparent),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      decoration: BoxDecoration(
+                        color: AppColors.greyAccent,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: TextFormField(
+                        style: AppTextStyles.textFields,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(left: 25, right: 13),
+                          labelText: 'Enter Instructor ID',
+                          labelStyle: AppTextStyles.subHeadings,
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            borderSide: BorderSide(
+                                color: AppColors.blueAccent, width: 2),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            instructorID = value;
+                          });
+                        },
+                        validator: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Required!";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      decoration: BoxDecoration(
+                        color: AppColors.greyAccent,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: TextFormField(
+                        style: AppTextStyles.textFields,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(left: 25, right: 13),
+                          labelText: 'Enter Instructor Password',
+                          labelStyle: AppTextStyles.subHeadings,
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            borderSide: BorderSide(
+                                color: AppColors.blueAccent, width: 2),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            instructorPassword = value;
+                          });
+                        },
+                        validator: (String? value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Required!";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          validateInstructor(
+                              instructorID!, instructorPassword!);
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => NavBar()));
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 40)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              AppColors.blueAccent),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                          elevation: MaterialStateProperty.all(0),
+                          shadowColor: MaterialStateProperty.all<Color>(
+                              Colors.transparent),
+                        ),
+                        child: Text(
+                          'Validate Instructor',
+                          style: AppTextStyles.title
+                              .copyWith(color: AppColors.yellowAccent),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                     Visibility(
                       visible: !isInstructorAvailable,
@@ -727,164 +949,20 @@ class _TaskState extends State<Task> {
                         style: AppTextStyles.subtitle2,
                       ),
                     ),
-                    Visibility(
-                      visible: isInstructorAvailable,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Instructor Signature:",
-                            style: AppTextStyles.title,
-                          ),
-                          Signature(
-                            controller: instructorSignature,
-                            width: 350,
-                            height: 200,
-                            backgroundColor: Colors.lightBlue[100]!,
-                          ),
-                          Container(
-                            height: 50,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              color: AppColors.greyAccent,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: TextFormField(
-                              style: AppTextStyles.textFields,
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.only(left: 25, right: 13),
-                                labelText: 'Enter Instructor ID',
-                                labelStyle: AppTextStyles.subHeadings,
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15.0)),
-                                  borderSide: BorderSide(
-                                      color: AppColors.blueAccent, width: 2),
-                                ),
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  instructorID = value;
-                                });
-                              },
-                              validator: (String? value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return "Required!";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              color: AppColors.greyAccent,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: TextFormField(
-                              style: AppTextStyles.textFields,
-                              decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.only(left: 25, right: 13),
-                                labelText: 'Enter Instructor Password',
-                                labelStyle: AppTextStyles.subHeadings,
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15.0)),
-                                  borderSide: BorderSide(
-                                      color: AppColors.blueAccent, width: 2),
-                                ),
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  instructorPassword = value;
-                                });
-                              },
-                              validator: (String? value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return "Required!";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                validateInstructor(
-                                    instructorID!, instructorPassword!);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => NavBar()));
-                              },
-                              style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 40)),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        AppColors.blueAccent),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                ),
-                                shadowColor: MaterialStateProperty.all<Color>(
-                                    Colors.transparent),
-                              ),
-                              child: Text(
-                                'Validate Instructor',
-                                style: AppTextStyles.title
-                                    .copyWith(color: AppColors.yellowAccent),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  instructorSignature.clear();
-                                },
-                                child: const Text(
-                                  "Clear",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.blue),
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            side: BorderSide(
-                                                color: Colors.red)))))),
-                      ],
+                    SizedBox(
+                      height: 15,
                     ),
                     GestureDetector(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           exportedImageStudent =
-                              await studentSignature.toPngBytes();
+                              await studentSignature.toPngBytes() ??
+                                  await instructorSignature.toPngBytes();
+                          print(exportedImageStudent);
                           exportedImageInstructor =
                               await instructorSignature.toPngBytes();
-
+                          print(exportedImageInstructor);
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -1969,18 +2047,29 @@ class _TaskState extends State<Task> {
                                           SizedBox(
                                             height: 15,
                                           ),
-                                          Text(
-                                            "Student Signature:",
-                                            style: AppTextStyles.subtitle2,
-                                          ),
-                                          if (exportedImageStudent != null)
-                                            Image.memory(
-                                              exportedImageStudent!,
-                                              // width: 300,
-                                              // height: 250,
+                                          Visibility(
+                                            visible: isUserStudent,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Student Signature:",
+                                                  style:
+                                                      AppTextStyles.subtitle2,
+                                                ),
+                                                if (exportedImageStudent !=
+                                                    null)
+                                                  Image.memory(
+                                                    exportedImageStudent!,
+                                                    // width: 300,
+                                                    // height: 250,
+                                                  ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                              ],
                                             ),
-                                          SizedBox(
-                                            height: 15,
                                           ),
                                           Text(
                                             "Instructor Signature:",
@@ -2046,7 +2135,7 @@ class _TaskState extends State<Task> {
                           //margin: const EdgeInsets.only(top: 30),
                           decoration: BoxDecoration(
                             color: AppColors.blueAccent,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
                             child: Text('Save',
