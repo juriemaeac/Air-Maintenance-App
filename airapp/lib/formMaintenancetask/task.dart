@@ -10,7 +10,9 @@ import 'package:airapp/authentication/login.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:signature/signature.dart';
 
+import '../boxes/boxInstructor.dart';
 import '../constants.dart';
+import '../database/instructor_model.dart';
 import '../navBar.dart';
 
 class Task extends StatefulWidget {
@@ -25,17 +27,25 @@ class _TaskState extends State<Task> {
 
   Uint8List? exportedImageStudent;
   Uint8List? exportedImageInstructor;
+  bool isInstructorAvailable = false;
+  bool isInstructorValidated = false;
+  bool isSaveEnabled = false;
+
+  String? instructorID = "n/a";
+  String? instructorPassword = "n/a";
 
   SignatureController studentSignature = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.red,
-    exportBackgroundColor: Colors.yellowAccent,
+    exportPenColor: Colors.black,
+    exportBackgroundColor: Colors.transparent,
   );
 
   SignatureController instructorSignature = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.red,
-    exportBackgroundColor: Colors.yellowAccent,
+    exportPenColor: Colors.black,
+    exportBackgroundColor: Colors.transparent,
   );
   String? accountID = "n/a";
   String? maintenanceDate = "n/a";
@@ -357,6 +367,7 @@ class _TaskState extends State<Task> {
   void initState() {
     super.initState();
     Hive.openBox<MaintenanceTask>(HiveBoxesMaintenance.maintenance);
+    Hive.openBox<Instructor>(HiveBoxesInstructor.instructor);
     accountID = userCredential.accountID;
     maintenanceDate = getDate();
     dateCompletionB = getDate();
@@ -364,6 +375,35 @@ class _TaskState extends State<Task> {
     userB = userCredential.name;
     dateA = getDate();
     dateB = getDate();
+    getInstructor();
+  }
+
+  void getInstructor() {
+    final box = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    int instructorCount = box.length;
+    if (instructorCount > 0) {
+      setState(() {
+        print("Instructor Available");
+        isInstructorAvailable = true;
+      });
+    } else {
+      print("No Instructor Available");
+    }
+  }
+
+  void validateInstructor(String instructorID, String instructorPassword) {
+    String inputID = instructorID;
+    String inputPass = instructorPassword;
+    final instructorBox = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    for (var instructor in instructorBox.values) {
+      if (instructor.accountID == inputID && instructor.password == inputPass) {
+        setState(() {
+          print("Instructor Validated");
+          isInstructorValidated = true;
+          isSaveEnabled = true;
+        });
+      }
+    }
   }
 
   String getDate() {
@@ -680,15 +720,135 @@ class _TaskState extends State<Task> {
                                                 color: Colors.red)))))),
                       ],
                     ),
-                    Text(
-                      "Instructor Signature:",
-                      style: AppTextStyles.title,
+                    Visibility(
+                      visible: !isInstructorAvailable,
+                      child: Text(
+                        "No Instructor Account Available! ",
+                        style: AppTextStyles.subtitle2,
+                      ),
                     ),
-                    Signature(
-                      controller: instructorSignature,
-                      width: 350,
-                      height: 200,
-                      backgroundColor: Colors.lightBlue[100]!,
+                    Visibility(
+                      visible: isInstructorAvailable,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Instructor Signature:",
+                            style: AppTextStyles.title,
+                          ),
+                          Signature(
+                            controller: instructorSignature,
+                            width: 350,
+                            height: 200,
+                            backgroundColor: Colors.lightBlue[100]!,
+                          ),
+                          Container(
+                            height: 50,
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyAccent,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: TextFormField(
+                              style: AppTextStyles.textFields,
+                              decoration: const InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.only(left: 25, right: 13),
+                                labelText: 'Enter Instructor ID',
+                                labelStyle: AppTextStyles.subHeadings,
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
+                                  borderSide: BorderSide(
+                                      color: AppColors.blueAccent, width: 2),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  instructorID = value;
+                                });
+                              },
+                              validator: (String? value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return "Required!";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyAccent,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: TextFormField(
+                              style: AppTextStyles.textFields,
+                              decoration: const InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.only(left: 25, right: 13),
+                                labelText: 'Enter Instructor Password',
+                                labelStyle: AppTextStyles.subHeadings,
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
+                                  borderSide: BorderSide(
+                                      color: AppColors.blueAccent, width: 2),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  instructorPassword = value;
+                                });
+                              },
+                              validator: (String? value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return "Required!";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                validateInstructor(
+                                    instructorID!, instructorPassword!);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => NavBar()));
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                    const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 40)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        AppColors.blueAccent),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                ),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                              ),
+                              child: Text(
+                                'Validate Instructor',
+                                style: AppTextStyles.title
+                                    .copyWith(color: AppColors.yellowAccent),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -1878,18 +2038,21 @@ class _TaskState extends State<Task> {
                               });
                         }
                       },
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        //margin: const EdgeInsets.only(top: 30),
-                        decoration: BoxDecoration(
-                          color: AppColors.blueAccent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text('Save',
-                              style: AppTextStyles.title
-                                  .copyWith(color: AppColors.yellowAccent)),
+                      child: Visibility(
+                        visible: isInstructorValidated,
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          //margin: const EdgeInsets.only(top: 30),
+                          decoration: BoxDecoration(
+                            color: AppColors.blueAccent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text('Save',
+                                style: AppTextStyles.title
+                                    .copyWith(color: AppColors.yellowAccent)),
+                          ),
                         ),
                       ),
                     ),
@@ -1979,6 +2142,9 @@ class _TaskState extends State<Task> {
       findingsLogbook6: findingsLogbook6,
       findingsSolution6: findingsSolution6,
       findingsResult6: findingsResult6,
+//Signatures
+      studentSignature: exportedImageStudent,
+      instructorSignature: exportedImageInstructor,
     ));
   }
 

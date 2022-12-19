@@ -107,13 +107,15 @@ class ScheduledInspectionAdapter extends TypeAdapter<ScheduledInspection> {
       sipB91Initials: fields[82] as String?,
       sipB92Findings: fields[83] as int?,
       sipB92Initials: fields[84] as String?,
+      studentSignature: fields[91] as Uint8List?,
+      instructorSignature: fields[92] as Uint8List?,
     )..id = fields[0] as String?;
   }
 
   @override
   void write(BinaryWriter writer, ScheduledInspection obj) {
     writer
-      ..writeByte(91)
+      ..writeByte(93)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -295,7 +297,11 @@ class ScheduledInspectionAdapter extends TypeAdapter<ScheduledInspection> {
       ..writeByte(89)
       ..write(obj.sipA14Findings)
       ..writeByte(90)
-      ..write(obj.sipA14Initials);
+      ..write(obj.sipA14Initials)
+      ..writeByte(91)
+      ..write(obj.studentSignature)
+      ..writeByte(92)
+      ..write(obj.instructorSignature);
   }
 
   @override

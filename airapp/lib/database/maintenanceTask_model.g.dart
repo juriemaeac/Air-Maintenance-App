@@ -84,13 +84,15 @@ class MaintenanceTaskAdapter extends TypeAdapter<MaintenanceTask> {
       findingsLogbook6: fields[65] as String?,
       findingsSolution6: fields[66] as String?,
       findingsResult6: fields[67] as String?,
+      studentSignature: fields[68] as Uint8List?,
+      instructorSignature: fields[69] as Uint8List?,
     )..id = fields[0] as String?;
   }
 
   @override
   void write(BinaryWriter writer, MaintenanceTask obj) {
     writer
-      ..writeByte(68)
+      ..writeByte(70)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -226,7 +228,11 @@ class MaintenanceTaskAdapter extends TypeAdapter<MaintenanceTask> {
       ..writeByte(66)
       ..write(obj.findingsSolution6)
       ..writeByte(67)
-      ..write(obj.findingsResult6);
+      ..write(obj.findingsResult6)
+      ..writeByte(68)
+      ..write(obj.studentSignature)
+      ..writeByte(69)
+      ..write(obj.instructorSignature);
   }
 
   @override

@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
+import 'dart:typed_data';
 part 'maintenanceTask_model.g.dart';
+
 
 @HiveType(typeId: 3)
 class MaintenanceTask extends HiveObject {
@@ -146,6 +148,12 @@ class MaintenanceTask extends HiveObject {
   String? findingsSolution6;
   @HiveField(67)
   String? findingsResult6;
+  //Student Signature
+  @HiveField(68)
+  Uint8List? studentSignature;
+  //Instructor Signature
+  @HiveField(69)
+  Uint8List? instructorSignature;
 
   MaintenanceTask(
       {
@@ -215,5 +223,8 @@ class MaintenanceTask extends HiveObject {
       required this.findingsB6,
       required this.findingsLogbook6,
       required this.findingsSolution6,
-      required this.findingsResult6});
+      required this.findingsResult6,
+      required this.studentSignature,
+      required this.instructorSignature,
+      });
 }

@@ -344,6 +344,8 @@ class _RecordPageState extends State<RecordPage> {
                                 sipB91Initials: res.sipB91Initials,
                                 sipB92Findings: res.sipB92Findings,
                                 sipB92Initials: res.sipB92Initials,
+                                studentSignature: res.studentSignature,
+                                instructorSignature: res.instructorSignature,
                               );
 
                               final pdfFile =
@@ -537,6 +539,8 @@ class _RecordPageState extends State<RecordPage> {
                                 findingsLogbook6: res.findingsLogbook6,
                                 findingsSolution6: res.findingsSolution6,
                                 findingsResult6: res.findingsResult6,
+                                studentSignature: res.studentSignature,
+                                instructorSignature: res.instructorSignature,
                               );
 
                               final pdfFile =

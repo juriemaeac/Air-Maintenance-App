@@ -12,6 +12,8 @@ import 'package:hive/hive.dart';
 import 'package:signature/signature.dart';
 
 import '../boxes/boxInspection.dart';
+import '../boxes/boxInstructor.dart';
+import '../database/instructor_model.dart';
 import '../database/scheduledInspection_model.dart';
 
 class Forms extends StatefulWidget {
@@ -29,25 +31,63 @@ class _FormsState extends State<Forms> with ChangeNotifier {
 
   Uint8List? exportedImageStudent;
   Uint8List? exportedImageInstructor;
+  bool isInstructorAvailable = false;
+  bool isInstructorValidated = false;
+  bool isSaveEnabled = false;
+
+  String? instructorID = "n/a";
+  String? instructorPassword = "n/a";
 
   SignatureController studentSignature = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.red,
-    exportBackgroundColor: Colors.yellowAccent,
+    exportPenColor: Colors.black,
+    exportBackgroundColor: Colors.transparent,
   );
 
   SignatureController instructorSignature = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.red,
-    exportBackgroundColor: Colors.yellowAccent,
+    exportPenColor: Colors.black,
+    exportBackgroundColor: Colors.transparent,
   );
 
   @override
   void initState() {
     super.initState();
     Hive.openBox<ScheduledInspection>(HiveBoxesInspection.inspection);
+    Hive.openBox<Instructor>(HiveBoxesInstructor.instructor);
     accountID = userCredential.accountID;
     getDate();
+    getInstructor();
+  }
+
+  void getInstructor() {
+    final box = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    int instructorCount = box.length;
+    if (instructorCount > 0) {
+      setState(() {
+        print("Instructor Available");
+        isInstructorAvailable = true;
+      });
+    } else {
+      print("No Instructor Available");
+    }
+  }
+
+  void validateInstructor(String instructorID, String instructorPassword) {
+    String inputID = instructorID;
+    String inputPass = instructorPassword;
+    final instructorBox = Hive.box<Instructor>(HiveBoxesInstructor.instructor);
+    for (var instructor in instructorBox.values) {
+      if (instructor.accountID == inputID && instructor.password == inputPass) {
+        setState(() {
+          print("Instructor Validated");
+          isInstructorValidated = true;
+          isSaveEnabled = true;
+        });
+      }
+    }
   }
 
   void getDate() {
@@ -1034,6 +1074,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                         ],
                       ),
                     ),
+
                     Text('Student Signature:', style: AppTextStyles.title),
                     Signature(
                       controller: studentSignature,
@@ -1067,16 +1108,137 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                                 color: Colors.red)))))),
                       ],
                     ),
-                    Text(
-                      "Instructor Signature:",
-                      style: AppTextStyles.title,
+                    Visibility(
+                      visible: !isInstructorAvailable,
+                      child: Text(
+                        "No Instructor Account Available! ",
+                        style: AppTextStyles.subtitle2,
+                      ),
                     ),
-                    Signature(
-                      controller: instructorSignature,
-                      width: 350,
-                      height: 200,
-                      backgroundColor: Colors.lightBlue[100]!,
+                    Visibility(
+                      visible: isInstructorAvailable,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Instructor Signature:",
+                            style: AppTextStyles.title,
+                          ),
+                          Signature(
+                            controller: instructorSignature,
+                            width: 350,
+                            height: 200,
+                            backgroundColor: Colors.lightBlue[100]!,
+                          ),
+                          Container(
+                            height: 50,
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyAccent,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: TextFormField(
+                              style: AppTextStyles.textFields,
+                              decoration: const InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.only(left: 25, right: 13),
+                                labelText: 'Enter Instructor ID',
+                                labelStyle: AppTextStyles.subHeadings,
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
+                                  borderSide: BorderSide(
+                                      color: AppColors.blueAccent, width: 2),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  instructorID = value;
+                                });
+                              },
+                              validator: (String? value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return "Required!";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyAccent,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: TextFormField(
+                              style: AppTextStyles.textFields,
+                              decoration: const InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.only(left: 25, right: 13),
+                                labelText: 'Enter Instructor Password',
+                                labelStyle: AppTextStyles.subHeadings,
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
+                                  borderSide: BorderSide(
+                                      color: AppColors.blueAccent, width: 2),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  instructorPassword = value;
+                                });
+                              },
+                              validator: (String? value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return "Required!";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                validateInstructor(
+                                    instructorID!, instructorPassword!);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => NavBar()));
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                    const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 40)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        AppColors.blueAccent),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                ),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                              ),
+                              child: Text(
+                                'Validate Instructor',
+                                style: AppTextStyles.title
+                                    .copyWith(color: AppColors.yellowAccent),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -2167,7 +2329,7 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                                             height: 15,
                                           ),
                                           Text(
-                                            "Student Signature:",
+                                            "Student Signature:!!!!!!!!!",
                                             style: AppTextStyles.subtitle2,
                                           ),
                                           if (exportedImageStudent != null)
@@ -2235,18 +2397,21 @@ class _FormsState extends State<Forms> with ChangeNotifier {
                               });
                         }
                       },
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        margin: const EdgeInsets.only(top: 30),
-                        decoration: BoxDecoration(
-                          color: AppColors.blueAccent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text('Save',
-                              style: AppTextStyles.subtitle2
-                                  .copyWith(color: AppColors.white)),
+                      child: Visibility(
+                        visible: isSaveEnabled,
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          margin: const EdgeInsets.only(top: 30),
+                          decoration: BoxDecoration(
+                            color: AppColors.blueAccent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text('Save',
+                                style: AppTextStyles.subtitle2
+                                    .copyWith(color: AppColors.white)),
+                          ),
                         ),
                       ),
                     ),
@@ -2354,6 +2519,8 @@ class _FormsState extends State<Forms> with ChangeNotifier {
       sipB91Initials: sipB91Initials,
       sipB92Findings: sipB92Findings,
       sipB92Initials: sipB92Initials,
+      studentSignature: exportedImageStudent,
+      instructorSignature: exportedImageInstructor,
     ));
   }
 }

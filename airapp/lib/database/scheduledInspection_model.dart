@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'dart:typed_data';
 part 'scheduledInspection_model.g.dart';
 
 @HiveType(typeId: 2)
@@ -186,6 +187,12 @@ class ScheduledInspection extends HiveObject {
   int? sipA14Findings;
   @HiveField(90)
   String? sipA14Initials;
+  //Student Signature
+  @HiveField(91)
+  Uint8List? studentSignature;
+  //Instructor Signature
+  @HiveField(92)
+  Uint8List? instructorSignature;
 
   ScheduledInspection({
     required this.accountID,
@@ -278,5 +285,7 @@ class ScheduledInspection extends HiveObject {
     required this.sipB91Initials,
     required this.sipB92Findings,
     required this.sipB92Initials,
+    required this.studentSignature,
+    required this.instructorSignature,
   });
 }
