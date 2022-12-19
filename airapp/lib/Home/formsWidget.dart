@@ -177,12 +177,7 @@ class _FormWidgetState extends State<FormWidget> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
+                                    Navigator.pop(context);
                                   },
                                   child: const Text(
                                     'OK',
@@ -266,12 +261,7 @@ class _FormWidgetState extends State<FormWidget> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
+                                    Navigator.pop(context);
                                   },
                                   child: const Text(
                                     'OK',
