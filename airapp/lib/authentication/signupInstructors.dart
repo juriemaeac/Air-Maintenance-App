@@ -178,6 +178,7 @@ class _SignupInstructorState extends State<SignupInstructor> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          textCapitalization: TextCapitalization.sentences,
                           //controller: firstNameText,
                           style: AppTextStyles.textFields,
                           decoration: const InputDecoration(
@@ -218,6 +219,7 @@ class _SignupInstructorState extends State<SignupInstructor> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          textCapitalization: TextCapitalization.sentences,
                           //controller: middleNameText,
                           style: AppTextStyles.textFields,
                           decoration: const InputDecoration(
@@ -262,6 +264,7 @@ class _SignupInstructorState extends State<SignupInstructor> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          textCapitalization: TextCapitalization.sentences,
                           style: AppTextStyles.textFields,
                           decoration: const InputDecoration(
                             contentPadding:
